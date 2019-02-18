@@ -13,7 +13,7 @@ public class ChooseThemeFragment extends Fragment {
 
     public static final String THEME_LIGHT = "light";
     public static final String THEME_DARK = "dark";
-    public static final String KEY_THEME = "density";
+    public static final String KEY_THEME = "theme";
 
     @Override
     public View onCreateView(

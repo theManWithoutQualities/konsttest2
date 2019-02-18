@@ -6,21 +6,29 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.view.ActionMode;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.konsttest2.R;
+import com.example.konsttest2.StatisticActivity;
+import com.example.konsttest2.data.AppDbHelper;
 
 import java.util.List;
 
 public class ListAppAdapter extends RecyclerView.Adapter<ListAppAdapter.ListHolder> {
     private final List<AppItem> appItemList;
     private final Context context;
+    AppDbHelper dbHelper;
 
     public ListAppAdapter(List<AppItem> appItemList, Context context) {
         this.appItemList = appItemList;
         this.context = context;
+        dbHelper = new AppDbHelper(context);
     }
 
     @NonNull
@@ -47,43 +55,70 @@ public class ListAppAdapter extends RecyclerView.Adapter<ListAppAdapter.ListHold
 
     public class ListHolder extends RecyclerView.ViewHolder {
 
-        View.OnClickListener startItemListener = (v) -> startAt(getAdapterPosition());
-//        ActionMode.Callback actionModeCallBack = new ActionMode.Callback() {
-//            @Override
-//            public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-//                MenuInflater menuInflater = mode.getMenuInflater();
-//                menuInflater.inflate(R.menu.app_context_menu, menu);
-//                return true;
-//            }
-//
-//            @Override
-//            public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-//                switch (item.getItemId()) {
-//                    case R.id.context_delete:
-//                        removeAt(getAdapterPosition());
-//                        mode.finish();
-//                        return true;
-//                     default:
-//                         return false;
-//                }
-//            }
-//
-//            @Override
-//            public void onDestroyActionMode(ActionMode mode) {
-//
-//            }
-//        };
+        View.OnClickListener startItemListener = (v) -> {
+            dbHelper.addClick(appItemList.get(getAdapterPosition()).getPackageName());
+            startAt(getAdapterPosition());
+            return;
+        };
+        ActionMode.Callback actionModeCallBack = new ActionMode.Callback() {
+            @Override
+            public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+                MenuInflater menuInflater = mode.getMenuInflater();
+                menuInflater.inflate(R.menu.app_context_menu, menu);
+                return true;
+            }
+
+            @Override
+            public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+                return false;
+            }
+
+            @Override
+            public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.context_delete:
+                        removeAt(getAdapterPosition());
+                        mode.finish();
+                        return true;
+                    case R.id.frequency:
+                        final Intent intent = new Intent();
+                        intent.setClass(context, StatisticActivity.class);
+                        final Integer count = dbHelper
+                                .getCount(appItemList.get(getAdapterPosition()).getPackageName());
+                        intent.putExtra("count", count == null ? 0 : count);
+                        context.startActivity(intent);
+                        return true;
+                    case R.id.info:
+                        Intent settingsIntent =
+                                new Intent(
+                                        android.provider.Settings
+                                                .ACTION_APPLICATION_DETAILS_SETTINGS
+                                );
+                        settingsIntent.setData(
+                                Uri.parse(
+                                        "package:" + appItemList
+                                                .get(getAdapterPosition())
+                                                .getPackageName()
+                                )
+                        );
+                        context.startActivity(settingsIntent);
+                        return true;
+                     default:
+                         return false;
+                }
+            }
+
+            @Override
+            public void onDestroyActionMode(ActionMode mode) {
+
+            }
+        };
         public ListHolder(@NonNull View itemView) {
             super(itemView);
-//            itemView.setOnLongClickListener((v) -> {
-//                v.startActionMode(actionModeCallBack);
-//                return true;
-//            });
+            itemView.setOnLongClickListener((v) -> {
+                v.startActionMode(actionModeCallBack);
+                return true;
+            });
             itemView.setOnClickListener(startItemListener);
         }
 
