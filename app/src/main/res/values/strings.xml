@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">KonstTest2</string>
+    <string name="logo">Logo</string>
+    <string name="welcome">Welcome!</string>
+    <string name="description">This is a launcher. You should use it</string>
+    <string name="light_theme">Light theme</string>
+    <string name="dark_theme">Dark theme</string>
+    <string name="standard_density">Standard density</string>
+    <string name="high_density">High density</string>
+    <string name="standard_density_explanation">Portrait: 4 icons in a row\nLandscape: 6 icons in a row</string>
+    <string name="high_density_explanation">Portrait: 5 icons in a row \nLandscape: 7 icons in a row</string>
+    <string name="theme">Тема</string>
+    <string name="density">Плотность</string>
+    <string name="settings">Настройки</string>
+    <string name="net">Сетка</string>
+    <string name="list">Список</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="name">Николай Константинов</string>
+</resources>

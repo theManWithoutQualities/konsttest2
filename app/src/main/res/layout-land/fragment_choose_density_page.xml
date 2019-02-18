@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:padding="18dp">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <RadioButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Standard density"
+                android:background="@drawable/radiobutton_background"
+                android:layout_margin="5dp"
+                android:id="@+id/standard_density">
+            </RadioButton>
+            <RadioButton
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="High density"
+                android:background="@drawable/radiobutton_background"
+                android:layout_margin="5dp"
+                android:id="@+id/high_density">
+            </RadioButton>
+        </RadioGroup>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingTop="220dp"
+                android:paddingLeft="10dp"
+                android:text="@string/standard_density_explanation"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingTop="220dp"
+                android:paddingLeft="10dp"
+                android:text="@string/high_density_explanation"/>
+        </LinearLayout>
+    </FrameLayout>
+</ScrollView>

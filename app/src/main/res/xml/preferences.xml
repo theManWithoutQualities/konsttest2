@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <ListPreference
+        android:key="theme"
+        android:entries="@array/theme_entries"
+        android:entryValues="@array/theme_entryValues"
+        android:title="@string/theme"
+        android:defaultValue="light" />
+    <ListPreference
+        android:key="density"
+        android:entries="@array/density_entries"
+        android:entryValues="@array/density_entryValues"
+        android:title="@string/density"
+        android:defaultValue="standard" />
+</PreferenceScreen>

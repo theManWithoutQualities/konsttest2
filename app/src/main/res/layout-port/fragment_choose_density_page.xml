@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:padding="18dp">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/radiobutton_background"
+                android:layout_margin="5dp"
+                android:text="@string/standard_density"
+                android:id="@+id/standard_density"
+                android:onClick="clickRadioButtonDensity"/>
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/radiobutton_background"
+                android:layout_margin="5dp"
+                android:text="@string/high_density"
+                android:id="@+id/high_density"
+                android:onClick="clickRadioButtonDensity"/>
+        </RadioGroup>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="#00000000">
+            <TextView
+                android:id="@+id/standard_density_explain"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:paddingTop="90dp"
+                android:paddingLeft="10dp"
+                android:text="@string/standard_density_explanation" />
+            <TextView
+                android:id="@+id/high_density_explain"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:paddingTop="90dp"
+                android:paddingLeft="10dp"
+                android:text="@string/high_density_explanation" />
+        </LinearLayout>
+    </FrameLayout>
+</ScrollView>
