@@ -23,12 +23,17 @@ import java.util.List;
 public class ListAppAdapter extends RecyclerView.Adapter<ListAppAdapter.ListHolder> {
     private final List<AppItem> appItemList;
     private final Context context;
-    AppDbHelper dbHelper;
+
+    private final AppDbHelper dbHelper;
 
     public ListAppAdapter(List<AppItem> appItemList, Context context) {
         this.appItemList = appItemList;
         this.context = context;
         dbHelper = new AppDbHelper(context);
+    }
+
+    public AppDbHelper getDbHelper() {
+        return dbHelper;
     }
 
     @NonNull
@@ -83,8 +88,7 @@ public class ListAppAdapter extends RecyclerView.Adapter<ListAppAdapter.ListHold
                     case R.id.frequency:
                         final Intent intent = new Intent();
                         intent.setClass(context, StatisticActivity.class);
-                        final Integer count = dbHelper
-                                .getCount(appItemList.get(getAdapterPosition()).getPackageName());
+                        final Integer count = appItemList.get(getAdapterPosition()).getCount();
                         intent.putExtra("count", count == null ? 0 : count);
                         context.startActivity(intent);
                         return true;

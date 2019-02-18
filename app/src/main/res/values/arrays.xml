@@ -16,4 +16,18 @@
         <item>standard</item>
         <item>high</item>
     </string-array>
+    <string-array name="sort_entries">
+        <item>Alphabetical</item>
+        <item>Alphabetical Reverse</item>
+        <item>Frequency</item>
+        <item>Date</item>
+        <item>No Sort</item>
+    </string-array>
+    <string-array name="sort_entryValues">
+        <item>alphabet</item>
+        <item>alphabetRev</item>
+        <item>frequency</item>
+        <item>date</item>
+        <item>noSort</item>
+    </string-array>
 </resources>

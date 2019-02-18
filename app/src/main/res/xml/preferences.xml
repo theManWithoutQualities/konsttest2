@@ -10,4 +10,9 @@
         android:entries="@array/density_entries"
         android:entryValues="@array/density_entryValues"
         android:title="@string/density" />
+    <ListPreference
+        android:key="sort"
+        android:entries="@array/sort_entries"
+        android:entryValues="@array/sort_entryValues"
+        android:title="@string/sort" />
 </PreferenceScreen>
