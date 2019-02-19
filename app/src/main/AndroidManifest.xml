@@ -47,6 +47,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.konsttest2.MainActivity" />
         </activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="9d01ca57583566d24afd9f170e92cfc69d0acd95" />
     </application>
 
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
