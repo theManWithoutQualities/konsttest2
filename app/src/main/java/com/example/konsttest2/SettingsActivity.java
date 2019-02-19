@@ -1,5 +1,6 @@
 package com.example.konsttest2;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
@@ -23,5 +24,12 @@ public class SettingsActivity extends BasicActivity {
                 .beginTransaction()
                 .replace(R.id.content, new SettingsFragment())
                 .commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        final Intent intent = new Intent();
+        intent.setClass(this, MainActivity.class);
+        startActivity(intent);
     }
 }

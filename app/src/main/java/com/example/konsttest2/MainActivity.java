@@ -2,7 +2,6 @@ package com.example.konsttest2;
 
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentTransaction;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -49,7 +48,9 @@ public class MainActivity extends BasicActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        setListFragment();
+        if (savedInstanceState == null) {
+            setNetFragment();
+        }
     }
 
     @Override
@@ -89,7 +90,7 @@ public class MainActivity extends BasicActivity
 
 
 
-    private void setListFragment() {
+    public void setListFragment() {
         Fragment listFragment = new ListAppFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
@@ -99,7 +100,7 @@ public class MainActivity extends BasicActivity
 
     }
 
-    private void setNetFragment() {
+    public void setNetFragment() {
         Fragment netFragment = new NetAppFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
