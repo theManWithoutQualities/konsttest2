@@ -1,5 +1,6 @@
 package com.example.konsttest2;
 
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
@@ -25,8 +26,8 @@ public class MainActivity extends BasicActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        final SharedPreferences preferences = getApplicationContext()
-                .getSharedPreferences("settings_enter", Context.MODE_PRIVATE);
+        final SharedPreferences preferences = PreferenceManager
+                .getDefaultSharedPreferences(this);
         final boolean showWelcomePage =
                 preferences.getBoolean("showWelcomePage", true);
         if (showWelcomePage) {
@@ -81,9 +82,9 @@ public class MainActivity extends BasicActivity
     }
 
     public void clickAvatarHandler(View view) {
-//        final Intent intent = new Intent();
-//        intent.setClass(this, WelcomeActivity.class);
-//        startActivity(intent);
+        final Intent intent = new Intent();
+        intent.setClass(this, ProfileActivity.class);
+        startActivity(intent);
     }
 
 
