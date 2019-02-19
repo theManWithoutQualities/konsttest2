@@ -13,8 +13,14 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import com.crashlytics.android.Crashlytics;
+import com.crashlytics.android.ndk.CrashlyticsNdk;
 import com.example.konsttest2.listApp.ListAppFragment;
 import com.example.konsttest2.netApp.NetAppFragment;
+import io.fabric.sdk.android.Fabric;
+import com.microsoft.appcenter.AppCenter;
+import com.microsoft.appcenter.analytics.Analytics;
+import com.microsoft.appcenter.crashes.Crashes;
 
 public class MainActivity extends BasicActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -23,7 +29,10 @@ public class MainActivity extends BasicActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        AppCenter.start(getApplication(), "450322b7-9374-4d01-bcaf-5abf9816b3cf",
+                Analytics.class, Crashes.class);
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics(), new CrashlyticsNdk());
 
         final SharedPreferences preferences = PreferenceManager
                 .getDefaultSharedPreferences(this);
