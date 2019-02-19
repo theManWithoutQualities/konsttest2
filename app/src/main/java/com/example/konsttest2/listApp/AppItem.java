@@ -2,10 +2,33 @@ package com.example.konsttest2.listApp;
 
 import android.graphics.drawable.Drawable;
 
+import java.util.Date;
+
 public class AppItem {
     private Drawable icon;
     private String name;
     private String packageName;
+    private Integer count;
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public AppItem setCount(Integer count) {
+        this.count = count;
+        return this;
+    }
+
+    public Date getInstallDate() {
+        return installDate;
+    }
+
+    public AppItem setInstallDate(Date installDate) {
+        this.installDate = installDate;
+        return this;
+    }
+
+    private Date installDate;
 
     public String getPackageName() {
         return packageName;

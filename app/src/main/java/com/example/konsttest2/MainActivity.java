@@ -1,7 +1,7 @@
 package com.example.konsttest2;
 
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentTransaction;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -25,8 +25,8 @@ public class MainActivity extends BasicActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        final SharedPreferences preferences = getApplicationContext()
-                .getSharedPreferences("settings_enter", Context.MODE_PRIVATE);
+        final SharedPreferences preferences = PreferenceManager
+                .getDefaultSharedPreferences(this);
         final boolean showWelcomePage =
                 preferences.getBoolean("showWelcomePage", true);
         if (showWelcomePage) {
@@ -48,7 +48,9 @@ public class MainActivity extends BasicActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        setListFragment();
+        if (savedInstanceState == null) {
+            setNetFragment();
+        }
     }
 
     @Override
@@ -81,14 +83,14 @@ public class MainActivity extends BasicActivity
     }
 
     public void clickAvatarHandler(View view) {
-//        final Intent intent = new Intent();
-//        intent.setClass(this, WelcomeActivity.class);
-//        startActivity(intent);
+        final Intent intent = new Intent();
+        intent.setClass(this, ProfileActivity.class);
+        startActivity(intent);
     }
 
 
 
-    private void setListFragment() {
+    public void setListFragment() {
         Fragment listFragment = new ListAppFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
@@ -98,7 +100,7 @@ public class MainActivity extends BasicActivity
 
     }
 
-    private void setNetFragment() {
+    public void setNetFragment() {
         Fragment netFragment = new NetAppFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 

@@ -35,7 +35,7 @@ public class WelcomeSlideActivity extends BasicActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_slide);
 
-        getApplicationContext().getSharedPreferences("settings_enter", Context.MODE_PRIVATE)
+        PreferenceManager.getDefaultSharedPreferences(this)
                 .edit()
                 .putBoolean("showWelcomePage", false)
                 .apply();

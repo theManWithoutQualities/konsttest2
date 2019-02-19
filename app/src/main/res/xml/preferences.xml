@@ -4,12 +4,18 @@
         android:key="theme"
         android:entries="@array/theme_entries"
         android:entryValues="@array/theme_entryValues"
-        android:title="@string/theme"
-        android:defaultValue="light" />
+        android:title="@string/theme" />
     <ListPreference
         android:key="density"
         android:entries="@array/density_entries"
         android:entryValues="@array/density_entryValues"
-        android:title="@string/density"
-        android:defaultValue="standard" />
+        android:title="@string/density" />
+    <ListPreference
+        android:key="sort"
+        android:entries="@array/sort_entries"
+        android:entryValues="@array/sort_entryValues"
+        android:title="@string/sort" />
+    <CheckBoxPreference
+        android:key="showWelcomePage"
+        android:title="@string/show_welcome_after" />
 </PreferenceScreen>

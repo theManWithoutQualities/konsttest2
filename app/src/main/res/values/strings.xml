@@ -18,4 +18,6 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="name">Николай Константинов</string>
+    <string name="sort">Сортировка</string>
+    <string name="show_welcome_after">Показывать Welcome-page при следующем запуске</string>
 </resources>
