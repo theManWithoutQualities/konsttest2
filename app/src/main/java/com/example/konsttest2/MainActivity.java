@@ -29,9 +29,9 @@ public class MainActivity extends BasicActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         AppCenter.start(getApplication(), "450322b7-9374-4d01-bcaf-5abf9816b3cf",
                 Analytics.class, Crashes.class);
-        super.onCreate(savedInstanceState);
         Fabric.with(this, new Crashlytics(), new CrashlyticsNdk());
 
         final SharedPreferences preferences = PreferenceManager
