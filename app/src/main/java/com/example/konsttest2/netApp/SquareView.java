@@ -19,11 +19,6 @@ public class SquareView extends LinearLayout {
         super(context, attrs);
     }
 
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, widthMeasureSpec);
-    }
-
     public void setTitle(String title) {
         final TextView titleView = findViewById(R.id.app_title);
         titleView.setText(title);
