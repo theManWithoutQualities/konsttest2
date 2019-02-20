@@ -12,7 +12,6 @@
         android:padding="18dp"
         android:id="@+id/linear_layout">
 
-
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -37,11 +36,11 @@
             android:textSize="18sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textView1"
-            android:text="@string/description"/>
+            android:id="@+id/textView2"
+            android:text="@string/description_second"/>
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:src="@drawable/ic_step_two"/>
+            android:src="@drawable/ic_step_tree"/>
     </LinearLayout>
 </ScrollView>

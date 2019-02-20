@@ -54,14 +54,16 @@
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="16dp"
                 android:text="@string/welcome"
                 android:textSize="25sp"
                 app:layout_constraintStart_toStartOf="@+id/textView1"
                 app:layout_constraintTop_toBottomOf="@+id/textView1" />
         </android.support.constraint.ConstraintLayout>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_step_one"/>
     </LinearLayout>
 
 </ScrollView>

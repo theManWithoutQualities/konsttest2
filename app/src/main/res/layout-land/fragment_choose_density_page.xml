@@ -50,5 +50,10 @@
                 android:paddingLeft="10dp"
                 android:text="@string/high_density_explanation"/>
         </LinearLayout>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="bottom"
+            android:src="@drawable/ic_step_four"/>
     </FrameLayout>
 </ScrollView>

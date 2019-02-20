@@ -1,8 +1,6 @@
 package com.example.konsttest2;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -35,18 +33,14 @@ public class WelcomeSlideActivity extends BasicActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_slide);
 
-        PreferenceManager.getDefaultSharedPreferences(this)
-                .edit()
-                .putBoolean("showWelcomePage", false)
-                .apply();
-
         mPager = findViewById(R.id.pager);
         final List<Fragment> fragments =
                 Arrays.asList(
                         new WelcomeFragment(),
                         new DescriptionFragment(),
-                        new ChooseThemeFragment(),
+                        new DescriptionSecondFragment(),
                         new ChooseDensityFragment(),
+                        new ChooseThemeFragment(),
                         new Fragment()
                 );
         mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager(), fragments);
@@ -60,6 +54,10 @@ public class WelcomeSlideActivity extends BasicActivity {
             @Override
             public void onPageSelected(int i) {
                 if(i == mPager.getAdapter().getCount() - 1){
+                    PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
+                            .edit()
+                            .putBoolean("showWelcomePage", false)
+                            .apply();
                     final Intent intent = new Intent();
                     intent.setClass(getBaseContext(), MainActivity.class);
                     startActivity(intent);
