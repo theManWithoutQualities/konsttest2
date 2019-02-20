@@ -16,8 +16,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/contact_title"
-            android:text="first"/>
+            android:id="@+id/contact_title" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

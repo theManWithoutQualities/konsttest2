@@ -49,7 +49,7 @@
             android:layout_weight="1"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
-            android:text="Телефон: +37550000"
+            android:text="@string/phone"
             android:textAlignment="center"
             android:textSize="15sp" />
 
@@ -60,7 +60,7 @@
             android:layout_weight="1"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
-            android:text="Email: konst007@tut.by"
+            android:text="@string/mail"
             android:textAlignment="center"
             android:textSize="15sp" />
 
@@ -71,7 +71,7 @@
             android:layout_weight="1"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
-            android:text="Vkontakte: vkontaktenesizhu"
+            android:text="@string/vk"
             android:textAlignment="center"
             android:textSize="15sp" />
 
@@ -82,7 +82,7 @@
             android:layout_weight="1"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
-            android:text="Facebook: vfeisbukenesizhutozhe"
+            android:text="@string/fb"
             android:textAlignment="center"
             android:textSize="15sp" />
 
@@ -93,7 +93,7 @@
             android:layout_weight="1"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
-            android:text="GitHub: theManWihoutQualities"
+            android:text="@string/git"
             android:textAlignment="center"
             android:textSize="15sp" />
 
@@ -104,7 +104,7 @@
             android:layout_weight="1"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
-            android:text="Координаты: 53°55′ с. ш. 27°33′ в. д."
+            android:text="@string/location"
             android:textAlignment="center"
             android:textSize="15sp" />
     </LinearLayout>
