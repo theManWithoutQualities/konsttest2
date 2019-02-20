@@ -25,7 +25,7 @@ import com.microsoft.appcenter.crashes.Crashes;
 public class MainActivity extends BasicActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-
+    private float x1, x2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,4 +118,5 @@ public class MainActivity extends BasicActivity
         transaction.commit();
 
     }
+
 }
