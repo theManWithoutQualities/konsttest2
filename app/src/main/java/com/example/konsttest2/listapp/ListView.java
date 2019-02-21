@@ -1,4 +1,4 @@
-package com.example.konsttest2.netApp;
+package com.example.konsttest2.listapp;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -9,23 +9,23 @@ import android.widget.TextView;
 
 import com.example.konsttest2.R;
 
-public class SquareView extends LinearLayout {
+public class ListView extends LinearLayout {
 
-    public SquareView(Context context) {
+    public ListView(Context context) {
         super(context);
     }
 
-    public SquareView(Context context, AttributeSet attrs) {
+    public ListView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
     public void setTitle(String title) {
-        final TextView titleView = findViewById(R.id.app_title);
+        final TextView titleView = findViewById(R.id.contact_title);
         titleView.setText(title);
     }
 
     public void setIcon(Drawable icon) {
-        final View avatar = findViewById(R.id.app_icon);
+        final View avatar = findViewById(R.id.avatar);
         avatar.setBackground(icon);
     }
 }

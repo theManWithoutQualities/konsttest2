@@ -11,11 +11,10 @@ import android.widget.RadioButton;
 
 import com.example.konsttest2.R;
 
-public class ChooseDensityFragment extends Fragment {
+import static com.example.konsttest2.settings.SettingsUtils.DENSITY_STANDARD;
+import static com.example.konsttest2.settings.SettingsUtils.KEY_DENSITY;
 
-    public static final String DENSITY_STANDARD = "standard";
-    public static final String DENSITY_HIGH = "high";
-    public static final String KEY_DENSITY = "density";
+public class ChooseDensityFragment extends Fragment {
 
     @Override
     public View onCreateView(

@@ -11,11 +11,10 @@ import android.widget.RadioButton;
 
 import com.example.konsttest2.R;
 
-public class ChooseThemeFragment extends Fragment {
+import static com.example.konsttest2.settings.SettingsUtils.KEY_THEME;
+import static com.example.konsttest2.settings.SettingsUtils.THEME_LIGHT;
 
-    public static final String THEME_LIGHT = "light";
-    public static final String THEME_DARK = "dark";
-    public static final String KEY_THEME = "theme";
+public class ChooseThemeFragment extends Fragment {
 
     @Override
     public View onCreateView(

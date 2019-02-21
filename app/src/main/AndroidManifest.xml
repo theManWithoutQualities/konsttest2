@@ -20,7 +20,7 @@
         <activity android:name=".statistic.StatisticActivity" />
 
         <receiver
-            android:name=".listApp.AppListReceiver"
+            android:name=".AppListReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter android:priority="999">

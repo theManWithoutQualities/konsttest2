@@ -4,8 +4,8 @@ import android.content.res.Resources;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 
-import static com.example.konsttest2.welcome.ChooseThemeFragment.KEY_THEME;
-import static com.example.konsttest2.welcome.ChooseThemeFragment.THEME_LIGHT;
+import static com.example.konsttest2.settings.SettingsUtils.KEY_THEME;
+import static com.example.konsttest2.settings.SettingsUtils.THEME_LIGHT;
 
 public class BasicActivity extends AppCompatActivity {
 

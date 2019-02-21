@@ -6,8 +6,10 @@ import android.content.Intent;
 
 public class AppListReceiver extends BroadcastReceiver {
 
+    public static final String REFRESH_APPS = "REFRESH_APPS";
+
     @Override
     public void onReceive(Context context, Intent intent) {
-        context.sendBroadcast(new Intent("REFRESH_APPS"));
+        context.sendBroadcast(new Intent(REFRESH_APPS));
     }
 }

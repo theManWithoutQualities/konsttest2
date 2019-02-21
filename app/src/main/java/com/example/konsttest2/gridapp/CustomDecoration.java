@@ -1,4 +1,4 @@
-package com.example.konsttest2.netApp;
+package com.example.konsttest2.gridapp;
 
 import android.graphics.Rect;
 import android.support.annotation.NonNull;

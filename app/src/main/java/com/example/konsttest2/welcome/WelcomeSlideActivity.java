@@ -19,12 +19,13 @@ import com.example.konsttest2.R;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.example.konsttest2.welcome.ChooseDensityFragment.DENSITY_HIGH;
-import static com.example.konsttest2.welcome.ChooseDensityFragment.DENSITY_STANDARD;
-import static com.example.konsttest2.welcome.ChooseDensityFragment.KEY_DENSITY;
-import static com.example.konsttest2.welcome.ChooseThemeFragment.KEY_THEME;
-import static com.example.konsttest2.welcome.ChooseThemeFragment.THEME_DARK;
-import static com.example.konsttest2.welcome.ChooseThemeFragment.THEME_LIGHT;
+import static com.example.konsttest2.settings.SettingsUtils.DENSITY_HIGH;
+import static com.example.konsttest2.settings.SettingsUtils.DENSITY_STANDARD;
+import static com.example.konsttest2.settings.SettingsUtils.KEY_DENSITY;
+import static com.example.konsttest2.settings.SettingsUtils.KEY_THEME;
+import static com.example.konsttest2.settings.SettingsUtils.SHOW_WELCOME_PAGE_KEY;
+import static com.example.konsttest2.settings.SettingsUtils.THEME_DARK;
+import static com.example.konsttest2.settings.SettingsUtils.THEME_LIGHT;
 
 public class WelcomeSlideActivity extends BasicActivity {
 
@@ -60,7 +61,7 @@ public class WelcomeSlideActivity extends BasicActivity {
                 if(i == mPager.getAdapter().getCount() - 1){
                     PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
                             .edit()
-                            .putBoolean("showWelcomePage", false)
+                            .putBoolean(SHOW_WELCOME_PAGE_KEY, false)
                             .apply();
                     final Intent intent = new Intent();
                     intent.setClass(getBaseContext(), MainActivity.class);

@@ -1,4 +1,4 @@
-package com.example.konsttest2.netApp;
+package com.example.konsttest2.gridapp;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,16 +17,16 @@ import android.view.ViewGroup;
 import com.example.konsttest2.R;
 import com.example.konsttest2.statistic.StatisticActivity;
 import com.example.konsttest2.data.AppDbHelper;
-import com.example.konsttest2.listApp.AppItem;
+import com.example.konsttest2.listapp.AppItem;
 
 import java.util.List;
 
-class NetAppAdapter extends RecyclerView.Adapter<NetAppAdapter.IconsViewHolder>{
+public class GridAppAdapter extends RecyclerView.Adapter<GridAppAdapter.IconsViewHolder>{
     private final List<AppItem> appItemList;
     private final Context context;
     private final AppDbHelper dbHelper;
 
-    public NetAppAdapter(List<AppItem> appItemList, Context context) {
+    public GridAppAdapter(List<AppItem> appItemList, Context context) {
         this.appItemList = appItemList;
         this.context = context;
         dbHelper = new AppDbHelper(context);
@@ -38,7 +38,7 @@ class NetAppAdapter extends RecyclerView.Adapter<NetAppAdapter.IconsViewHolder>{
 
     @NonNull
     @Override
-    public NetAppAdapter.IconsViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public GridAppAdapter.IconsViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater
                 .from(viewGroup.getContext())
                 .inflate(R.layout.item_net_view, viewGroup, false);

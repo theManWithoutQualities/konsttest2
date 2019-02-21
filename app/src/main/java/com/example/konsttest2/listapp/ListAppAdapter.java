@@ -1,4 +1,4 @@
-package com.example.konsttest2.listApp;
+package com.example.konsttest2.listapp;
 
 import android.content.Context;
 import android.content.Intent;
