@@ -1,4 +1,4 @@
-package com.example.konsttest2.listapp;
+package com.example.konsttest2.launcher;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,26 +7,26 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.ActionMode;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.example.konsttest2.R;
-import com.example.konsttest2.statistic.StatisticActivity;
 import com.example.konsttest2.data.AppDbHelper;
+import com.example.konsttest2.statistic.StatisticActivity;
 
 import java.util.List;
 
-public class ListAppAdapter extends RecyclerView.Adapter<ListAppAdapter.ListHolder> {
-    private final List<AppItem> appItemList;
-    private final Context context;
+public abstract class LauncherAdapter extends RecyclerView.Adapter {
 
-    private final AppDbHelper dbHelper;
+    private static final String COUNT = "count";
 
-    public ListAppAdapter(List<AppItem> appItemList, Context context) {
+    protected final List<AppItem> appItemList;
+    protected final Context context;
+    protected final AppDbHelper dbHelper;
+
+    public LauncherAdapter(List<AppItem> appItemList, Context context) {
         this.appItemList = appItemList;
         this.context = context;
         dbHelper = new AppDbHelper(context);
@@ -36,29 +36,19 @@ public class ListAppAdapter extends RecyclerView.Adapter<ListAppAdapter.ListHold
         return dbHelper;
     }
 
-    @NonNull
-    @Override
-    public ListHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater
-                .from(viewGroup.getContext())
-                .inflate(R.layout.item_list_view, viewGroup, false);
-        return new ListHolder(view);
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull ListHolder listHolder, int i) {
-        listHolder.bindIcon(appItemList.get(i).getIcon());
-        listHolder.bindName(appItemList.get(i).getName());
-    }
-
     @Override
     public int getItemCount() {
         return appItemList.size();
     }
 
+    @Override
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+        ((LauncherHolder)viewHolder).bindIcon(appItemList.get(i).getIcon());
+        ((LauncherHolder)viewHolder).bindName(appItemList.get(i).getName());
+    }
 
 
-    public class ListHolder extends RecyclerView.ViewHolder {
+    public class LauncherHolder extends RecyclerView.ViewHolder {
 
         View.OnClickListener startItemListener = (v) -> {
             dbHelper.addClick(appItemList.get(getAdapterPosition()).getPackageName());
@@ -89,7 +79,7 @@ public class ListAppAdapter extends RecyclerView.Adapter<ListAppAdapter.ListHold
                         final Intent intent = new Intent();
                         intent.setClass(context, StatisticActivity.class);
                         final Integer count = appItemList.get(getAdapterPosition()).getCount();
-                        intent.putExtra("count", count == null ? 0 : count);
+                        intent.putExtra(COUNT, count == null ? 0 : count);
                         context.startActivity(intent);
                         return true;
                     case R.id.info:
@@ -107,8 +97,8 @@ public class ListAppAdapter extends RecyclerView.Adapter<ListAppAdapter.ListHold
                         );
                         context.startActivity(settingsIntent);
                         return true;
-                     default:
-                         return false;
+                    default:
+                        return false;
                 }
             }
 
@@ -117,7 +107,7 @@ public class ListAppAdapter extends RecyclerView.Adapter<ListAppAdapter.ListHold
 
             }
         };
-        public ListHolder(@NonNull View itemView) {
+        public LauncherHolder(@NonNull View itemView) {
             super(itemView);
             itemView.setOnLongClickListener((v) -> {
                 v.startActionMode(actionModeCallBack);
@@ -127,10 +117,10 @@ public class ListAppAdapter extends RecyclerView.Adapter<ListAppAdapter.ListHold
         }
 
         public void bindIcon(Drawable icon) {
-            ((ListView)itemView).setIcon(icon);
+            ((LauncherView)itemView).setIcon(icon);
         }
         public void bindName(String name) {
-            ((ListView)itemView).setTitle(name);
+            ((LauncherView)itemView).setTitle(name);
         }
     }
 

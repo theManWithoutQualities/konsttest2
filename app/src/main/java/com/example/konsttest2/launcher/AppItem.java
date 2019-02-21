@@ -1,4 +1,4 @@
-package com.example.konsttest2.listapp;
+package com.example.konsttest2.launcher;
 
 import android.graphics.drawable.Drawable;
 

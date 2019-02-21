@@ -1,69 +1,43 @@
-package com.example.konsttest2.listApp;
+package com.example.konsttest2.launcher;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.preference.PreferenceManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.example.konsttest2.R;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import static com.example.konsttest2.settings.SettingsActivity.KEY_SORT;
-import static com.example.konsttest2.settings.SettingsActivity.SORT_ALPHABETIC;
-import static com.example.konsttest2.settings.SettingsActivity.SORT_ALPHABETIC_REVERSE;
-import static com.example.konsttest2.settings.SettingsActivity.SORT_DATE;
-import static com.example.konsttest2.settings.SettingsActivity.SORT_FREQUENCY;
+import static com.example.konsttest2.settings.SettingsUtils.KEY_SORT;
+import static com.example.konsttest2.settings.SettingsUtils.SORT_ALPHABETIC;
+import static com.example.konsttest2.settings.SettingsUtils.SORT_ALPHABETIC_REVERSE;
+import static com.example.konsttest2.settings.SettingsUtils.SORT_DATE;
+import static com.example.konsttest2.settings.SettingsUtils.SORT_FREQUENCY;
 
-public class ListAppFragment extends Fragment {
-    private final List<AppItem> appItemList = new ArrayList<>();
-    private ListAppAdapter listAppAdapter;
-    private final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+public class LauncherFragment extends Fragment {
+
+    public static final int TOP_FREQUENT_COUNT = 3;
+
+    protected final List<AppItem> appItemList = new ArrayList<>();
+    protected LauncherAdapter launcherAdapter;
+    protected final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             loadApps();
-            getListAppAdapter().notifyDataSetChanged();
+            launcherAdapter.notifyDataSetChanged();
         }
     };
 
-    public ListAppAdapter getListAppAdapter() {
-        return listAppAdapter;
+    public LauncherAdapter getLauncherAdapter() {
+        return launcherAdapter;
     }
 
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_list, container, false);
-
-        final RecyclerView listRecyclerView = view.findViewById(R.id.listRecyclerView);
-        listRecyclerView.setHasFixedSize(true);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        listRecyclerView.setLayoutManager(linearLayoutManager);
-        listAppAdapter = new ListAppAdapter(appItemList, getContext());
-        listRecyclerView.setAdapter(listAppAdapter);
-
-        loadApps();
-
-        getActivity().registerReceiver(broadcastReceiver, new IntentFilter("REFRESH_APPS"));
-
-        return view;
-    }
-
-    public void loadApps() {
+    protected void loadApps() {
         appItemList.clear();
         final PackageManager packageManager = getActivity().getPackageManager();
         Intent intent = new Intent(Intent.ACTION_MAIN, null);
@@ -88,7 +62,7 @@ public class ListAppFragment extends Fragment {
                 e.printStackTrace();
             }
 
-            final Integer count = getListAppAdapter().getDbHelper().getCount(packageName);
+            final Integer count = launcherAdapter.getDbHelper().getCount(packageName);
             appItem.setCount(count == null ? 0 : count);
 
             appItemList.add(appItem);
@@ -117,11 +91,5 @@ public class ListAppFragment extends Fragment {
             default:
                 break;
         }
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        getActivity().unregisterReceiver(broadcastReceiver);
     }
 }

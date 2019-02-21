@@ -15,8 +15,8 @@ import android.view.MenuItem;
 import android.view.View;
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.ndk.CrashlyticsNdk;
-import com.example.konsttest2.listApp.ListAppFragment;
-import com.example.konsttest2.netApp.NetAppFragment;
+import com.example.konsttest2.launcher.list.ListFragment;
+import com.example.konsttest2.launcher.grid.GridFragment;
 import io.fabric.sdk.android.Fabric;
 
 import com.example.konsttest2.profile.ProfileActivity;
@@ -103,7 +103,7 @@ public class MainActivity extends BasicActivity
 
 
     public void setListFragment() {
-        Fragment listFragment = new ListAppFragment();
+        Fragment listFragment = new ListFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
         transaction.replace(R.id.main_content, listFragment);
@@ -113,7 +113,7 @@ public class MainActivity extends BasicActivity
     }
 
     public void setNetFragment() {
-        Fragment netFragment = new NetAppFragment();
+        Fragment netFragment = new GridFragment();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
         transaction.replace(R.id.main_content, netFragment);
