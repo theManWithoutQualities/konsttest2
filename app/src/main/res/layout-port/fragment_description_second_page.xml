@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom|center"
+        android:orientation="vertical"
+        android:padding="18dp"
+        android:id="@+id/linear_layout">
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="111dp"
+            android:paddingRight="111dp"
+            android:id="@+id/frame">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:id="@+id/pic"
+                android:src="@drawable/hello"
+                android:contentDescription="@string/logo" />
+        </FrameLayout>
+
+        <TextView
+            android:paddingLeft="18dp"
+            android:paddingRight="18dp"
+            android:paddingTop="30dp"
+            android:paddingBottom="222dp"
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView2"
+            android:text="@string/description_second"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_step_tree"/>
+    </LinearLayout>
+</ScrollView>

@@ -5,27 +5,36 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     android:padding="18dp">
-    <RadioGroup
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-        <RadioButton
+        android:layout_height="wrap_content">
+        <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/radiobutton_background"
-            android:layout_margin="@dimen/offset"
-            android:layout_weight="1"
-            android:text="@string/light_theme"
-            android:id="@+id/light_theme"
-            android:onClick="clickRadioButtonTheme"/>
-        <RadioButton
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/radiobutton_background"
-            android:layout_margin="@dimen/offset"
-            android:layout_weight="1"
-            android:text="@string/dark_theme"
-            android:id="@+id/dark_theme"
-            android:onClick="clickRadioButtonTheme"/>
-    </RadioGroup>
+            android:orientation="horizontal">
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/radiobutton_background"
+                android:layout_margin="@dimen/offset"
+                android:layout_weight="1"
+                android:text="@string/light_theme"
+                android:id="@+id/light_theme"
+                android:onClick="clickRadioButtonTheme"/>
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/radiobutton_background"
+                android:layout_margin="@dimen/offset"
+                android:layout_weight="1"
+                android:text="@string/dark_theme"
+                android:id="@+id/dark_theme"
+                android:onClick="clickRadioButtonTheme"/>
+        </RadioGroup>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="bottom"
+            android:src="@drawable/ic_step_five"/>
+    </FrameLayout>
 </ScrollView>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">KonstTest2</string>
+    <string name="logo">Logo</string>
+    <string name="description">Dies ist ein Launcher. Um Anwendungen und andere interessante Dinge auszuführen.</string>
+    <string name="light_theme">Licht Thema</string>
+    <string name="dark_theme">Dunkles Thema</string>
+    <string name="standard_density">Standardlayout</string>
+    <string name="high_density">Enges Layout</string>
+    <string name="standard_density_explanation">Porträt: 4 Symbole in einer Reihe Landschaft: 6 Symbole in einer Reihe</string>
+    <string name="high_density_explanation">Porträt: 5 Symbole in einer Reihe Landschaft: 7 Symbole in einer Reihe</string>
+    <string name="theme">Thema</string>
+    <string name="density">Dichte</string>
+    <string name="settings">Einstellungen</string>
+    <string name="net">Gitter</string>
+    <string name="list">Liste</string>
+    <string name="navigation_drawer_open">Öffnen Sie die Navigationsleiste</string>
+    <string name="navigation_drawer_close">Navigationsleiste schließen</string>
+    <string name="nav_header_desc">Kopfzeile der Navigation</string>
+    <string name="name">Nikolay Konstantinov</string>
+    <string name="sort">Sortieren</string>
+    <string name="show_welcome_after">Willkommensseite beim nächsten Lauf anzeigen</string>
+    <string name="no_data">Keine Daten</string>
+    <string name="mail">E-Mail: konst007@tut.by</string>
+    <string name="vk">Vkontakte: vkontaktenesizhu</string>
+    <string name="fb">Vkontakte: vkontaktenesizhu</string>
+    <string name="git">GitHub: theManWihoutQualities</string>
+    <string name="location">Koordinaten: 53 ° 55 \'s. sh. 27 ° 33 \'in. d.</string>
+    <string name="description_second">... Sie können beispielsweise Anwendungsstartstatistiken anzeigen, ein Profil anzeigen</string>
+    <string name="welcome">Willkommen zurück!</string>
+    <string name="phone">Telefon: +37550000</string>
+</resources>

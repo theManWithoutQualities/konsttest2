@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">KonstTest2</string>
+    <string name="logo">شعار</string>
+    <string name="description">هذا هو قاذفة. لتشغيل التطبيقات وغيرها من الأشياء المثيرة للاهتمام.</string>
+    <string name="light_theme">موضوع خفيف</string>
+    <string name="dark_theme">موضوع مظلم</string>
+    <string name="standard_density">تخطيط قياسي</string>
+    <string name="high_density">تخطيط ضيق</string>
+    <string name="standard_density_explanation">صورة: 4 رموز في صف المناظر الطبيعية: 6 رموز متتالية</string>
+    <string name="high_density_explanation">صورة: 5 رموز في صف المناظر الطبيعية: 7 رموز متتالية</string>
+    <string name="theme">موضوع</string>
+    <string name="density">كثافة</string>
+    <string name="settings">إعدادات</string>
+    <string name="net">شبكة</string>
+    <string name="list">قائمة</string>
+    <string name="navigation_drawer_open">افتح درج التنقل</string>
+    <string name="navigation_drawer_close">إغلاق درج التنقل</string>
+    <string name="nav_header_desc">رأس التنقل</string>
+    <string name="name">نيكولاي كونستانتينوف</string>
+    <string name="sort">فرز</string>
+    <string name="show_welcome_after">عرض صفحة الترحيب في الجولة التالية</string>
+    <string name="no_data">لا توجد بيانات</string>
+    <string name="mail">البريد الإلكتروني: konst007@tut.by</string>
+    <string name="vk">Vkontakte: vkontaktenesizhu</string>
+    <string name="fb">Facebook: vfeisbukenesizhutozhe</string>
+    <string name="git">GitHub: theManWihoutQualities</string>
+    <string name="location">الإحداثيات: 53 ° 55 ′ s. ث. 27 ° 33 ′ بوصة د.</string>
+    <string name="description_second">... على سبيل المثال ، يمكنك عرض إحصائيات إطلاق التطبيق ، أو عرض ملف تعريف</string>
+    <string name="welcome">أهلا وسهلا!</string>
+    <string name="phone">الهاتف: +37550000</string>
+</resources>

@@ -7,7 +7,7 @@
     <LinearLayout
         android:id="@+id/android_custom_gridview_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="bottom|center"
         android:padding="18dp"
         android:orientation="vertical">
@@ -39,9 +39,9 @@
                 android:id="@+id/textView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="36dp"
-                android:layout_marginLeft="36dp"
-                android:layout_marginTop="92dp"
+                android:layout_marginStart="44dp"
+                android:layout_marginLeft="44dp"
+                android:layout_marginTop="56dp"
                 android:text="@string/app_name"
                 android:textSize="26sp"
                 app:layout_constraintStart_toEndOf="@+id/frame"
@@ -49,13 +49,17 @@
 
             <TextView
                 android:id="@+id/textView2"
-                android:layout_width="286dp"
-                android:layout_height="68dp"
+                android:layout_width="283dp"
+                android:layout_height="87dp"
                 android:layout_marginTop="24dp"
                 android:text="@string/description"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="@+id/textView1"
                 app:layout_constraintTop_toBottomOf="@+id/textView1" />
         </android.support.constraint.ConstraintLayout>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_step_two"/>
     </LinearLayout>
 </ScrollView>

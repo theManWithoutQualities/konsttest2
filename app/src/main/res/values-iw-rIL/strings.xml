@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">KonstTest2</string>
+    <string name="logo">עברית</string>
+    <string name="description">זה משגר. כדי להפעיל יישומים ועוד דברים מעניינים.</string>
+    <string name="light_theme">נושא קל</string>
+    <string name="dark_theme">נושא כהה</string>
+    <string name="standard_density">פריסה רגילה</string>
+    <string name="high_density">פריסה צמודה</string>
+    <string name="standard_density_explanation">דיוקן: 4 סמלים בשורה נוף: 6 סמלים בשורה</string>
+    <string name="high_density_explanation">דיוקן: 5 סמלים בשורה נוף: 7 סמלים בשורה</string>
+    <string name="theme">נושא</string>
+    <string name="density">צפיפות</string>
+    <string name="settings">הגדרות</string>
+    <string name="net">רשת</string>
+    <string name="list">רשימה</string>
+    <string name="navigation_drawer_open">פתח את מגירת הניווט</string>
+    <string name="navigation_drawer_close">סגור את מגירת הניווט</string>
+    <string name="nav_header_desc">כותרת ניווט</string>
+    <string name="name">ניקולאי קונסטנטינוב</string>
+    <string name="sort">מיון</string>
+    <string name="show_welcome_after">הצג דף ברוכים הבאים בהפעלה הבאה</string>
+    <string name="no_data">אין נתונים</string>
+    <string name="mail">Email: konst007@tut.by</string>
+    <string name="fb">Facebook: vfeisbukenesizhutozhe</string>
+    <string name="vk">Vkontakte: vkontaktenesizhu</string>
+    <string name="git">GitHub: theManWihoutQualities</string>
+    <string name="location">קואורדינטות: 53 ° 55 s. sh. 27 ° 33 \'ב. ד.</string>
+    <string name="description_second">... לדוגמה, באפשרותך להציג נתונים סטטיסטיים של הפעלת יישומים, להציג פרופיל</string>
+    <string name="welcome">ברוכים הבאים!</string>
+    <string name="phone">טלפון: +37550000</string>
+</resources>

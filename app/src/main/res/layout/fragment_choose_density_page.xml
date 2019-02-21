@@ -6,7 +6,7 @@
     android:fillViewport="true">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="bottom|center"
         android:orientation="vertical"
         android:padding="18dp"
@@ -59,6 +59,11 @@
                     android:padding="18dp"
                     android:text="@string/high_density_explanation" />
             </LinearLayout>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="bottom"
+                android:src="@drawable/ic_step_four"/>
         </FrameLayout>
     </LinearLayout>
 </ScrollView>

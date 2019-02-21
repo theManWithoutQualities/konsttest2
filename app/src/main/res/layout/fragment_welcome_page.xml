@@ -8,7 +8,7 @@
     android:id="@+id/vert">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="bottom|center"
         android:orientation="vertical"
         android:padding="18dp"
@@ -48,5 +48,9 @@
             android:paddingBottom="210dp"
             android:text="@string/welcome"
             android:textSize="16sp" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_step_one"/>
     </LinearLayout>
 </ScrollView>

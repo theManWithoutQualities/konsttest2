@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.example.konsttest2.netApp.SquareView
+<com.example.konsttest2.launcher.grid.SquareView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="100dp">
@@ -7,16 +7,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_gravity="center_vertical">
-        <FrameLayout
+        android:layout_gravity="center_vertical"
+        android:id="@+id/cell">
             android:layout_width="match_parent"
             android:layout_height="60dp">
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/app_icon"
-                android:layout_gravity="center"/>
-        </FrameLayout>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:id="@+id/app_icon"
+            android:layout_gravity="center"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="40dp"
@@ -26,4 +27,4 @@
             android:singleLine="true"/>
     </LinearLayout>
 
-</com.example.konsttest2.netApp.SquareView>
+</com.example.konsttest2.launcher.grid.SquareView>

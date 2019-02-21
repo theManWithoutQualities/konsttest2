@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">KonstTest2</string>
+    <string name="logo">徽标</string>
+    <string name="description">这是一个发射器。运行应用程序和其他有趣的东西。</string>
+    <string name="light_theme">轻主题</string>
+    <string name="dark_theme">黑暗的主题</string>
+    <string name="standard_density">标准布局</string>
+    <string name="high_density">布局紧张</string>
+    <string name="standard_density_explanation">肖像：连续4个图标横向：连续6个图标</string>
+    <string name="high_density_explanation">肖像：连续5个图标风景：连续7个图标</string>
+    <string name="theme">主题</string>
+    <string name="density">密度</string>
+    <string name="settings">设置</string>
+    <string name="net">网</string>
+    <string name="list">名单</string>
+    <string name="navigation_drawer_open">打开导航抽屉</string>
+    <string name="navigation_drawer_close">关闭导航抽屉</string>
+    <string name="nav_header_desc">导航标题</string>
+    <string name="name">尼古拉康斯坦丁诺夫</string>
+    <string name="sort">排序</string>
+    <string name="show_welcome_after">下次运行时显示欢迎页面</string>
+    <string name="no_data">没有数据</string>
+    <string name="mail">Email: konst007@tut.by</string>
+    <string name="vk">Vkontakte: vkontaktenesizhu</string>
+    <string name="fb">Facebook: vfeisbukenesizhutozhe</string>
+    <string name="git">GitHub: theManWihoutQualities</string>
+    <string name="location">坐标：53°55\'。 W上。 27°33\'英寸d。</string>
+    <string name="description_second">...例如，您可以查看应用程序启动统计信息，查看配置文件</string>
+    <string name="welcome">欢迎您！</string>
+    <string name="phone">电话：+37550000</string>
+</resources>

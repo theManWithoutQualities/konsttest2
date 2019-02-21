@@ -39,5 +39,4 @@ jobs:
         command: |
           if [ "${CIRCLE_BRANCH}" == "master" ]; then
             bash ./scripts/deploy-fabric.sh
-            bash ./scripts/deploy-appcenter.sh
           fi
