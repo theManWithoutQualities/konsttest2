@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">KonstTest2</string>
+    <string name="logo">Le logo</string>
+    <string name="description">Ceci est un lanceur. Pour exécuter des applications et autres choses intéressantes.</string>
+    <string name="light_theme">Thème lumière</string>
+    <string name="dark_theme">Thème sombre</string>
+    <string name="standard_density">Mise en page standard</string>
+    <string name="high_density">Mise en page serrée</string>
+    <string name="standard_density_explanation">Portrait: 4 icônes à la suite Paysage: 6 icônes à la suite</string>
+    <string name="high_density_explanation">Portrait: 5 icônes à la suite Paysage: 7 icônes à la suite</string>
+    <string name="theme">Thème</string>
+    <string name="density">La densité</string>
+    <string name="settings">Paramètres</string>
+    <string name="net">Grille</string>
+    <string name="list">Liste</string>
+    <string name="navigation_drawer_open">Ouvrir le tiroir de navigation</string>
+    <string name="navigation_drawer_close">Fermer le tiroir de navigation</string>
+    <string name="nav_header_desc">En-tête de navigation</string>
+    <string name="name">Nikolay Konstantinov</string>
+    <string name="sort">Trier</string>
+    <string name="show_welcome_after">Afficher la page d\'accueil lors de la prochaine exécution</string>
+    <string name="no_data">Aucune donnée</string>
+    <string name="mail">Email: konst007@tut.by</string>
+    <string name="vk">Vkontakte: vkontaktenesizhu</string>
+    <string name="fb">Facebook: vfeisbukenesizhutozhe</string>
+    <string name="git">GitHub: theManWihoutQualities</string>
+    <string name="location">Coordonnées: 53 ° 55 ′ s. sh. 27 ° 33 ′ à. d.</string>
+    <string name="description_second">... Par exemple, vous pouvez afficher les statistiques de lancement d’application, afficher un profil</string>
+    <string name="welcome">Bienvenue!</string>
+    <string name="phone">Téléphone: +37550000</string>
+</resources>

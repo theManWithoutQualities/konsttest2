@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">KonstTest2</string>
+    <string name="logo">Logo</string>
+    <string name="description">See on käivitaja. Rakenduste ja muude huvitavate asjade käivitamiseks.</string>
+    <string name="light_theme">Kerge teema</string>
+    <string name="dark_theme">Tume teema</string>
+    <string name="standard_density">Standardne paigutus</string>
+    <string name="high_density">Tihe paigutus</string>
+    <string name="standard_density_explanation">Portree: 4 ikooni järjest rida Maastik: 6 ikooni järjest</string>
+    <string name="high_density_explanation">Portree: 5 ikooni järjest rida Maastik: 7 ikooni järjest</string>
+    <string name="theme">Teema</string>
+    <string name="density">Tihedus</string>
+    <string name="settings">Seaded</string>
+    <string name="net">Võrk</string>
+    <string name="list">Nimekiri</string>
+    <string name="navigation_drawer_open">Avage navigeerimissahtel</string>
+    <string name="navigation_drawer_close">Sulgege navigatsiooni sahtel</string>
+    <string name="nav_header_desc">Navigeerimise päis</string>
+    <string name="name">Nikolai Konstantinov</string>
+    <string name="sort">Sorteeri</string>
+    <string name="show_welcome_after">Näita tervituslehte järgmisel käivitamisel</string>
+    <string name="no_data">Andmeid pole</string>
+    <string name="vk">Email: konst007@tut.by</string>
+    <string name="mail">Email: konst007@tut.by</string>
+    <string name="fb">Facebook: vfeisbukenesizhutozhe</string>
+    <string name="git">GitHub: theManWihoutQualities</string>
+    <string name="location">Koordinaadid: 53 ° 55 ′ s. sh. 27 ° 33 ′ in. d.</string>
+    <string name="description_second">... Näiteks saate vaadata rakenduste käivitamise statistikat, vaadata profiili</string>
+    <string name="welcome">Tere tulemast!</string>
+    <string name="phone">Telefon: +37550000</string>
+</resources>

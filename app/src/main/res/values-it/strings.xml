@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">KonstTest2</string>
+    <string name="logo">logo</string>
+    <string name="description">Questo è un launcher. Per eseguire applicazioni e altre cose interessanti.</string>
+    <string name="light_theme">Tema leggero</string>
+    <string name="dark_theme">Tema scuro</string>
+    <string name="standard_density">Layout standard</string>
+    <string name="high_density">Layout stretto</string>
+    <string name="standard_density_explanation">Ritratto: 4 icone in una riga Paesaggio: 6 icone in una riga</string>
+    <string name="high_density_explanation">Ritratto: 5 icone in una riga Paesaggio: 7 icone in una riga</string>
+    <string name="theme">tema</string>
+    <string name="density">densità</string>
+    <string name="settings">impostazioni</string>
+    <string name="net">rete</string>
+    <string name="list">lista</string>
+    <string name="navigation_drawer_open">Apri il cassetto di navigazione</string>
+    <string name="navigation_drawer_close">Chiudi il cassetto di navigazione</string>
+    <string name="nav_header_desc">Intestazione di navigazione</string>
+    <string name="name">Nikolay Konstantinov</string>
+    <string name="sort">ordinamento</string>
+    <string name="show_welcome_after">Mostra la pagina di benvenuto alla prossima esecuzione</string>
+    <string name="no_data">Nessun dato</string>
+    <string name="mail">Email: konst007@tut.by</string>
+    <string name="vk">Vkontakte: vkontaktenesizhu</string>
+    <string name="fb">Facebook: vfeisbukenesizhutozhe</string>
+    <string name="git">GitHub: theManWihoutQualities</string>
+    <string name="location">Coordinate: 53 ° 55 \'s. w. 27 ° 33 \'in d.</string>
+    <string name="description_second">... Ad esempio, è possibile visualizzare le statistiche di avvio dell\'applicazione, visualizzare un profilo</string>
+    <string name="welcome">Benvenuto!</string>
+    <string name="phone">Telefono: +37550000</string>
+</resources>

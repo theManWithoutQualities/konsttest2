@@ -1,14 +1,12 @@
 <resources>
     <string name="app_name">KonstTest2</string>
     <string name="logo">Лого</string>
-    <string name="description">Это лаунчер. Для запуска приложений и других интересных вещей.</string>
     <string name="light_theme">Светлая тема</string>
     <string name="dark_theme">Темная тема</string>
     <string name="standard_density">Стандартный макет</string>
     <string name="high_density">Плотный макет</string>
     <string name="standard_density_explanation">Портретная: 4 иконки в ряд Ландшафтная: 6 иконок в ряд</string>
     <string name="high_density_explanation">Портретная: 5 иконки в ряд Ландшафтная: 7 иконок в ряд</string>
-    <string name="theme">Тема</string>
     <string name="density">Плотность</string>
     <string name="settings">Настройки</string>
     <string name="net">Сетка</string>
@@ -21,11 +19,13 @@
     <string name="show_welcome_after">Показывать Welcome-page при следующем запуске</string>
     <string name="no_data">Нет данных</string>
     <string name="mail">Email: konst007@tut.by</string>
-    <string name="vk">Vkontakte: vkontaktenesizhu</string>
     <string name="fb">Facebook: vfeisbukenesizhutozhe</string>
     <string name="git">GitHub: theManWihoutQualities</string>
     <string name="location">Координаты: 53°55′ с. ш. 27°33′ в. д.</string>
     <string name="description_second">...Например, можно просматривать статистику запуска приложений, просматривать профиль</string>
     <string name="welcome">Добро пожаловать!</string>
     <string name="phone">Телефон: +37550000</string>
+    <string name="description">Это лаунчер. Для запуска приложений и других интересных вещей.</string>
+    <string name="theme">Тема</string>
+    <string name="vk">Vkontakte: vkontaktenesizhu</string>
 </resources>

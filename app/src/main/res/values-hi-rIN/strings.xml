@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">KonstTest2</string>
+    <string name="logo">लोगो</string>
+    <string name="description">यह एक लांचर है। एप्लिकेशन और अन्य दिलचस्प चीजें चलाने के लिए।</string>
+    <string name="light_theme">प्रकाश विषय</string>
+    <string name="dark_theme">डार्क थीम</string>
+    <string name="standard_density">मानक लेआउट</string>
+    <string name="high_density">तंग लेआउट</string>
+    <string name="standard_density_explanation">पोर्ट्रेट: एक पंक्ति में 4 आइकन लैंडस्केप: एक पंक्ति में 6 आइकन</string>
+    <string name="high_density_explanation">पोर्ट्रेट: एक पंक्ति में 5 आइकन लैंडस्केप: एक पंक्ति में 7 आइकन</string>
+    <string name="theme">विषय</string>
+    <string name="density">घनत्व</string>
+    <string name="settings">सेटिंग्स</string>
+    <string name="net">जाल</string>
+    <string name="list">सूची</string>
+    <string name="navigation_drawer_open">नेविगेशन दराज खोलें</string>
+    <string name="navigation_drawer_close">नेविगेशन ड्रॉअर बंद करें</string>
+    <string name="nav_header_desc">नेविगेशन हेडर</string>
+    <string name="name">निकोले कोंस्टेंटिनोव</string>
+    <string name="sort">छँटाई</string>
+    <string name="show_welcome_after">अगले भाग पर स्वागत-पृष्ठ दिखाएँ</string>
+    <string name="no_data">कोई डेटा नहीं</string>
+    <string name="vk">Vkontakte: vkontaktenesizhu</string>
+    <string name="mail">Email: konst007@tut.by</string>
+    <string name="fb">Facebook: vfeisbukenesizhutozhe</string>
+    <string name="git">GitHub: theManWihoutQualities</string>
+    <string name="location">निर्देशांक: 53 ° 55 ° s। डब्ल्यू। 27 ° 33 ′ में। घ।</string>
+    <string name="description_second">... उदाहरण के लिए, आप एप्लिकेशन लॉन्च आंकड़े देख सकते हैं, प्रोफ़ाइल देख सकते हैं</string>
+    <string name="welcome">आपका स्वागत है!</string>
+    <string name="phone">फोन: +37550000</string>
+</resources>
