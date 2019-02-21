@@ -18,6 +18,10 @@ import com.crashlytics.android.ndk.CrashlyticsNdk;
 import com.example.konsttest2.listApp.ListAppFragment;
 import com.example.konsttest2.netApp.NetAppFragment;
 import io.fabric.sdk.android.Fabric;
+
+import com.example.konsttest2.profile.ProfileActivity;
+import com.example.konsttest2.settings.SettingsActivity;
+import com.example.konsttest2.welcome.WelcomeSlideActivity;
 import com.microsoft.appcenter.AppCenter;
 import com.microsoft.appcenter.analytics.Analytics;
 import com.microsoft.appcenter.crashes.Crashes;

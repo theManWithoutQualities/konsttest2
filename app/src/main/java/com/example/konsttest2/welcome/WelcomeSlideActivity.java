@@ -1,4 +1,4 @@
-package com.example.konsttest2;
+package com.example.konsttest2.welcome;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,15 +12,19 @@ import android.support.v7.preference.PreferenceManager;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.konsttest2.BasicActivity;
+import com.example.konsttest2.MainActivity;
+import com.example.konsttest2.R;
+
 import java.util.Arrays;
 import java.util.List;
 
-import static com.example.konsttest2.ChooseDensityFragment.DENSITY_HIGH;
-import static com.example.konsttest2.ChooseDensityFragment.DENSITY_STANDARD;
-import static com.example.konsttest2.ChooseDensityFragment.KEY_DENSITY;
-import static com.example.konsttest2.ChooseThemeFragment.KEY_THEME;
-import static com.example.konsttest2.ChooseThemeFragment.THEME_DARK;
-import static com.example.konsttest2.ChooseThemeFragment.THEME_LIGHT;
+import static com.example.konsttest2.welcome.ChooseDensityFragment.DENSITY_HIGH;
+import static com.example.konsttest2.welcome.ChooseDensityFragment.DENSITY_STANDARD;
+import static com.example.konsttest2.welcome.ChooseDensityFragment.KEY_DENSITY;
+import static com.example.konsttest2.welcome.ChooseThemeFragment.KEY_THEME;
+import static com.example.konsttest2.welcome.ChooseThemeFragment.THEME_DARK;
+import static com.example.konsttest2.welcome.ChooseThemeFragment.THEME_LIGHT;
 
 public class WelcomeSlideActivity extends BasicActivity {
 

@@ -1,8 +1,10 @@
-package com.example.konsttest2;
+package com.example.konsttest2.settings;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.preference.PreferenceFragmentCompat;
+
+import com.example.konsttest2.R;
 
 public class SettingsFragment
         extends PreferenceFragmentCompat

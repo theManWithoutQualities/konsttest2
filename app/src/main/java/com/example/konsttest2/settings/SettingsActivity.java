@@ -1,8 +1,12 @@
-package com.example.konsttest2;
+package com.example.konsttest2.settings;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+
+import com.example.konsttest2.BasicActivity;
+import com.example.konsttest2.MainActivity;
+import com.example.konsttest2.R;
 
 public class SettingsActivity extends BasicActivity {
 

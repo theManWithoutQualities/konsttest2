@@ -1,4 +1,4 @@
-package com.example.konsttest2;
+package com.example.konsttest2.welcome;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
+
+import com.example.konsttest2.R;
 
 public class ChooseThemeFragment extends Fragment {
 

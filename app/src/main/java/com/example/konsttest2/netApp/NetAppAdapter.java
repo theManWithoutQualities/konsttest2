@@ -15,7 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.konsttest2.R;
-import com.example.konsttest2.StatisticActivity;
+import com.example.konsttest2.statistic.StatisticActivity;
 import com.example.konsttest2.data.AppDbHelper;
 import com.example.konsttest2.listApp.AppItem;
 

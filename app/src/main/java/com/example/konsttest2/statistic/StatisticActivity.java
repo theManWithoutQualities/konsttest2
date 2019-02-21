@@ -1,8 +1,10 @@
-package com.example.konsttest2;
+package com.example.konsttest2.statistic;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
+
+import com.example.konsttest2.R;
 
 public class StatisticActivity extends AppCompatActivity {
 

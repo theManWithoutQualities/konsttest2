@@ -23,13 +23,13 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import static com.example.konsttest2.ChooseDensityFragment.DENSITY_STANDARD;
-import static com.example.konsttest2.ChooseDensityFragment.KEY_DENSITY;
-import static com.example.konsttest2.SettingsActivity.KEY_SORT;
-import static com.example.konsttest2.SettingsActivity.SORT_ALPHABETIC;
-import static com.example.konsttest2.SettingsActivity.SORT_ALPHABETIC_REVERSE;
-import static com.example.konsttest2.SettingsActivity.SORT_DATE;
-import static com.example.konsttest2.SettingsActivity.SORT_FREQUENCY;
+import static com.example.konsttest2.welcome.ChooseDensityFragment.DENSITY_STANDARD;
+import static com.example.konsttest2.welcome.ChooseDensityFragment.KEY_DENSITY;
+import static com.example.konsttest2.settings.SettingsActivity.KEY_SORT;
+import static com.example.konsttest2.settings.SettingsActivity.SORT_ALPHABETIC;
+import static com.example.konsttest2.settings.SettingsActivity.SORT_ALPHABETIC_REVERSE;
+import static com.example.konsttest2.settings.SettingsActivity.SORT_DATE;
+import static com.example.konsttest2.settings.SettingsActivity.SORT_FREQUENCY;
 
 public class NetAppFragment extends Fragment {
 
