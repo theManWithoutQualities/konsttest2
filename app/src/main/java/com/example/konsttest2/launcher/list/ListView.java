@@ -31,4 +31,9 @@ public class ListView extends LinearLayout implements LauncherView {
         final View avatar = findViewById(R.id.avatar);
         avatar.setBackground(icon);
     }
+
+    @Override
+    public void setBackgroundCol(int color) {
+        findViewById(R.id.raw).setBackgroundColor(color);
+    }
 }

@@ -2,6 +2,7 @@ package com.example.konsttest2.launcher;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.annotation.NonNull;
@@ -18,9 +19,12 @@ import com.example.konsttest2.statistic.StatisticActivity;
 
 import java.util.List;
 
+import static com.example.konsttest2.launcher.LauncherFragment.TOP_FREQUENT_COUNT;
+
 public abstract class LauncherAdapter extends RecyclerView.Adapter {
 
     private static final String COUNT = "count";
+    private static final String ACCENT_COLOR = "#43A047";
 
     protected final List<AppItem> appItemList;
     protected final Context context;
@@ -45,12 +49,20 @@ public abstract class LauncherAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
         ((LauncherHolder)viewHolder).bindIcon(appItemList.get(i).getIcon());
         ((LauncherHolder)viewHolder).bindName(appItemList.get(i).getName());
+        if (i < TOP_FREQUENT_COUNT) {
+            ((LauncherHolder)viewHolder).bindBackgroundColor(Color.parseColor(ACCENT_COLOR));
+        } else {
+            ((LauncherHolder)viewHolder).bindBackgroundColor(Color.TRANSPARENT);
+        }
     }
 
 
     public class LauncherHolder extends RecyclerView.ViewHolder {
 
         View.OnClickListener startItemListener = (v) -> {
+            appItemList
+                    .get(getAdapterPosition())
+                    .setCount(appItemList.get(getAdapterPosition()).getCount() + 1);
             dbHelper.addClick(appItemList.get(getAdapterPosition()).getPackageName());
             startAt(getAdapterPosition());
             return;
@@ -121,6 +133,9 @@ public abstract class LauncherAdapter extends RecyclerView.Adapter {
         }
         public void bindName(String name) {
             ((LauncherView)itemView).setTitle(name);
+        }
+        public void bindBackgroundColor(int color) {
+            ((LauncherView)itemView).setBackgroundCol(color);
         }
     }
 

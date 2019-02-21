@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v4.app.Fragment;
 import android.support.v7.preference.PreferenceManager;
 
@@ -22,6 +24,7 @@ import static com.example.konsttest2.settings.SettingsUtils.SORT_FREQUENCY;
 public class LauncherFragment extends Fragment {
 
     public static final int TOP_FREQUENT_COUNT = 3;
+    public static final String EMPTY = "";
 
     protected final List<AppItem> appItemList = new ArrayList<>();
     protected LauncherAdapter launcherAdapter;
@@ -33,12 +36,9 @@ public class LauncherFragment extends Fragment {
         }
     };
 
-    public LauncherAdapter getLauncherAdapter() {
-        return launcherAdapter;
-    }
-
     protected void loadApps() {
         appItemList.clear();
+        final List<AppItem> tempList = new ArrayList<>();
         final PackageManager packageManager = getActivity().getPackageManager();
         Intent intent = new Intent(Intent.ACTION_MAIN, null);
         intent.addCategory(Intent.CATEGORY_LAUNCHER);
@@ -65,28 +65,48 @@ public class LauncherFragment extends Fragment {
             final Integer count = launcherAdapter.getDbHelper().getCount(packageName);
             appItem.setCount(count == null ? 0 : count);
 
-            appItemList.add(appItem);
+            tempList.add(appItem);
         }
 
-        sort(appItemList);
+        fillPopularPositions(tempList);
+        sort(tempList);
+        appItemList.addAll(tempList);
     }
 
-    private void sort(List<AppItem> appItemList) {
+    private void fillPopularPositions(List<AppItem> list) {
+        Collections.sort(list, (a1, a2) -> a2.getCount().compareTo(a1.getCount()));
+        if (list.size() >= TOP_FREQUENT_COUNT) {
+            for (int num = 0; num < TOP_FREQUENT_COUNT; num++) {
+                appItemList.add(list.get(num));
+            }
+        } else {
+            appItemList.addAll(list);
+            for (int num = appItemList.size() - 1; num < TOP_FREQUENT_COUNT; num++) {
+                appItemList.add(
+                        new AppItem()
+                                .setIcon(new ColorDrawable(Color.TRANSPARENT))
+                                .setName(EMPTY)
+                );
+            }
+        }
+    }
+
+    private void sort(List<AppItem> list) {
         final String sortName = PreferenceManager.getDefaultSharedPreferences(getContext())
                 .getString(KEY_SORT, SORT_ALPHABETIC);
         switch (sortName) {
             case SORT_ALPHABETIC:
-                Collections.sort(appItemList, (a1, a2) -> a1.getName().compareTo(a2.getName()));
+                Collections.sort(list, (a1, a2) -> a1.getName().compareTo(a2.getName()));
                 break;
             case SORT_ALPHABETIC_REVERSE:
-                Collections.sort(appItemList, (a1, a2) -> a2.getName().compareTo(a1.getName()));
+                Collections.sort(list, (a1, a2) -> a2.getName().compareTo(a1.getName()));
                 break;
             case SORT_DATE:
-                Collections.sort(appItemList, (a1, a2) ->
+                Collections.sort(list, (a1, a2) ->
                         a1.getInstallDate().compareTo(a2.getInstallDate()));
                 break;
             case SORT_FREQUENCY:
-                Collections.sort(appItemList, (a1, a2) -> a1.getCount().compareTo(a2.getCount()));
+                Collections.sort(list, (a1, a2) -> a1.getCount().compareTo(a2.getCount()));
                 break;
             default:
                 break;

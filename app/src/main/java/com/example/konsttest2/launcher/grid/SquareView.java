@@ -31,4 +31,9 @@ public class SquareView extends LinearLayout implements LauncherView {
         final View avatar = findViewById(R.id.app_icon);
         avatar.setBackground(icon);
     }
+
+    @Override
+    public void setBackgroundCol(int color) {
+        findViewById(R.id.cell).setBackgroundColor(color);
+    }
 }
