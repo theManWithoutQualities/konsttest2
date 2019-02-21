@@ -7,7 +7,7 @@
     <LinearLayout
         android:id="@+id/android_custom_gridview_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="bottom|center"
         android:padding="18dp"
         android:orientation="vertical">

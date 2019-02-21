@@ -7,7 +7,7 @@
     android:padding="18dp">
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
         <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="match_parent"
