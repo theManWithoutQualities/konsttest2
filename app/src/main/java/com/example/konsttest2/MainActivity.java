@@ -1,20 +1,27 @@
 package com.example.konsttest2;
 
 import android.preference.PreferenceManager;
-import android.support.v4.app.FragmentTransaction;
+import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.ndk.CrashlyticsNdk;
+import com.example.konsttest2.launcher.desktop.DesktopFragment;
 import com.example.konsttest2.launcher.list.ListFragment;
 import com.example.konsttest2.launcher.grid.GridFragment;
 import io.fabric.sdk.android.Fabric;
@@ -27,8 +34,15 @@ import com.microsoft.appcenter.analytics.Analytics;
 import com.microsoft.appcenter.crashes.Crashes;
 import com.microsoft.appcenter.distribute.Distribute;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class MainActivity extends BasicActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private ViewPager mPager;
+
+    private PagerAdapter mPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,8 +74,34 @@ public class MainActivity extends BasicActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        mPager = findViewById(R.id.main_content);
+        final List<Fragment> fragments =
+                Arrays.asList(
+                        new DesktopFragment(),
+                        new GridFragment(),
+                        new ListFragment()
+                );
+        mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager(), fragments);
+        mPager.setAdapter(mPagerAdapter);
+        mPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {
+
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
+            }
+        });
+
         if (savedInstanceState == null) {
-            setNetFragment();
+            setDesktopFragment();
         }
     }
 
@@ -79,8 +119,10 @@ public class MainActivity extends BasicActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.nav_net) {
-            setNetFragment();
+        if (id == R.id.nav_desktop) {
+            setDesktopFragment();
+        } else if (id == R.id.nav_net) {
+            setGridFragment();
         } else if (id == R.id.nav_list) {
             setListFragment();
         } else if (id == R.id.nav_settings) {
@@ -100,26 +142,40 @@ public class MainActivity extends BasicActivity
         startActivity(intent);
     }
 
-
-
-    public void setListFragment() {
-        Fragment listFragment = new ListFragment();
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-        transaction.replace(R.id.main_content, listFragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
-
+    public void setDesktopFragment() {
+        mPager.setCurrentItem(0, true);
     }
 
-    public void setNetFragment() {
-        Fragment netFragment = new GridFragment();
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+    public void setGridFragment() {
+        mPager.setCurrentItem(1, true);
+    }
 
-        transaction.replace(R.id.main_content, netFragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
+    public void setListFragment() {
+        mPager.setCurrentItem(2, true);
+    }
 
+    private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
+        private final List<Fragment> fragments;
+        public ScreenSlidePagerAdapter(FragmentManager fm, List<Fragment> fragments) {
+            super(fm);
+            this.fragments = fragments;
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return fragments.get(position);
+        }
+
+        @NonNull
+        @Override
+        public Object instantiateItem(@NonNull ViewGroup container, int position) {
+            return super.instantiateItem(container, position);
+        }
+
+        @Override
+        public int getCount() {
+            return fragments.size();
+        }
     }
 
 }
