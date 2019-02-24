@@ -37,6 +37,8 @@ import com.microsoft.appcenter.distribute.Distribute;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.example.konsttest2.settings.SettingsUtils.SHOW_WELCOME_PAGE_KEY;
+
 public class MainActivity extends BasicActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -54,7 +56,7 @@ public class MainActivity extends BasicActivity
         final SharedPreferences preferences = PreferenceManager
                 .getDefaultSharedPreferences(this);
         final boolean showWelcomePage =
-                preferences.getBoolean("showWelcomePage", true);
+                preferences.getBoolean(SHOW_WELCOME_PAGE_KEY, true);
         if (showWelcomePage) {
             final Intent intent = new Intent(this, WelcomeSlideActivity.class);
             startActivity(intent);

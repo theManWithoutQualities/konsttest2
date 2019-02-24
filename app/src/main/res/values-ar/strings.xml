@@ -29,4 +29,8 @@
     <string name="description_second">... على سبيل المثال ، يمكنك عرض إحصائيات إطلاق التطبيق ، أو عرض ملف تعريف</string>
     <string name="welcome">أهلا وسهلا!</string>
     <string name="phone">الهاتف: +37550000</string>
+    <string name="delete">Удалить</string>
+    <string name="add">Добавить</string>
+    <string name="frequency">Частота</string>
+    <string name="info">Инфо</string>
 </resources>

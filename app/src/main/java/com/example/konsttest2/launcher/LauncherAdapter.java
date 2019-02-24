@@ -14,7 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.konsttest2.R;
-import com.example.konsttest2.data.AppDbHelper;
+import com.example.konsttest2.data.LauncherDbHelper;
 import com.example.konsttest2.statistic.StatisticActivity;
 
 import java.util.List;
@@ -28,15 +28,15 @@ public abstract class LauncherAdapter extends RecyclerView.Adapter {
 
     protected final List<AppItem> appItemList;
     protected final Context context;
-    protected final AppDbHelper dbHelper;
+    protected final LauncherDbHelper dbHelper;
 
     public LauncherAdapter(List<AppItem> appItemList, Context context) {
         this.appItemList = appItemList;
         this.context = context;
-        dbHelper = new AppDbHelper(context);
+        dbHelper = new LauncherDbHelper(context);
     }
 
-    public AppDbHelper getDbHelper() {
+    public LauncherDbHelper getDbHelper() {
         return dbHelper;
     }
 
@@ -93,6 +93,7 @@ public abstract class LauncherAdapter extends RecyclerView.Adapter {
                         final Integer count = appItemList.get(getAdapterPosition()).getCount();
                         intent.putExtra(COUNT, count == null ? 0 : count);
                         context.startActivity(intent);
+                        mode.finish();
                         return true;
                     case R.id.info:
                         Intent settingsIntent =
@@ -108,6 +109,7 @@ public abstract class LauncherAdapter extends RecyclerView.Adapter {
                                 )
                         );
                         context.startActivity(settingsIntent);
+                        mode.finish();
                         return true;
                     default:
                         return false;

@@ -30,4 +30,8 @@
     <string name="location">Координаты: 53°55′ с. ш. 27°33′ в. д.</string>
     <string name="description_second">...Например, можно просматривать статистику запуска приложений, просматривать профиль</string>
     <string name="desktop">Рабочий стол</string>
+    <string name="delete">Удалить</string>
+    <string name="add">Добавить</string>
+    <string name="frequency">Частота</string>
+    <string name="info">Инфо</string>
 </resources>

@@ -29,4 +29,8 @@
     <string name="theme">Тема</string>
     <string name="vk">Vkontakte: vkontaktenesizhu</string>
     <string name="desktop">Рабочий стол</string>
+    <string name="delete">Удалить</string>
+    <string name="add">Добавить</string>
+    <string name="frequency">Частота</string>
+    <string name="info">Инфо</string>
 </resources>

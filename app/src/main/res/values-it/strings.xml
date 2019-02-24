@@ -29,4 +29,8 @@
     <string name="description_second">... Ad esempio, è possibile visualizzare le statistiche di avvio dell\'applicazione, visualizzare un profilo</string>
     <string name="welcome">Benvenuto!</string>
     <string name="phone">Telefono: +37550000</string>
+    <string name="delete">Удалить</string>
+    <string name="add">Добавить</string>
+    <string name="frequency">Частота</string>
+    <string name="info">Инфо</string>
 </resources>

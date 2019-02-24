@@ -29,4 +29,8 @@
     <string name="description_second">... उदाहरण के लिए, आप एप्लिकेशन लॉन्च आंकड़े देख सकते हैं, प्रोफ़ाइल देख सकते हैं</string>
     <string name="welcome">आपका स्वागत है!</string>
     <string name="phone">फोन: +37550000</string>
+    <string name="delete">Удалить</string>
+    <string name="add">Добавить</string>
+    <string name="frequency">Частота</string>
+    <string name="info">Инфо</string>
 </resources>
