@@ -15,7 +15,9 @@ import android.view.View;
 
 import com.example.konsttest2.R;
 import com.example.konsttest2.data.LauncherDbHelper;
+import com.example.konsttest2.metrica.MetricaUtils;
 import com.example.konsttest2.statistic.StatisticActivity;
+import com.yandex.metrica.YandexMetrica;
 
 import java.util.List;
 
@@ -60,6 +62,7 @@ public abstract class LauncherAdapter extends RecyclerView.Adapter {
     public class LauncherHolder extends RecyclerView.ViewHolder {
 
         View.OnClickListener startItemListener = (v) -> {
+            YandexMetrica.reportEvent(MetricaUtils.START_APP);
             appItemList
                     .get(getAdapterPosition())
                     .setCount(appItemList.get(getAdapterPosition()).getCount() + 1);
@@ -86,6 +89,7 @@ public abstract class LauncherAdapter extends RecyclerView.Adapter {
                     case R.id.context_delete:
                         removeAt(getAdapterPosition());
                         mode.finish();
+                        YandexMetrica.reportEvent(MetricaUtils.CONTEXT_DELETE_APP);
                         return true;
                     case R.id.frequency:
                         final Intent intent = new Intent();
@@ -94,8 +98,10 @@ public abstract class LauncherAdapter extends RecyclerView.Adapter {
                         intent.putExtra(COUNT, count == null ? 0 : count);
                         context.startActivity(intent);
                         mode.finish();
+                        YandexMetrica.reportEvent(MetricaUtils.CONTEXT_FREQUENCY);
                         return true;
                     case R.id.info:
+                        YandexMetrica.reportEvent(MetricaUtils.CONTEXT_INFO);
                         Intent settingsIntent =
                                 new Intent(
                                         android.provider.Settings
@@ -124,6 +130,7 @@ public abstract class LauncherAdapter extends RecyclerView.Adapter {
         public LauncherHolder(@NonNull View itemView) {
             super(itemView);
             itemView.setOnLongClickListener((v) -> {
+                YandexMetrica.reportEvent(MetricaUtils.LONGCLICK_APP);
                 v.startActionMode(actionModeCallBack);
                 return true;
             });

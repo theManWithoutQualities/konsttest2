@@ -2,6 +2,7 @@ package com.example.konsttest2.launcher.desktop;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.widget.ImageView;
 
 import java.io.InputStream;
@@ -27,6 +28,11 @@ public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
         return bmp;
     }
     protected void onPostExecute(Bitmap result) {
-        image.setImageBitmap(result);
+        Log.d("Konst", "DownloadImageTask#onPostExecute, bitmap = " + result);
+        if (result != null) {
+            image.setImageBitmap(result);
+        } else {
+
+        }
     }
 }

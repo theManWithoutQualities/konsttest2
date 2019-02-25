@@ -6,7 +6,7 @@ import android.os.Build;
 import com.yandex.metrica.YandexMetrica;
 import com.yandex.metrica.YandexMetricaConfig;
 
-public class LauncherApplication extends Application {
+public class KonstTest2 extends Application {
 
     @Override
     public void onCreate() {

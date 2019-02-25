@@ -7,6 +7,8 @@ import android.support.v7.widget.Toolbar;
 import com.example.konsttest2.BasicActivity;
 import com.example.konsttest2.MainActivity;
 import com.example.konsttest2.R;
+import com.example.konsttest2.metrica.MetricaUtils;
+import com.yandex.metrica.YandexMetrica;
 
 public class SettingsActivity extends BasicActivity {
 
@@ -25,6 +27,7 @@ public class SettingsActivity extends BasicActivity {
 
     @Override
     public void onBackPressed() {
+        YandexMetrica.reportEvent(MetricaUtils.BACKPRESS_SETTINGS);
         final Intent intent = new Intent();
         intent.setClass(this, MainActivity.class);
         startActivity(intent);

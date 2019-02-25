@@ -46,6 +46,7 @@ import com.example.konsttest2.launcher.list.ListFragment;
 import com.example.konsttest2.launcher.grid.GridFragment;
 import io.fabric.sdk.android.Fabric;
 
+import com.example.konsttest2.metrica.MetricaUtils;
 import com.example.konsttest2.profile.ProfileActivity;
 import com.example.konsttest2.settings.SettingsActivity;
 import com.example.konsttest2.welcome.WelcomeSlideActivity;
@@ -53,6 +54,7 @@ import com.microsoft.appcenter.AppCenter;
 import com.microsoft.appcenter.analytics.Analytics;
 import com.microsoft.appcenter.crashes.Crashes;
 import com.microsoft.appcenter.distribute.Distribute;
+import com.yandex.metrica.YandexMetrica;
 
 import java.util.Arrays;
 import java.util.Calendar;
@@ -201,11 +203,15 @@ public class MainActivity extends BasicActivity
 
         if (id == R.id.nav_desktop) {
             setDesktopFragment();
+            YandexMetrica.reportEvent(MetricaUtils.CHOOSE_DESKTOP);
         } else if (id == R.id.nav_net) {
             setGridFragment();
+            YandexMetrica.reportEvent(MetricaUtils.CHOOSE_GRID);
         } else if (id == R.id.nav_list) {
             setListFragment();
+            YandexMetrica.reportEvent(MetricaUtils.CHOOSE_LIST);
         } else if (id == R.id.nav_settings) {
+            YandexMetrica.reportEvent(MetricaUtils.CHOOSE_SETTINGS);
             final Intent intent = new Intent();
             intent.setClass(this, SettingsActivity.class);
             startActivity(intent);

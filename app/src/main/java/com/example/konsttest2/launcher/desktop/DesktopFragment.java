@@ -2,7 +2,6 @@ package com.example.konsttest2.launcher.desktop;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.ActionMode;
@@ -20,6 +19,8 @@ import android.widget.TextView;
 import com.example.konsttest2.R;
 import com.example.konsttest2.data.LauncherDbHelper;
 import com.example.konsttest2.data.Link;
+import com.example.konsttest2.metrica.MetricaUtils;
+import com.yandex.metrica.YandexMetrica;
 
 import java.util.List;
 
@@ -51,6 +52,7 @@ public class DesktopFragment extends Fragment {
                 final View cell = ((ViewGroup) row).getChildAt(ind2);
                 cell.setTag("cell_" + ind1 + "_" + ind2);
                 cell.setOnLongClickListener((v) -> {
+                    YandexMetrica.reportEvent(MetricaUtils.LONGCLICK_DESKTOP);
                     v.startActionMode(actionModeCallBack.setClickedView(v));
                     return true;
                 });
@@ -97,10 +99,12 @@ public class DesktopFragment extends Fragment {
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.context_delete:
+                    YandexMetrica.reportEvent(MetricaUtils.CONTEXT_DELETE_LINK);
                     ((ViewGroup)clickedView).removeAllViews();
                     mode.finish();
                     return true;
                 case R.id.context_add:
+                    YandexMetrica.reportEvent(MetricaUtils.CONTEXT_ADD_LINK);
                     final Dialog dialog = new Dialog(getContext());
                     dialog.setContentView(R.layout.desktop_dialog);
                     dialog.setCancelable(true);
@@ -109,7 +113,7 @@ public class DesktopFragment extends Fragment {
                     button.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            final String title = ((EditText) dialog.findViewById(R.id.title))
+                            final String title = ((EditText) dialog.findViewById(R.id.address))
                                     .getText()
                                     .toString();
                             final String weblink = ((EditText) dialog.findViewById(R.id.address))
