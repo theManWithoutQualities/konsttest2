@@ -20,4 +20,19 @@
     <CheckBoxPreference
         android:key="showWelcomePage"
         android:title="@string/show_welcome_after" />
+    <ListPreference
+        android:key="background_site"
+        android:entries="@array/background_site_entries"
+        android:entryValues="@array/background_site_entryValues"
+        android:title="@string/wallpaper_source"
+        android:defaultValue="https://loremflickr.com/"/>
+    <CheckBoxPreference
+        android:key="changeWallpaperNow"
+        android:title="@string/change_wallpaper_now" />
+    <ListPreference
+        android:key="background_periodic"
+        android:entries="@array/background_periodic_entries"
+        android:entryValues="@array/background_periodic_entryValues"
+        android:title="@string/wallpaper_periodic"
+        android:defaultValue="per_15_minutes"/>
 </PreferenceScreen>

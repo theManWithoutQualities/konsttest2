@@ -34,4 +34,7 @@
     <string name="add">Add</string>
     <string name="frequency">Frequency</string>
     <string name="info">Info</string>
+    <string name="wallpaper_source">Wallpaper source</string>
+    <string name="change_wallpaper_now">Change wallpaper now</string>
+    <string name="wallpaper_periodic">Wallpaper changing frequency</string>
 </resources>

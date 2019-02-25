@@ -1,7 +1,21 @@
 package com.example.konsttest2;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.IntentFilter;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.os.PersistableBundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.v17.leanback.app.BackgroundManager;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.content.Intent;
@@ -15,12 +29,18 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.ndk.CrashlyticsNdk;
+import com.example.konsttest2.imageload.ImageLoadService;
+import com.example.konsttest2.imageload.CacheImageHandler;
+import com.example.konsttest2.imageload.RestartImageLoadServiceBroadcastReceiver;
 import com.example.konsttest2.launcher.desktop.DesktopFragment;
 import com.example.konsttest2.launcher.list.ListFragment;
 import com.example.konsttest2.launcher.grid.GridFragment;
@@ -35,16 +55,29 @@ import com.microsoft.appcenter.crashes.Crashes;
 import com.microsoft.appcenter.distribute.Distribute;
 
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
+import static com.example.konsttest2.settings.SettingsUtils.CHANGE_WALLPAPER_PERIODIC_15_MIN;
+import static com.example.konsttest2.settings.SettingsUtils.CHANGE_WALLPAPER_PERIODIC_1_HOUR;
+import static com.example.konsttest2.settings.SettingsUtils.CHANGE_WALLPAPER_PERIODIC_24_HOURS;
+import static com.example.konsttest2.settings.SettingsUtils.CHANGE_WALLPAPER_PERIODIC_8_HOURS;
+import static com.example.konsttest2.settings.SettingsUtils.KEY_CHANGE_WALLPAPER_NOW;
+import static com.example.konsttest2.settings.SettingsUtils.KEY_CHANGE_WALLPAPER_PERIODIC;
+import static com.example.konsttest2.settings.SettingsUtils.KEY_WALLPAPER_SOURCE;
 import static com.example.konsttest2.settings.SettingsUtils.SHOW_WELCOME_PAGE_KEY;
+import static com.example.konsttest2.settings.SettingsUtils.WALLPAPER_SOURCE_LOREM;
 
 public class MainActivity extends BasicActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private ViewPager mPager;
-
     private PagerAdapter mPagerAdapter;
+    private BackgroundManager backgroundManager;
+    private UpdateBackgroundBroadcastReceiver updateBackgroundBroadcastReceiver;
+    private RestartImageLoadServiceBroadcastReceiver restartImageLoadServiceBroadcastReceiver;
+
+    public static final String RESTART_IMAGE_SERVICE = "RESTART_IMAGE_SERVICE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +138,51 @@ public class MainActivity extends BasicActivity
         if (savedInstanceState == null) {
             setDesktopFragment();
         }
+        backgroundManager = BackgroundManager.getInstance(this);
+        if(backgroundManager.isAttached() == false) {
+            backgroundManager.attach(this.getWindow());
+        }
+        Calendar calendar = Calendar.getInstance();
+
+        calendar.set(Calendar.HOUR_OF_DAY, 12);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        if(Calendar.getInstance().get(Calendar.HOUR_OF_DAY) > 12) {
+            calendar.add(Calendar.DATE, 1);
+        }
+        PendingIntent pendingIntent = PendingIntent
+                .getBroadcast(
+                        this,
+                        0,
+                        new Intent(
+                                this,
+                                RestartImageLoadServiceBroadcastReceiver.class
+                        ).setAction(RESTART_IMAGE_SERVICE),
+                        0
+                );
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        alarmManager.setRepeating(
+                AlarmManager.RTC_WAKEUP,
+                calendar.getTimeInMillis(),
+                AlarmManager.INTERVAL_DAY,
+                pendingIntent
+        );
+        Log.d("Konst", "Alarm manager is configured");
+        final boolean changeWallpaperNow = preferences
+                .getBoolean(KEY_CHANGE_WALLPAPER_NOW, true);
+        if(changeWallpaperNow) {
+            preferences.edit().putBoolean(KEY_CHANGE_WALLPAPER_NOW, false).apply();
+            restartBackgroundLoading();
+        }
+        restartImageLoadServiceBroadcastReceiver = new RestartImageLoadServiceBroadcastReceiver();
+        updateBackgroundBroadcastReceiver = new UpdateBackgroundBroadcastReceiver();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        registerReceiver(updateBackgroundBroadcastReceiver,
+                new IntentFilter(ImageLoadService.BROADCAST_ACTION_UPDATE_IMAGE));
     }
 
     @Override
@@ -177,6 +255,63 @@ public class MainActivity extends BasicActivity
         @Override
         public int getCount() {
             return fragments.size();
+        }
+    }
+
+    private class UpdateBackgroundBroadcastReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(final Context context, final Intent intent) {
+            String action = intent.getAction();
+            if (ImageLoadService.BROADCAST_ACTION_UPDATE_IMAGE.equals(action)) {
+                final String imageName = intent.getStringExtra(ImageLoadService.BROADCAST_EXTRA_IMAGE_NAME);
+                if (TextUtils.isEmpty(imageName) == false) {
+                    final Bitmap bitmap = CacheImageHandler
+                            .getInstance()
+                            .loadImage(getApplicationContext(), imageName);
+                    final Drawable drawable = new BitmapDrawable(getResources(), bitmap);
+                    setBackground(drawable);
+                }
+            }
+        }
+    }
+
+    private void setBackground(Drawable drawable) {
+        backgroundManager.setDrawable(drawable);
+    }
+
+    private void restartBackgroundLoading() {
+        JobScheduler jobScheduler = (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);
+        jobScheduler.cancel(ImageLoadService.JOB_ID_LOAD_IMAGE);
+        if (jobScheduler != null) {
+            jobScheduler.cancel(ImageLoadService.JOB_ID_LOAD_IMAGE);
+            long periodic;
+            final String periodicString = PreferenceManager
+                    .getDefaultSharedPreferences(this)
+                    .getString(KEY_CHANGE_WALLPAPER_PERIODIC, CHANGE_WALLPAPER_PERIODIC_15_MIN);
+            switch (periodicString) {
+                case CHANGE_WALLPAPER_PERIODIC_15_MIN:
+                    periodic = 1000 * 60 * 15;
+                    break;
+                case CHANGE_WALLPAPER_PERIODIC_1_HOUR:
+                    periodic = 1000 * 60 * 60;
+                    break;
+                case CHANGE_WALLPAPER_PERIODIC_8_HOURS:
+                    periodic = 1000 * 60 * 60 * 8;
+                    break;
+                case CHANGE_WALLPAPER_PERIODIC_24_HOURS:
+                    periodic = 1000 * 60 * 60 * 24;
+                    break;
+                default:
+                    periodic = 1000 * 60 * 15;
+            }
+            jobScheduler.schedule(
+                    new JobInfo.Builder(ImageLoadService.JOB_ID_LOAD_IMAGE,
+                            new ComponentName(getApplicationContext(), ImageLoadService.class))
+                            .setPeriodic(periodic)
+                            .setOverrideDeadline(0)
+                            .build()
+            );
         }
     }
 

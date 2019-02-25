@@ -34,4 +34,7 @@
     <string name="add">Добавить</string>
     <string name="frequency">Частота</string>
     <string name="info">Инфо</string>
+    <string name="wallpaper_source">Источник обоев</string>
+    <string name="change_wallpaper_now">Изменить обои сейчас</string>
+    <string name="wallpaper_periodic">Периодичность смены обоев</string>
 </resources>

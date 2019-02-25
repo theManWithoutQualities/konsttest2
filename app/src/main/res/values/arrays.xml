@@ -30,4 +30,24 @@
         <item>date</item>
         <item>noSort</item>
     </string-array>
+    <string-array name="background_site_entries">
+        <item>loremflickr</item>
+        <item>picsum</item>
+    </string-array>
+    <string-array name="background_site_entryValues">
+        <item>https://loremflickr.com/</item>
+        <item>https://picsum.photos/</item>
+    </string-array>
+    <string-array name="background_periodic_entries">
+        <item>15 minutes</item>
+        <item>1 hour</item>
+        <item>8 hours</item>
+        <item>24 hours</item>
+    </string-array>
+    <string-array name="background_periodic_entryValues">
+        <item>per_15_minutes</item>
+        <item>per_1_hour</item>
+        <item>per_8_hours</item>
+        <item>per_24_hours</item>
+    </string-array>
 </resources>
