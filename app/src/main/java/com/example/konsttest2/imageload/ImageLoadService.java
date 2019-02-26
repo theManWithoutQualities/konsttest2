@@ -12,10 +12,9 @@ import static com.example.konsttest2.settings.SettingsUtils.WALLPAPER_SOURCE_LOR
 public class ImageLoadService extends JobService {
 
     public static final int JOB_ID_LOAD_IMAGE = 21234;
-    public static final String BROADCAST_ACTION_UPDATE_IMAGE =
-            "UPDATE_IMAGE";
-    public static final String BROADCAST_EXTRA_IMAGE_NAME =
-            "IMAGE_NAME";
+    public static final String BACKGROUND_IMAGE_NAME = "background.png";
+    public static final String BROADCAST_ACTION_UPDATE_IMAGE = "UPDATE_IMAGE";
+    public static final String BROADCAST_EXTRA_IMAGE_NAME = "IMAGE_NAME";
     private final ImageLoader mImageLoader;
 
     public ImageLoadService() {
@@ -38,7 +37,7 @@ public class ImageLoadService extends JobService {
                             .getString(KEY_WALLPAPER_SOURCE, WALLPAPER_SOURCE_LOREM);
                     final Bitmap bitmap = mImageLoader
                             .loadBitmap(url + widthPixels + "/" + heightPixels);
-                    final String imageName = "background.png";
+                    final String imageName = BACKGROUND_IMAGE_NAME;
                     CacheImageHandler.getInstance().saveImage(getApplicationContext(), bitmap, imageName);
 
                     final Intent broadcastIntent = new Intent(BROADCAST_ACTION_UPDATE_IMAGE);

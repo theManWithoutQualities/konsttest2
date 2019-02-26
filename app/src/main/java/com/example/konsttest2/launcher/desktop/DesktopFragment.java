@@ -45,7 +45,11 @@ public class DesktopFragment extends Fragment {
                 container,
                 false
         );
+        setLinksOnDesktop(view);
+        return view;
+    }
 
+    private void setLinksOnDesktop(View view) {
         for(int ind1 = 0; ind1 < ((ViewGroup)view).getChildCount(); ind1 ++) {
             final View row = ((ViewGroup) view).getChildAt(ind1);
             for(int ind2 = 0; ind2 < ((ViewGroup)row).getChildCount(); ind2 ++) {
@@ -64,9 +68,8 @@ public class DesktopFragment extends Fragment {
             final ImageView image = (ImageView) ((ViewGroup) viewLink).getChildAt(0);
             final TextView text = (TextView) ((ViewGroup) viewLink).getChildAt(1);
             text.setText(link.getTitle());
-            new DownloadImageTask(image).execute(link.getWeblink());
+            new DownloadImageTask(image, getContext()).execute(link.getWeblink());
         }
-        return view;
     }
 
     private interface ActionModeCallback extends ActionMode.Callback {
@@ -100,10 +103,23 @@ public class DesktopFragment extends Fragment {
             switch (item.getItemId()) {
                 case R.id.context_delete:
                     YandexMetrica.reportEvent(MetricaUtils.CONTEXT_DELETE_LINK);
-                    ((ViewGroup)clickedView).removeAllViews();
+                    ((ImageView)((ViewGroup)clickedView)
+                            .getChildAt(0))
+                            .setImageResource(android.R.color.transparent);
+                    ((TextView)((ViewGroup)clickedView)
+                            .getChildAt(1))
+                            .setText("");
+                    int x = Integer
+                            .valueOf(((String)clickedView.getTag()).split("_")[1]);
+                    int y = Integer
+                            .valueOf(((String)clickedView.getTag()).split("_")[2]);
+                    final Link link = launcherDbHelper.getLinkByXAndY(x, y);
+                    if (link != null) {
+                        launcherDbHelper.deleteLink(link.getId());
+                    }
                     mode.finish();
                     return true;
-                case R.id.context_add:
+                case R.id.context_add_link:
                     YandexMetrica.reportEvent(MetricaUtils.CONTEXT_ADD_LINK);
                     final Dialog dialog = new Dialog(getContext());
                     dialog.setContentView(R.layout.desktop_dialog);
@@ -119,9 +135,9 @@ public class DesktopFragment extends Fragment {
                             final String weblink = ((EditText) dialog.findViewById(R.id.address))
                                     .getText()
                                     .toString();
-                            int x =Integer
+                            int x = Integer
                                     .valueOf(((String)clickedView.getTag()).split("_")[1]);
-                            int y =Integer
+                            int y = Integer
                                     .valueOf(((String)clickedView.getTag()).split("_")[2]);
                             final Link link = new Link()
                                     .setTitle(title)
@@ -130,6 +146,7 @@ public class DesktopFragment extends Fragment {
                                     .setY(y);
                             launcherDbHelper.saveLinkAndDeleteOld(link);
                             dialog.dismiss();
+                            setLinksOnDesktop(getView());
                         }
                     });
                     mode.finish();

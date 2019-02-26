@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -100,11 +101,12 @@ public class LauncherDbHelper extends SQLiteOpenHelper {
         SQLiteDatabase database = this.getReadableDatabase();
         Cursor c = database.rawQuery(selectQuery, null);
         if (c != null && c.moveToFirst()) {
-            link = new Link();
-            link.setTitle(c.getString(c.getColumnIndex(LinkContract.LinkEntry.COLUMN_NAME_TITLE)));
-            link.setWeblink(c.getString(c.getColumnIndex(LinkContract.LinkEntry.COLUMN_NAME_WEBLINK)));
-            link.setX(c.getInt(c.getColumnIndex(LinkContract.LinkEntry.COLUMN_NAME_X)));
-            link.setY(c.getInt(c.getColumnIndex(LinkContract.LinkEntry.COLUMN_NAME_Y)));
+            link = new Link()
+                    .setId((c.getInt(c.getColumnIndex(LinkContract.LinkEntry._ID))))
+                    .setTitle(c.getString(c.getColumnIndex(LinkContract.LinkEntry.COLUMN_NAME_TITLE)))
+                    .setWeblink(c.getString(c.getColumnIndex(LinkContract.LinkEntry.COLUMN_NAME_WEBLINK)))
+                    .setX(c.getInt(c.getColumnIndex(LinkContract.LinkEntry.COLUMN_NAME_X)))
+                    .setY(c.getInt(c.getColumnIndex(LinkContract.LinkEntry.COLUMN_NAME_Y)));
         }
         c.close();
         database.close();
@@ -147,10 +149,11 @@ public class LauncherDbHelper extends SQLiteOpenHelper {
     }
 
     public void deleteLink(long id) {
+        Log.d("Konst", "delete link, id = " + id);
         SQLiteDatabase database = this.getWritableDatabase();
         database.delete(
                 LinkContract.LinkEntry.TABLE_NAME,
-                LinkContract.LinkEntry._ID,
+                LinkContract.LinkEntry._ID + " = ?",
                 new String[] {String.valueOf(id)}
                 );
         database.close();

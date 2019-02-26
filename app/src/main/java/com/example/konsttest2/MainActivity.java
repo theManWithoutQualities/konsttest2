@@ -2,17 +2,12 @@ package com.example.konsttest2;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
-import android.app.job.JobInfo;
-import android.app.job.JobScheduler;
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
-import android.os.PersistableBundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v17.leanback.app.BackgroundManager;
@@ -34,7 +29,6 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.ndk.CrashlyticsNdk;
@@ -60,15 +54,9 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
-import static com.example.konsttest2.settings.SettingsUtils.CHANGE_WALLPAPER_PERIODIC_15_MIN;
-import static com.example.konsttest2.settings.SettingsUtils.CHANGE_WALLPAPER_PERIODIC_1_HOUR;
-import static com.example.konsttest2.settings.SettingsUtils.CHANGE_WALLPAPER_PERIODIC_24_HOURS;
-import static com.example.konsttest2.settings.SettingsUtils.CHANGE_WALLPAPER_PERIODIC_8_HOURS;
+import static com.example.konsttest2.imageload.ImageLoadService.BACKGROUND_IMAGE_NAME;
 import static com.example.konsttest2.settings.SettingsUtils.KEY_CHANGE_WALLPAPER_NOW;
-import static com.example.konsttest2.settings.SettingsUtils.KEY_CHANGE_WALLPAPER_PERIODIC;
-import static com.example.konsttest2.settings.SettingsUtils.KEY_WALLPAPER_SOURCE;
 import static com.example.konsttest2.settings.SettingsUtils.SHOW_WELCOME_PAGE_KEY;
-import static com.example.konsttest2.settings.SettingsUtils.WALLPAPER_SOURCE_LOREM;
 
 public class MainActivity extends BasicActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -140,10 +128,7 @@ public class MainActivity extends BasicActivity
         if (savedInstanceState == null) {
             setDesktopFragment();
         }
-        backgroundManager = BackgroundManager.getInstance(this);
-        if(backgroundManager.isAttached() == false) {
-            backgroundManager.attach(this.getWindow());
-        }
+
         Calendar calendar = Calendar.getInstance();
 
         calendar.set(Calendar.HOUR_OF_DAY, 12);
@@ -185,6 +170,11 @@ public class MainActivity extends BasicActivity
         super.onResume();
         registerReceiver(updateBackgroundBroadcastReceiver,
                 new IntentFilter(ImageLoadService.BROADCAST_ACTION_UPDATE_IMAGE));
+        backgroundManager = BackgroundManager.getInstance(this);
+        if(backgroundManager.isAttached() == false) {
+            backgroundManager.attach(this.getWindow());
+        }
+        setBackground();
     }
 
     @Override
@@ -272,53 +262,29 @@ public class MainActivity extends BasicActivity
             if (ImageLoadService.BROADCAST_ACTION_UPDATE_IMAGE.equals(action)) {
                 final String imageName = intent.getStringExtra(ImageLoadService.BROADCAST_EXTRA_IMAGE_NAME);
                 if (TextUtils.isEmpty(imageName) == false) {
-                    final Bitmap bitmap = CacheImageHandler
-                            .getInstance()
-                            .loadImage(getApplicationContext(), imageName);
-                    final Drawable drawable = new BitmapDrawable(getResources(), bitmap);
-                    setBackground(drawable);
+                    setBackground();
                 }
             }
         }
     }
 
-    private void setBackground(Drawable drawable) {
+    private void setBackground() {
+        final Bitmap bitmap = CacheImageHandler
+                .getInstance()
+                .loadImage(getApplicationContext(), BACKGROUND_IMAGE_NAME);
+        final Drawable drawable = new BitmapDrawable(getResources(), bitmap);
         backgroundManager.setDrawable(drawable);
     }
 
     private void restartBackgroundLoading() {
-        JobScheduler jobScheduler = (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);
-        jobScheduler.cancel(ImageLoadService.JOB_ID_LOAD_IMAGE);
-        if (jobScheduler != null) {
-            jobScheduler.cancel(ImageLoadService.JOB_ID_LOAD_IMAGE);
-            long periodic;
-            final String periodicString = PreferenceManager
-                    .getDefaultSharedPreferences(this)
-                    .getString(KEY_CHANGE_WALLPAPER_PERIODIC, CHANGE_WALLPAPER_PERIODIC_15_MIN);
-            switch (periodicString) {
-                case CHANGE_WALLPAPER_PERIODIC_15_MIN:
-                    periodic = 1000 * 60 * 15;
-                    break;
-                case CHANGE_WALLPAPER_PERIODIC_1_HOUR:
-                    periodic = 1000 * 60 * 60;
-                    break;
-                case CHANGE_WALLPAPER_PERIODIC_8_HOURS:
-                    periodic = 1000 * 60 * 60 * 8;
-                    break;
-                case CHANGE_WALLPAPER_PERIODIC_24_HOURS:
-                    periodic = 1000 * 60 * 60 * 24;
-                    break;
-                default:
-                    periodic = 1000 * 60 * 15;
-            }
-            jobScheduler.schedule(
-                    new JobInfo.Builder(ImageLoadService.JOB_ID_LOAD_IMAGE,
-                            new ComponentName(getApplicationContext(), ImageLoadService.class))
-                            .setPeriodic(periodic)
-                            .setOverrideDeadline(0)
-                            .build()
-            );
-        }
+        final Intent intent = new Intent(this, RestartImageLoadServiceBroadcastReceiver.class)
+                .setAction(RESTART_IMAGE_SERVICE);
+        sendBroadcast(intent);
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(updateBackgroundBroadcastReceiver);
+    }
 }

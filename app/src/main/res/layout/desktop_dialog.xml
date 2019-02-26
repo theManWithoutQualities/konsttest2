@@ -9,12 +9,14 @@
         android:layout_weight="1"
         android:text="Введите ссылку"
         android:id="@+id/address_label"
+        android:textColor="@color/black"
         android:labelFor="@+id/address"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:inputType="textUri"
+        android:textColor="@color/black"
         android:id="@+id/address" />
     <Button
         android:layout_width="match_parent"

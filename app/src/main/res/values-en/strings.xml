@@ -37,4 +37,5 @@
     <string name="wallpaper_source">Wallpaper source</string>
     <string name="change_wallpaper_now">Change wallpaper now</string>
     <string name="wallpaper_periodic">Wallpaper changing frequency</string>
+    <string name="add_link">Добавить ссылкку</string>
 </resources>
