@@ -3,12 +3,14 @@ package com.example.konsttest2.launcher;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v4.app.Fragment;
 import android.support.v7.preference.PreferenceManager;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -28,13 +30,32 @@ public class LauncherFragment extends Fragment {
 
     protected final List<AppItem> appItemList = new ArrayList<>();
     protected LauncherAdapter launcherAdapter;
-    protected final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+    protected final BroadcastReceiver refreshBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
+            Log.d("Konst", "receive intent add/del app");
             loadApps();
             launcherAdapter.notifyDataSetChanged();
         }
     };
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        final IntentFilter filterRefreshApps = new IntentFilter();
+        filterRefreshApps.addAction("android.intent.action.PACKAGE_ADDED");
+        filterRefreshApps.addAction("android.intent.action.PACKAGE_REMOVED");
+        filterRefreshApps.addDataScheme("package");
+        context.registerReceiver(refreshBroadcastReceiver, filterRefreshApps);
+        Log.d("Konst", "register receiver for refresh apps");
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        getActivity().unregisterReceiver(refreshBroadcastReceiver);
+        Log.d("Konst", "unregister receiver for refresh apps");
+    }
 
     protected void loadApps() {
         appItemList.clear();
