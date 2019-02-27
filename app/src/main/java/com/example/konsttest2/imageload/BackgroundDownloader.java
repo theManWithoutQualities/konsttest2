@@ -10,7 +10,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 
-class ImageLoader {
+class BackgroundDownloader {
 
     @Nullable
     Bitmap loadBitmap(String srcUrl) {

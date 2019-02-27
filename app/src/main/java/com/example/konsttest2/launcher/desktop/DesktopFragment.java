@@ -2,7 +2,10 @@ package com.example.konsttest2.launcher.desktop;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
@@ -17,16 +20,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.konsttest2.R;
+import com.example.konsttest2.data.DesktopItem;
+import com.example.konsttest2.data.DesktopItemType;
 import com.example.konsttest2.data.LauncherDbHelper;
-import com.example.konsttest2.data.Link;
 import com.example.konsttest2.metrica.MetricaUtils;
 import com.yandex.metrica.YandexMetrica;
 
 import java.util.List;
 
+import static android.app.Activity.RESULT_OK;
+
 public class DesktopFragment extends Fragment {
 
     private LauncherDbHelper launcherDbHelper;
+    private int currentItemX;
+    private int currentItemY;
+    static final int REQUEST_SELECT_CONTACT = 1;
 
     @Override
     public void onAttach(Context context) {
@@ -45,11 +54,11 @@ public class DesktopFragment extends Fragment {
                 container,
                 false
         );
-        setLinksOnDesktop(view);
+        setItemsOnDesktop(view);
         return view;
     }
 
-    private void setLinksOnDesktop(View view) {
+    private void setItemsOnDesktop(View view) {
         for(int ind1 = 0; ind1 < ((ViewGroup)view).getChildCount(); ind1 ++) {
             final View row = ((ViewGroup) view).getChildAt(ind1);
             for(int ind2 = 0; ind2 < ((ViewGroup)row).getChildCount(); ind2 ++) {
@@ -62,13 +71,22 @@ public class DesktopFragment extends Fragment {
                 });
             }
         }
-        final List<Link> links = launcherDbHelper.getAllLinks();
-        for(Link link : links) {
-            final View viewLink = view.findViewWithTag("cell_" + link.getX() + "_" + link.getY());
+        final List<DesktopItem> desktopItems = launcherDbHelper.getAllDesktopItems();
+        for(DesktopItem desktopItem : desktopItems) {
+            final View viewLink = view
+                    .findViewWithTag("cell_" + desktopItem.getX() + "_" + desktopItem.getY());
             final ImageView image = (ImageView) ((ViewGroup) viewLink).getChildAt(0);
-            final TextView text = (TextView) ((ViewGroup) viewLink).getChildAt(1);
-            text.setText(link.getTitle());
-            new DownloadImageTask(image, getContext()).execute(link.getWeblink());
+            final TextView title = (TextView) ((ViewGroup) viewLink).getChildAt(1);
+            title.setText(desktopItem.getTitle());
+            viewLink.setOnClickListener(v -> {
+                final Intent intent =
+                        new Intent(
+                                "android.intent.action.VIEW",
+                                Uri.parse(desktopItem.getLink())
+                        );
+                startActivity(intent);
+            });
+            new DownloadImageTask(image, getContext()).execute(desktopItem.getLink());
         }
     }
 
@@ -100,6 +118,10 @@ public class DesktopFragment extends Fragment {
 
         @Override
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+            final int x = Integer
+                    .valueOf(((String)clickedView.getTag()).split("_")[1]);
+            final int y = Integer
+                    .valueOf(((String)clickedView.getTag()).split("_")[2]);
             switch (item.getItemId()) {
                 case R.id.context_delete:
                     YandexMetrica.reportEvent(MetricaUtils.CONTEXT_DELETE_LINK);
@@ -109,13 +131,9 @@ public class DesktopFragment extends Fragment {
                     ((TextView)((ViewGroup)clickedView)
                             .getChildAt(1))
                             .setText("");
-                    int x = Integer
-                            .valueOf(((String)clickedView.getTag()).split("_")[1]);
-                    int y = Integer
-                            .valueOf(((String)clickedView.getTag()).split("_")[2]);
-                    final Link link = launcherDbHelper.getLinkByXAndY(x, y);
-                    if (link != null) {
-                        launcherDbHelper.deleteLink(link.getId());
+                    final DesktopItem desktopItem = launcherDbHelper.getDesktopItemByXAndY(x, y);
+                    if (desktopItem != null) {
+                        launcherDbHelper.deleteDesktopItem(desktopItem.getId());
                     }
                     mode.finish();
                     return true;
@@ -132,23 +150,33 @@ public class DesktopFragment extends Fragment {
                             final String title = ((EditText) dialog.findViewById(R.id.address))
                                     .getText()
                                     .toString();
-                            final String weblink = ((EditText) dialog.findViewById(R.id.address))
+                            String weblink = ((EditText) dialog.findViewById(R.id.address))
                                     .getText()
                                     .toString();
-                            int x = Integer
-                                    .valueOf(((String)clickedView.getTag()).split("_")[1]);
-                            int y = Integer
-                                    .valueOf(((String)clickedView.getTag()).split("_")[2]);
-                            final Link link = new Link()
+                            if (!weblink.contains("http")) {
+                                weblink = "http://" + weblink;
+                            }
+                            final DesktopItem desktopItem = new DesktopItem()
                                     .setTitle(title)
-                                    .setWeblink(weblink)
+                                    .setLink(weblink)
                                     .setX(x)
-                                    .setY(y);
-                            launcherDbHelper.saveLinkAndDeleteOld(link);
+                                    .setY(y)
+                                    .setType(DesktopItemType.WEBLINK.ordinal());
+                            launcherDbHelper.saveDesktopItemAndDeleteOld(desktopItem);
                             dialog.dismiss();
-                            setLinksOnDesktop(getView());
+                            setItemsOnDesktop(getView());
                         }
                     });
+                    mode.finish();
+                    return true;
+                case R.id.context_add_phone:
+                    Intent intent = new Intent(Intent.ACTION_PICK);
+                    intent.setType(ContactsContract.Contacts.CONTENT_TYPE);
+                    currentItemX = x;
+                    currentItemY = y;
+                    if (intent.resolveActivity(getContext().getPackageManager()) != null) {
+                        startActivityForResult(intent, REQUEST_SELECT_CONTACT);
+                    }
                     mode.finish();
                     return true;
                 default:
@@ -162,4 +190,20 @@ public class DesktopFragment extends Fragment {
 
         }
     };
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_SELECT_CONTACT && resultCode == RESULT_OK) {
+            Uri contactUri = data.getData();
+            final DesktopItem desktopItem = new DesktopItem()
+                    .setTitle("contact")
+                    .setLink(contactUri.toString())
+                    .setX(currentItemX)
+                    .setY(currentItemY)
+                    .setType(DesktopItemType.CONTACT.ordinal());
+            launcherDbHelper.saveDesktopItemAndDeleteOld(desktopItem);
+            setItemsOnDesktop(getView());
+        }
+    }
 }

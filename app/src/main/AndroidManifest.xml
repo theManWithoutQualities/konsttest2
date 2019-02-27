@@ -37,7 +37,7 @@
                 <data android:scheme="package" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".imageload.RestartImageLoadServiceBroadcastReceiver"
+        <receiver android:name=".imageload.RestartBackgroundLoadServiceBroadcastReceiver"
             android:exported="true"/>
 
         <activity android:name=".MainActivity">
@@ -58,7 +58,7 @@
                 android:value="com.example.konsttest2.MainActivity" />
         </activity>
         <service
-            android:name=".imageload.ImageLoadService"
+            android:name=".imageload.BackgroundLoadService"
             android:enabled="true"
             android:permission="android.permission.BIND_JOB_SERVICE">
         </service>

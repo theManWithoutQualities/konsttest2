@@ -16,7 +16,7 @@ import static com.example.konsttest2.settings.SettingsUtils.CHANGE_WALLPAPER_PER
 import static com.example.konsttest2.settings.SettingsUtils.CHANGE_WALLPAPER_PERIODIC_8_HOURS;
 import static com.example.konsttest2.settings.SettingsUtils.KEY_CHANGE_WALLPAPER_PERIODIC;
 
-public class RestartImageLoadServiceBroadcastReceiver extends BroadcastReceiver {
+public class RestartBackgroundLoadServiceBroadcastReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(final Context context, final Intent intent) {
         String action = intent.getAction();
@@ -24,7 +24,7 @@ public class RestartImageLoadServiceBroadcastReceiver extends BroadcastReceiver 
             Log.d("Konst", "Receive restart service action");
             JobScheduler jobScheduler = (JobScheduler) context.getSystemService(Context.JOB_SCHEDULER_SERVICE);
             if (jobScheduler != null) {
-                jobScheduler.cancel(ImageLoadService.JOB_ID_LOAD_IMAGE);
+                jobScheduler.cancel(BackgroundLoadService.JOB_ID_LOAD_IMAGE);
                 long periodic;
                 final String periodicString = PreferenceManager
                         .getDefaultSharedPreferences(context)
@@ -46,8 +46,8 @@ public class RestartImageLoadServiceBroadcastReceiver extends BroadcastReceiver 
                         periodic = 1000 * 60 * 15;
                 }
                 jobScheduler.schedule(
-                        new JobInfo.Builder(ImageLoadService.JOB_ID_LOAD_IMAGE,
-                                new ComponentName(context, ImageLoadService.class))
+                        new JobInfo.Builder(BackgroundLoadService.JOB_ID_LOAD_IMAGE,
+                                new ComponentName(context, BackgroundLoadService.class))
                                 .setPeriodic(periodic)
                                 .setOverrideDeadline(0)
                                 .build()

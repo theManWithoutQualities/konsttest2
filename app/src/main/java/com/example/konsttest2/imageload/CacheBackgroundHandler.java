@@ -10,18 +10,18 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class CacheImageHandler {
+public class CacheBackgroundHandler {
 
     private static final Object mLock = new Object();
-    private static volatile CacheImageHandler sInstance;
+    private static volatile CacheBackgroundHandler sInstance;
 
     private static final String DIRECTORY_NAME = "images";
 
-    public static CacheImageHandler getInstance() {
+    public static CacheBackgroundHandler getInstance() {
         if (null == sInstance) {
             synchronized (mLock) {
                 if (null == sInstance) {
-                    sInstance = new CacheImageHandler();
+                    sInstance = new CacheBackgroundHandler();
                 }
             }
         }
@@ -29,7 +29,7 @@ public class CacheImageHandler {
         return sInstance;
     }
 
-    private CacheImageHandler() {
+    private CacheBackgroundHandler() {
     }
 
     public void saveImage(final Context context, final Bitmap bitmap, final String fileName) {

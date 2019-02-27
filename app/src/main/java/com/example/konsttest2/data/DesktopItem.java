@@ -1,17 +1,27 @@
 package com.example.konsttest2.data;
 
-public class Link {
+public class DesktopItem {
     private long id;
     private String title;
-    private String weblink;
+    private String link;
     private int x;
     private int y;
+    private int type;
+
+    public int getType() {
+        return type;
+    }
+
+    public DesktopItem setType(int type) {
+        this.type = type;
+        return this;
+    }
 
     public long getId() {
         return id;
     }
 
-    public Link setId(long id) {
+    public DesktopItem setId(long id) {
         this.id = id;
         return this;
     }
@@ -20,17 +30,17 @@ public class Link {
         return title;
     }
 
-    public Link setTitle(String title) {
+    public DesktopItem setTitle(String title) {
         this.title = title;
         return this;
     }
 
-    public String getWeblink() {
-        return weblink;
+    public String getLink() {
+        return link;
     }
 
-    public Link setWeblink(String weblink) {
-        this.weblink = weblink;
+    public DesktopItem setLink(String link) {
+        this.link = link;
         return this;
     }
 
@@ -38,7 +48,7 @@ public class Link {
         return x;
     }
 
-    public Link setX(int x) {
+    public DesktopItem setX(int x) {
         this.x = x;
         return this;
     }
@@ -47,7 +57,7 @@ public class Link {
         return y;
     }
 
-    public Link setY(int y) {
+    public DesktopItem setY(int y) {
         this.y = y;
         return this;
     }

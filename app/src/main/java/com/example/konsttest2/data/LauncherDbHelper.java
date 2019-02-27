@@ -20,17 +20,18 @@ public class LauncherDbHelper extends SQLiteOpenHelper {
                     AppInfoContract.AppInfoEntry.COLUMN_NAME_TITLE + " TEXT," +
                     AppInfoContract.AppInfoEntry.COLUMN_NAME_COUNT + " INTEGER);";
     private static final String SQL_CREATE_TABLE_LINK =
-             "CREATE TABLE " + LinkContract.LinkEntry.TABLE_NAME + " (" +
-                    LinkContract.LinkEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT ," +
-                    LinkContract.LinkEntry.COLUMN_NAME_TITLE + " TEXT," +
-                    LinkContract.LinkEntry.COLUMN_NAME_WEBLINK + " INTEGER," +
-                    LinkContract.LinkEntry.COLUMN_NAME_X + " INTEGER," +
-                    LinkContract.LinkEntry.COLUMN_NAME_Y + " INTEGER);";
+             "CREATE TABLE " + DesktopItemContract.LinkEntry.TABLE_NAME + " (" +
+                    DesktopItemContract.LinkEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT ," +
+                    DesktopItemContract.LinkEntry.COLUMN_NAME_TITLE + " TEXT," +
+                    DesktopItemContract.LinkEntry.COLUMN_NAME_LINK + " TEXT," +
+                    DesktopItemContract.LinkEntry.COLUMN_NAME_X + " INTEGER," +
+                    DesktopItemContract.LinkEntry.COLUMN_NAME_Y + " INTEGER," +
+                    DesktopItemContract.LinkEntry.COLUMN_NAME_TYPE + " INTEGER);";
 
     private static final String SQL_DELETE_TABLE_APPINFO =
             "DROP TABLE IF EXISTS " + AppInfoContract.AppInfoEntry.TABLE_NAME + "; ";
     private static final String SQL_DELETE_TABLE_LINK =
-            "DROP TABLE IF EXISTS " + LinkContract.LinkEntry.TABLE_NAME + ";";
+            "DROP TABLE IF EXISTS " + DesktopItemContract.LinkEntry.TABLE_NAME + ";";
 
     public LauncherDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -93,67 +94,71 @@ public class LauncherDbHelper extends SQLiteOpenHelper {
         }
     }
 
-    public Link getLinkByXAndY(int x, int y) {
-        Link link = null;
-        String selectQuery = "SELECT  * FROM " + LinkContract.LinkEntry.TABLE_NAME +
-                " WHERE " + LinkContract.LinkEntry.COLUMN_NAME_X + " = " + x +
-                " AND " + LinkContract.LinkEntry.COLUMN_NAME_Y + "=" + y + ";";
+    public DesktopItem getDesktopItemByXAndY(int x, int y) {
+        DesktopItem desktopItem = null;
+        String selectQuery = "SELECT  * FROM " + DesktopItemContract.LinkEntry.TABLE_NAME +
+                " WHERE " + DesktopItemContract.LinkEntry.COLUMN_NAME_X + " = " + x +
+                " AND " + DesktopItemContract.LinkEntry.COLUMN_NAME_Y + "=" + y + ";";
         SQLiteDatabase database = this.getReadableDatabase();
         Cursor c = database.rawQuery(selectQuery, null);
         if (c != null && c.moveToFirst()) {
-            link = new Link()
-                    .setId((c.getInt(c.getColumnIndex(LinkContract.LinkEntry._ID))))
-                    .setTitle(c.getString(c.getColumnIndex(LinkContract.LinkEntry.COLUMN_NAME_TITLE)))
-                    .setWeblink(c.getString(c.getColumnIndex(LinkContract.LinkEntry.COLUMN_NAME_WEBLINK)))
-                    .setX(c.getInt(c.getColumnIndex(LinkContract.LinkEntry.COLUMN_NAME_X)))
-                    .setY(c.getInt(c.getColumnIndex(LinkContract.LinkEntry.COLUMN_NAME_Y)));
+            desktopItem = new DesktopItem()
+                    .setId((c.getInt(c.getColumnIndex(DesktopItemContract.LinkEntry._ID))))
+                    .setTitle(c.getString(c.getColumnIndex(DesktopItemContract.LinkEntry.COLUMN_NAME_TITLE)))
+                    .setLink(c.getString(c.getColumnIndex(DesktopItemContract.LinkEntry.COLUMN_NAME_LINK)))
+                    .setX(c.getInt(c.getColumnIndex(DesktopItemContract.LinkEntry.COLUMN_NAME_X)))
+                    .setY(c.getInt(c.getColumnIndex(DesktopItemContract.LinkEntry.COLUMN_NAME_Y)))
+                    .setType(c.getInt(c.getColumnIndex(DesktopItemContract.LinkEntry.COLUMN_NAME_TYPE)));
         }
         c.close();
         database.close();
-        return link;
+        return desktopItem;
     }
 
-    public void saveLinkAndDeleteOld(Link link) {
-        Link oldLink = getLinkByXAndY(link.getX(), link.getY());
-        if(oldLink != null) {
-            deleteLink(oldLink.getId());
+    public void saveDesktopItemAndDeleteOld(DesktopItem desktopItem) {
+        DesktopItem oldDesktopItem = getDesktopItemByXAndY(desktopItem.getX(), desktopItem.getY());
+        if(oldDesktopItem != null) {
+            deleteDesktopItem(oldDesktopItem.getId());
         }
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(LinkContract.LinkEntry.COLUMN_NAME_TITLE, link.getTitle());
-        values.put(LinkContract.LinkEntry.COLUMN_NAME_WEBLINK, link.getWeblink());
-        values.put(LinkContract.LinkEntry.COLUMN_NAME_X, link.getX());
-        values.put(LinkContract.LinkEntry.COLUMN_NAME_Y, link.getY());
-        link.setId(database.insert(LinkContract.LinkEntry.TABLE_NAME, null, values));
+        values.put(DesktopItemContract.LinkEntry.COLUMN_NAME_TITLE, desktopItem.getTitle());
+        values.put(DesktopItemContract.LinkEntry.COLUMN_NAME_LINK, desktopItem.getLink());
+        values.put(DesktopItemContract.LinkEntry.COLUMN_NAME_X, desktopItem.getX());
+        values.put(DesktopItemContract.LinkEntry.COLUMN_NAME_Y, desktopItem.getY());
+        values.put(DesktopItemContract.LinkEntry.COLUMN_NAME_TYPE, desktopItem.getType());
+        desktopItem.setId(database.insert(DesktopItemContract.LinkEntry.TABLE_NAME, null, values));
         database.close();
     }
 
-    public List<Link> getAllLinks() {
-        List<Link> links = new ArrayList<>();
-        String selectQuery = "SELECT  * FROM " + LinkContract.LinkEntry.TABLE_NAME;
+    public List<DesktopItem> getAllDesktopItems() {
+        List<DesktopItem> desktopItems = new ArrayList<>();
+        String selectQuery = "SELECT  * FROM " + DesktopItemContract.LinkEntry.TABLE_NAME;
         SQLiteDatabase database = this.getReadableDatabase();
         Cursor c = database.rawQuery(selectQuery, null);
         if (c.moveToFirst()) {
             do {
-                Link link = new Link();
-                link.setTitle(c.getString(c.getColumnIndex(LinkContract.LinkEntry.COLUMN_NAME_TITLE)));
-                link.setWeblink(c.getString(c.getColumnIndex(LinkContract.LinkEntry.COLUMN_NAME_WEBLINK)));
-                link.setX(c.getInt(c.getColumnIndex(LinkContract.LinkEntry.COLUMN_NAME_X)));
-                link.setY(c.getInt(c.getColumnIndex(LinkContract.LinkEntry.COLUMN_NAME_Y)));
-                links.add(link);
+                DesktopItem desktopItem = new DesktopItem();
+                desktopItem
+                        .setTitle(c.getString(c.getColumnIndex(DesktopItemContract.LinkEntry.COLUMN_NAME_TITLE)))
+                        .setLink(c.getString(c.getColumnIndex(DesktopItemContract.LinkEntry.COLUMN_NAME_LINK)))
+                        .setX(c.getInt(c.getColumnIndex(DesktopItemContract.LinkEntry.COLUMN_NAME_X)))
+                        .setY(c.getInt(c.getColumnIndex(DesktopItemContract.LinkEntry.COLUMN_NAME_Y)))
+                        .setType(c.getInt(c.getColumnIndex(DesktopItemContract.LinkEntry.COLUMN_NAME_TYPE)));
+                desktopItems.add(desktopItem);
             } while (c.moveToNext());
         }
         c.close();
         database.close();
-        return links;
+        return desktopItems;
     }
 
-    public void deleteLink(long id) {
-        Log.d("Konst", "delete link, id = " + id);
+    public void deleteDesktopItem(long id) {
+        Log.d("Konst", "delete desktop item, id = " + id);
         SQLiteDatabase database = this.getWritableDatabase();
         database.delete(
-                LinkContract.LinkEntry.TABLE_NAME,
-                LinkContract.LinkEntry._ID + " = ?",
+                DesktopItemContract.LinkEntry.TABLE_NAME,
+                DesktopItemContract.LinkEntry._ID + " = ?",
                 new String[] {String.valueOf(id)}
                 );
         database.close();

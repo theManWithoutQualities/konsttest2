@@ -9,16 +9,16 @@ import android.preference.PreferenceManager;
 import static com.example.konsttest2.settings.SettingsUtils.KEY_WALLPAPER_SOURCE;
 import static com.example.konsttest2.settings.SettingsUtils.WALLPAPER_SOURCE_LOREM;
 
-public class ImageLoadService extends JobService {
+public class BackgroundLoadService extends JobService {
 
     public static final int JOB_ID_LOAD_IMAGE = 21234;
     public static final String BACKGROUND_IMAGE_NAME = "background.png";
     public static final String BROADCAST_ACTION_UPDATE_IMAGE = "UPDATE_IMAGE";
     public static final String BROADCAST_EXTRA_IMAGE_NAME = "IMAGE_NAME";
-    private final ImageLoader mImageLoader;
+    private final BackgroundDownloader mBackgroundDownloader;
 
-    public ImageLoadService() {
-        mImageLoader = new ImageLoader();
+    public BackgroundLoadService() {
+        mBackgroundDownloader = new BackgroundDownloader();
     }
 
 
@@ -35,10 +35,10 @@ public class ImageLoadService extends JobService {
                     final String url = PreferenceManager
                             .getDefaultSharedPreferences(getApplicationContext())
                             .getString(KEY_WALLPAPER_SOURCE, WALLPAPER_SOURCE_LOREM);
-                    final Bitmap bitmap = mImageLoader
+                    final Bitmap bitmap = mBackgroundDownloader
                             .loadBitmap(url + widthPixels + "/" + heightPixels);
                     final String imageName = BACKGROUND_IMAGE_NAME;
-                    CacheImageHandler.getInstance().saveImage(getApplicationContext(), bitmap, imageName);
+                    CacheBackgroundHandler.getInstance().saveImage(getApplicationContext(), bitmap, imageName);
 
                     final Intent broadcastIntent = new Intent(BROADCAST_ACTION_UPDATE_IMAGE);
                     broadcastIntent.putExtra(BROADCAST_EXTRA_IMAGE_NAME, imageName);

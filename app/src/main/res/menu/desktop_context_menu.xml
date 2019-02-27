@@ -4,4 +4,6 @@
         android:title="@string/delete" />
     <item android:id="@+id/context_add_link"
         android:title="@string/add_link" />
+    <item android:id="@+id/context_add_phone"
+        android:title="@string/add_phone" />
 </menu>

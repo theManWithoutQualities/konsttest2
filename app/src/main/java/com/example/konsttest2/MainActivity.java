@@ -6,8 +6,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.IntentFilter;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v17.leanback.app.BackgroundManager;
@@ -32,9 +30,9 @@ import android.view.ViewGroup;
 
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.ndk.CrashlyticsNdk;
-import com.example.konsttest2.imageload.ImageLoadService;
-import com.example.konsttest2.imageload.CacheImageHandler;
-import com.example.konsttest2.imageload.RestartImageLoadServiceBroadcastReceiver;
+import com.example.konsttest2.imageload.BackgroundLoadService;
+import com.example.konsttest2.imageload.CacheBackgroundHandler;
+import com.example.konsttest2.imageload.RestartBackgroundLoadServiceBroadcastReceiver;
 import com.example.konsttest2.launcher.desktop.DesktopFragment;
 import com.example.konsttest2.launcher.list.ListFragment;
 import com.example.konsttest2.launcher.grid.GridFragment;
@@ -54,7 +52,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
-import static com.example.konsttest2.imageload.ImageLoadService.BACKGROUND_IMAGE_NAME;
+import static com.example.konsttest2.imageload.BackgroundLoadService.BACKGROUND_IMAGE_NAME;
 import static com.example.konsttest2.settings.SettingsUtils.KEY_CHANGE_WALLPAPER_NOW;
 import static com.example.konsttest2.settings.SettingsUtils.SHOW_WELCOME_PAGE_KEY;
 
@@ -65,7 +63,7 @@ public class MainActivity extends BasicActivity
     private PagerAdapter mPagerAdapter;
     private BackgroundManager backgroundManager;
     private UpdateBackgroundBroadcastReceiver updateBackgroundBroadcastReceiver;
-    private RestartImageLoadServiceBroadcastReceiver restartImageLoadServiceBroadcastReceiver;
+    private RestartBackgroundLoadServiceBroadcastReceiver restartBackgroundLoadServiceBroadcastReceiver;
 
     public static final String RESTART_IMAGE_SERVICE = "RESTART_IMAGE_SERVICE";
 
@@ -82,6 +80,7 @@ public class MainActivity extends BasicActivity
                 preferences.getBoolean(SHOW_WELCOME_PAGE_KEY, true);
         if (showWelcomePage) {
             final Intent intent = new Intent(this, WelcomeSlideActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             return;
         }
@@ -143,7 +142,7 @@ public class MainActivity extends BasicActivity
                         0,
                         new Intent(
                                 this,
-                                RestartImageLoadServiceBroadcastReceiver.class
+                                RestartBackgroundLoadServiceBroadcastReceiver.class
                         ).setAction(RESTART_IMAGE_SERVICE),
                         0
                 );
@@ -161,7 +160,7 @@ public class MainActivity extends BasicActivity
             preferences.edit().putBoolean(KEY_CHANGE_WALLPAPER_NOW, false).apply();
             restartBackgroundLoading();
         }
-        restartImageLoadServiceBroadcastReceiver = new RestartImageLoadServiceBroadcastReceiver();
+        restartBackgroundLoadServiceBroadcastReceiver = new RestartBackgroundLoadServiceBroadcastReceiver();
         updateBackgroundBroadcastReceiver = new UpdateBackgroundBroadcastReceiver();
     }
 
@@ -169,7 +168,7 @@ public class MainActivity extends BasicActivity
     protected void onResume() {
         super.onResume();
         registerReceiver(updateBackgroundBroadcastReceiver,
-                new IntentFilter(ImageLoadService.BROADCAST_ACTION_UPDATE_IMAGE));
+                new IntentFilter(BackgroundLoadService.BROADCAST_ACTION_UPDATE_IMAGE));
         backgroundManager = BackgroundManager.getInstance(this);
         if(backgroundManager.isAttached() == false) {
             backgroundManager.attach(this.getWindow());
@@ -259,8 +258,8 @@ public class MainActivity extends BasicActivity
         @Override
         public void onReceive(final Context context, final Intent intent) {
             String action = intent.getAction();
-            if (ImageLoadService.BROADCAST_ACTION_UPDATE_IMAGE.equals(action)) {
-                final String imageName = intent.getStringExtra(ImageLoadService.BROADCAST_EXTRA_IMAGE_NAME);
+            if (BackgroundLoadService.BROADCAST_ACTION_UPDATE_IMAGE.equals(action)) {
+                final String imageName = intent.getStringExtra(BackgroundLoadService.BROADCAST_EXTRA_IMAGE_NAME);
                 if (TextUtils.isEmpty(imageName) == false) {
                     setBackground();
                 }
@@ -269,15 +268,16 @@ public class MainActivity extends BasicActivity
     }
 
     private void setBackground() {
-        final Bitmap bitmap = CacheImageHandler
+        final Bitmap bitmap = CacheBackgroundHandler
                 .getInstance()
                 .loadImage(getApplicationContext(), BACKGROUND_IMAGE_NAME);
-        final Drawable drawable = new BitmapDrawable(getResources(), bitmap);
-        backgroundManager.setDrawable(drawable);
+        int widthPixels = getResources().getDisplayMetrics().widthPixels;
+        int heightPixels = getResources().getDisplayMetrics().heightPixels;
+        backgroundManager.setBitmap(Bitmap.createScaledBitmap(bitmap, widthPixels, heightPixels, false));
     }
 
     private void restartBackgroundLoading() {
-        final Intent intent = new Intent(this, RestartImageLoadServiceBroadcastReceiver.class)
+        final Intent intent = new Intent(this, RestartBackgroundLoadServiceBroadcastReceiver.class)
                 .setAction(RESTART_IMAGE_SERVICE);
         sendBroadcast(intent);
     }
@@ -285,6 +285,10 @@ public class MainActivity extends BasicActivity
     @Override
     protected void onPause() {
         super.onPause();
-        unregisterReceiver(updateBackgroundBroadcastReceiver);
+        try {
+            unregisterReceiver(updateBackgroundBroadcastReceiver);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
