@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import com.example.konsttest2.R;
 import com.example.konsttest2.launcher.LauncherFragment;
 
-import static com.example.konsttest2.launcher.AppEventReceiver.REFRESH_APPS;
 import static com.example.konsttest2.settings.SettingsUtils.DENSITY_HIGH;
 import static com.example.konsttest2.settings.SettingsUtils.DENSITY_STANDARD;
 import static com.example.konsttest2.settings.SettingsUtils.KEY_DENSITY;
@@ -45,8 +44,6 @@ public class GridFragment extends LauncherFragment {
 
         loadApps();
 
-        getActivity().registerReceiver(broadcastReceiver, new IntentFilter(REFRESH_APPS));
-
         return view;
     }
 
@@ -71,11 +68,5 @@ public class GridFragment extends LauncherFragment {
             }
         }
         return 5;
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        getActivity().unregisterReceiver(broadcastReceiver);
     }
 }

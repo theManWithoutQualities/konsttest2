@@ -1,7 +1,9 @@
 package com.example.konsttest2.launcher;
 
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInstaller;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;

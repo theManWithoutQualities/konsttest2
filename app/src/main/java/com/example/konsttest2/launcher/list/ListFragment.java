@@ -1,5 +1,6 @@
 package com.example.konsttest2.launcher.list;
 
+import android.content.Context;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,8 +11,6 @@ import android.view.ViewGroup;
 
 import com.example.konsttest2.R;
 import com.example.konsttest2.launcher.LauncherFragment;
-
-import static com.example.konsttest2.launcher.AppEventReceiver.REFRESH_APPS;
 
 public class ListFragment extends LauncherFragment {
 
@@ -29,14 +28,6 @@ public class ListFragment extends LauncherFragment {
 
         loadApps();
 
-        getActivity().registerReceiver(broadcastReceiver, new IntentFilter(REFRESH_APPS));
-
         return view;
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        getActivity().unregisterReceiver(broadcastReceiver);
     }
 }
