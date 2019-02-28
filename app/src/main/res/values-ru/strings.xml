@@ -4,7 +4,7 @@
     <string name="logo">Лого</string>
     <string name="welcome">Добро пожаловать!</string>
     <string name="description">Это лаунчер. Для запуска приложений и других интересных вещей.</string>
-    <string name="light_theme">Светлая темаа</string>
+    <string name="light_theme">Светлая тема</string>
     <string name="dark_theme">Темная тема</string>
     <string name="standard_density">Стандартный макет</string>
     <string name="high_density">Плотный макет</string>
