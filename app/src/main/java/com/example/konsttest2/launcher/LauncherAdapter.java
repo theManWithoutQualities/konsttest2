@@ -1,14 +1,13 @@
 package com.example.konsttest2.launcher;
 
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInstaller;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,6 +22,7 @@ import com.yandex.metrica.YandexMetrica;
 
 import java.util.List;
 
+import static com.example.konsttest2.launcher.LauncherFragment.ACTION_APP_CLICKED;
 import static com.example.konsttest2.launcher.LauncherFragment.TOP_FREQUENT_COUNT;
 
 public abstract class LauncherAdapter extends RecyclerView.Adapter {
@@ -69,6 +69,9 @@ public abstract class LauncherAdapter extends RecyclerView.Adapter {
                     .get(getAdapterPosition())
                     .setCount(appItemList.get(getAdapterPosition()).getCount() + 1);
             dbHelper.addClick(appItemList.get(getAdapterPosition()).getPackageName());
+            final Intent intent = new Intent(ACTION_APP_CLICKED);
+            context.sendBroadcast(intent);
+            Log.d("Konst", "app clicked!");
             startAt(getAdapterPosition());
             return;
         };
