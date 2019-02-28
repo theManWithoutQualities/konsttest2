@@ -128,8 +128,18 @@ public class MainActivity extends BasicActivity
             setDesktopFragment();
         }
 
-        Calendar calendar = Calendar.getInstance();
+        restartBackgroundLoadServiceBroadcastReceiver = new RestartBackgroundLoadServiceBroadcastReceiver();
+        updateBackgroundBroadcastReceiver = new UpdateBackgroundBroadcastReceiver();
+        registerReceiver(updateBackgroundBroadcastReceiver,
+                new IntentFilter(BackgroundLoadService.BROADCAST_ACTION_UPDATE_IMAGE));
+        registerReceiver(restartBackgroundLoadServiceBroadcastReceiver,
+                new IntentFilter(RESTART_IMAGE_SERVICE));
+        backgroundManager = BackgroundManager.getInstance(this);
+        if(backgroundManager.isAttached() == false) {
+            backgroundManager.attach(this.getWindow());
+        }
 
+        Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, 12);
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);
@@ -157,22 +167,13 @@ public class MainActivity extends BasicActivity
         final boolean changeWallpaperNow = preferences
                 .getBoolean(KEY_CHANGE_WALLPAPER_NOW, true);
         if(changeWallpaperNow) {
-            preferences.edit().putBoolean(KEY_CHANGE_WALLPAPER_NOW, false).apply();
             restartBackgroundLoading();
         }
-        restartBackgroundLoadServiceBroadcastReceiver = new RestartBackgroundLoadServiceBroadcastReceiver();
-        updateBackgroundBroadcastReceiver = new UpdateBackgroundBroadcastReceiver();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        registerReceiver(updateBackgroundBroadcastReceiver,
-                new IntentFilter(BackgroundLoadService.BROADCAST_ACTION_UPDATE_IMAGE));
-        backgroundManager = BackgroundManager.getInstance(this);
-        if(backgroundManager.isAttached() == false) {
-            backgroundManager.attach(this.getWindow());
-        }
         setBackground();
     }
 
@@ -273,20 +274,23 @@ public class MainActivity extends BasicActivity
                 .loadImage(getApplicationContext(), BACKGROUND_IMAGE_NAME);
         int widthPixels = getResources().getDisplayMetrics().widthPixels;
         int heightPixels = getResources().getDisplayMetrics().heightPixels;
-        backgroundManager.setBitmap(Bitmap.createScaledBitmap(bitmap, widthPixels, heightPixels, false));
+        if (bitmap != null) {
+            backgroundManager.setBitmap(Bitmap.createScaledBitmap(bitmap, widthPixels, heightPixels, false));
+        }
     }
 
     private void restartBackgroundLoading() {
-        final Intent intent = new Intent(this, RestartBackgroundLoadServiceBroadcastReceiver.class)
-                .setAction(RESTART_IMAGE_SERVICE);
+        final Intent intent = new Intent(RESTART_IMAGE_SERVICE);
         sendBroadcast(intent);
+        Log.d("Konst", "send intent: restart background loading");
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
+    protected void onDestroy() {
+        super.onDestroy();
         try {
             unregisterReceiver(updateBackgroundBroadcastReceiver);
+            unregisterReceiver(restartBackgroundLoadServiceBroadcastReceiver);
         } catch (Exception e) {
             e.printStackTrace();
         }
