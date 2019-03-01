@@ -18,9 +18,10 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:scaleType="center"
+                android:scaleType="centerInside"
                 android:layout_weight="5"/>
             <TextView
+                android:textStyle="bold"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -37,9 +38,10 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:scaleType="center"
+                android:scaleType="centerInside"
                 android:layout_weight="5"/>
             <TextView
+                android:textStyle="bold"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -56,9 +58,10 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:scaleType="center"
+                android:scaleType="centerInside"
                 android:layout_weight="5"/>
             <TextView
+                android:textStyle="bold"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -81,9 +84,10 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:scaleType="center"
+                android:scaleType="centerInside"
                 android:layout_weight="5"/>
             <TextView
+                android:textStyle="bold"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -100,9 +104,10 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:scaleType="center"
+                android:scaleType="centerInside"
                 android:layout_weight="5"/>
             <TextView
+                android:textStyle="bold"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -119,9 +124,10 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:scaleType="center"
+                android:scaleType="centerInside"
                 android:layout_weight="5"/>
             <TextView
+                android:textStyle="bold"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -144,9 +150,10 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:scaleType="center"
+                android:scaleType="centerInside"
                 android:layout_weight="5"/>
             <TextView
+                android:textStyle="bold"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -163,9 +170,10 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:scaleType="center"
+                android:scaleType="centerInside"
                 android:layout_weight="5"/>
             <TextView
+                android:textStyle="bold"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -182,9 +190,10 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:scaleType="center"
+                android:scaleType="centerInside"
                 android:layout_weight="5"/>
             <TextView
+                android:textStyle="bold"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"

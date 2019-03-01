@@ -32,7 +32,8 @@ public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
     }
     protected void onPostExecute(Bitmap result) {
         Log.d("Konst", "DownloadImageTask#onPostExecute, bitmap = " + result);
-        if (result == null || result.getWidth() < LINK_SIZE) {
+        if (result == null || result.getWidth() < LINK_SIZE
+                || result.sameAs(Bitmap.createBitmap(result.getWidth(), result.getHeight(), result.getConfig()))) {
             image.setImageDrawable(context.getDrawable(R.drawable.link_img));
         } else {
             image.setImageBitmap(result);

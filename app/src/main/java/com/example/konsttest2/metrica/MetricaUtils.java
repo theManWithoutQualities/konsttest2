@@ -20,6 +20,6 @@ public class MetricaUtils {
     public static final String LONGCLICK_APP = "Long click on app";
     public static final String START_APP = "Start app";
     public static final String LONGCLICK_DESKTOP = "Long click on link";
-    public static final String CONTEXT_DELETE_LINK = "Delete link (context menu click)";
+    public static final String CONTEXT_DELETE_DESKTOP_ITEM = "Delete desktop item (context menu click)";
     public static final String CONTEXT_ADD_LINK = "Add link (context menu click)";
 }
