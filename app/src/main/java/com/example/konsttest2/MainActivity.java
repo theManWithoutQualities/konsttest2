@@ -6,9 +6,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.IntentFilter;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
-import android.support.v17.leanback.app.BackgroundManager;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.content.Intent;
@@ -61,7 +61,6 @@ public class MainActivity extends BasicActivity
 
     private ViewPager mPager;
     private PagerAdapter mPagerAdapter;
-    private BackgroundManager backgroundManager;
     private UpdateBackgroundBroadcastReceiver updateBackgroundBroadcastReceiver;
     private RestartBackgroundLoadServiceBroadcastReceiver restartBackgroundLoadServiceBroadcastReceiver;
 
@@ -134,10 +133,6 @@ public class MainActivity extends BasicActivity
                 new IntentFilter(BackgroundLoadService.BROADCAST_ACTION_UPDATE_IMAGE));
         registerReceiver(restartBackgroundLoadServiceBroadcastReceiver,
                 new IntentFilter(RESTART_IMAGE_SERVICE));
-        backgroundManager = BackgroundManager.getInstance(this);
-        if(backgroundManager.isAttached() == false) {
-            backgroundManager.attach(this.getWindow());
-        }
 
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, 12);
@@ -275,7 +270,12 @@ public class MainActivity extends BasicActivity
         int widthPixels = getResources().getDisplayMetrics().widthPixels;
         int heightPixels = getResources().getDisplayMetrics().heightPixels;
         if (bitmap != null) {
-            backgroundManager.setBitmap(Bitmap.createScaledBitmap(bitmap, widthPixels, heightPixels, false));
+            getWindow()
+                    .setBackgroundDrawable(
+                            new BitmapDrawable(getResources(),
+                                    Bitmap.createScaledBitmap(bitmap, widthPixels, heightPixels, false)
+                            )
+                    );
         }
     }
 
