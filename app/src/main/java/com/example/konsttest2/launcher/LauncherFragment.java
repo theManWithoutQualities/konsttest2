@@ -27,6 +27,7 @@ public class LauncherFragment extends Fragment {
 
     public static final int TOP_FREQUENT_COUNT = 3;
     public static final String EMPTY = "";
+    public static final String ACTION_APP_CLICKED = "ACTION_APP_CLICKED";
 
     protected final List<AppItem> appItemList = new ArrayList<>();
     protected LauncherAdapter launcherAdapter;
@@ -34,6 +35,14 @@ public class LauncherFragment extends Fragment {
         @Override
         public void onReceive(Context context, Intent intent) {
             Log.d("Konst", "receive intent add/del app");
+            loadApps();
+            launcherAdapter.notifyDataSetChanged();
+        }
+    };
+    protected final BroadcastReceiver clickBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Log.d("Konst", "receive intent click app");
             loadApps();
             launcherAdapter.notifyDataSetChanged();
         }
@@ -48,13 +57,29 @@ public class LauncherFragment extends Fragment {
         filterRefreshApps.addDataScheme("package");
         context.registerReceiver(refreshBroadcastReceiver, filterRefreshApps);
         Log.d("Konst", "register receiver for refresh apps");
+        context.registerReceiver(clickBroadcastReceiver, new IntentFilter(ACTION_APP_CLICKED));
+        Log.d("Konst", "register receiver for click apps");
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
         getActivity().unregisterReceiver(refreshBroadcastReceiver);
+        getActivity().unregisterReceiver(clickBroadcastReceiver);
         Log.d("Konst", "unregister receiver for refresh apps");
+        Log.d("Konst", "unregister receiver for click apps");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d("Konst", "fragment onResume");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d("Konst", "fragment onPause");
     }
 
     protected void loadApps() {

@@ -29,4 +29,14 @@
     <string name="description_second">...例如，您可以查看应用程序启动统计信息，查看配置文件</string>
     <string name="welcome">欢迎您！</string>
     <string name="phone">电话：+37550000</string>
+    <string name="delete">Удалить</string>
+    <string name="add">Добавить</string>
+    <string name="frequency">Частота</string>
+    <string name="info">Инфо</string>
+    <string name="wallpaper_source">Источник обоев</string>
+    <string name="change_wallpaper_now">Изменить обои сейчас</string>
+    <string name="wallpaper_periodic">Периодичность смены обоев</string>
+    <string name="add_link">Добавить ссылку</string>
+    <string name="add_phone">Добавить контакт</string>
+    <string name="desktop">Рабочий стол</string>
 </resources>

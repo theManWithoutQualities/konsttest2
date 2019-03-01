@@ -4,7 +4,7 @@
     <string name="logo">Лого</string>
     <string name="welcome">Добро пожаловать!</string>
     <string name="description">Это лаунчер. Для запуска приложений и других интересных вещей.</string>
-    <string name="light_theme">Светлая темаа</string>
+    <string name="light_theme">Светлая тема</string>
     <string name="dark_theme">Темная тема</string>
     <string name="standard_density">Стандартный макет</string>
     <string name="high_density">Плотный макет</string>
@@ -29,4 +29,14 @@
     <string name="git">GitHub: theManWihoutQualities</string>
     <string name="location">Координаты: 53°55′ с. ш. 27°33′ в. д.</string>
     <string name="description_second">...Например, можно просматривать статистику запуска приложений, просматривать профиль</string>
+    <string name="desktop">Рабочий стол</string>
+    <string name="delete">Удалить</string>
+    <string name="add">Добавить</string>
+    <string name="frequency">Частота</string>
+    <string name="info">Инфо</string>
+    <string name="wallpaper_source">Источник обоев</string>
+    <string name="change_wallpaper_now">Изменить обои сейчас</string>
+    <string name="wallpaper_periodic">Периодичность смены обоев</string>
+    <string name="add_link">Добавить ссылку</string>
+    <string name="add_phone">Добавить контакт</string>
 </resources>

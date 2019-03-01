@@ -15,4 +15,14 @@ public final class SettingsUtils {
     public static final String THEME_DARK = "dark";
     public static final String KEY_THEME = "theme";
     public static final String SHOW_WELCOME_PAGE_KEY = "showWelcomePage";
+    public static final String KEY_WALLPAPER_SOURCE = "background_site";
+    public static final String WALLPAPER_SOURCE_LOREM = "https://loremflickr.com/";
+    public static final String WALLPAPER_SOURCE_PICSUM = "https://picsum.photos/";
+    public static final String PLACEIMG = "https://placeimg.com/";
+    public static final String KEY_CHANGE_WALLPAPER_NOW = "changeWallpaperNow";
+    public static final String KEY_CHANGE_WALLPAPER_PERIODIC = "background_periodic";
+    public static final String CHANGE_WALLPAPER_PERIODIC_15_MIN = "per_15_minutes";
+    public static final String CHANGE_WALLPAPER_PERIODIC_1_HOUR = "per_1_hour";
+    public static final String CHANGE_WALLPAPER_PERIODIC_8_HOURS = "per_8_hours";
+    public static final String CHANGE_WALLPAPER_PERIODIC_24_HOURS = "per_24_hours";
 }
