@@ -8,6 +8,8 @@ import android.support.v7.widget.Toolbar;
 import com.example.konsttest2.BasicActivity;
 import com.example.konsttest2.MainActivity;
 import com.example.konsttest2.R;
+import com.example.konsttest2.metrica.MetricaUtils;
+import com.yandex.metrica.YandexMetrica;
 
 public class ProfileActivity extends BasicActivity {
 
@@ -20,6 +22,7 @@ public class ProfileActivity extends BasicActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         findViewById(R.id.vk).setOnClickListener(v -> {
+            YandexMetrica.reportEvent(MetricaUtils.CLICK_VK);
             final Intent intent = new Intent(
                     "android.intent.action.VIEW",
                     Uri.parse("http://vk.com")
@@ -28,6 +31,7 @@ public class ProfileActivity extends BasicActivity {
         });
 
         findViewById(R.id.fb).setOnClickListener(v -> {
+            YandexMetrica.reportEvent(MetricaUtils.CLICK_FB);
             final Intent intent =
                     new Intent(
                             "android.intent.action.VIEW",
@@ -37,6 +41,7 @@ public class ProfileActivity extends BasicActivity {
         });
 
         findViewById(R.id.git).setOnClickListener(v -> {
+            YandexMetrica.reportEvent(MetricaUtils.CLICK_GIT);
             final Intent intent =
                     new Intent(
                             "android.intent.action.VIEW",
@@ -46,6 +51,7 @@ public class ProfileActivity extends BasicActivity {
         });
 
         findViewById(R.id.map).setOnClickListener(v -> {
+            YandexMetrica.reportEvent(MetricaUtils.CLICK_MAP);
             final Intent intent =
                     new Intent(
                             "android.intent.action.VIEW",
@@ -55,6 +61,7 @@ public class ProfileActivity extends BasicActivity {
         });
 
         findViewById(R.id.mail).setOnClickListener(v -> {
+            YandexMetrica.reportEvent(MetricaUtils.CLICK_MAIL);
             Intent emailIntent = new Intent(
                     Intent.ACTION_SENDTO,
                     Uri.fromParts("mailto","konst007@tut.by", null));
@@ -62,6 +69,7 @@ public class ProfileActivity extends BasicActivity {
         });
 
         findViewById(R.id.phone).setOnClickListener(v -> {
+            YandexMetrica.reportEvent(MetricaUtils.CLICK_PHONE);
             Intent intent = new Intent(Intent.ACTION_DIAL);
             intent.setData(Uri.parse("tel:+375291939666"));
             startActivity(intent);
@@ -70,6 +78,7 @@ public class ProfileActivity extends BasicActivity {
 
     @Override
     public void onBackPressed() {
+        YandexMetrica.reportEvent(MetricaUtils.BACKPRESS_PROFILE);
         final Intent intent = new Intent();
         intent.setClass(this, MainActivity.class);
         startActivity(intent);

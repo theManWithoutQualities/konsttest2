@@ -28,4 +28,14 @@
     <string name="description">Это лаунчер. Для запуска приложений и других интересных вещей.</string>
     <string name="theme">Тема</string>
     <string name="vk">Vkontakte: vkontaktenesizhu</string>
+    <string name="desktop">Рабочий стол</string>
+    <string name="delete">Удалить</string>
+    <string name="add">Добавить</string>
+    <string name="frequency">Частота</string>
+    <string name="info">Инфо</string>
+    <string name="wallpaper_source">Источник обоев</string>
+    <string name="change_wallpaper_now">Изменить обои сейчас</string>
+    <string name="wallpaper_periodic">Периодичность смены обоев</string>
+    <string name="add_link">Добавить ссылку</string>
+    <string name="add_phone">Добавить контакт</string>
 </resources>

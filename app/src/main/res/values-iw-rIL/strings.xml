@@ -29,4 +29,14 @@
     <string name="description_second">... לדוגמה, באפשרותך להציג נתונים סטטיסטיים של הפעלת יישומים, להציג פרופיל</string>
     <string name="welcome">ברוכים הבאים!</string>
     <string name="phone">טלפון: +37550000</string>
+    <string name="delete">Удалить</string>
+    <string name="add">Добавить</string>
+    <string name="frequency">Частота</string>
+    <string name="info">Инфо</string>
+    <string name="wallpaper_source">Источник обоев</string>
+    <string name="change_wallpaper_now">Изменить обои сейчас</string>
+    <string name="wallpaper_periodic">Периодичность смены обоев</string>
+    <string name="add_link">Добавить ссылку</string>
+    <string name="add_phone">Добавить контакт</string>
+    <string name="desktop">Рабочий стол</string>
 </resources>
