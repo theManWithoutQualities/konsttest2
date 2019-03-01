@@ -18,6 +18,7 @@ public final class SettingsUtils {
     public static final String KEY_WALLPAPER_SOURCE = "background_site";
     public static final String WALLPAPER_SOURCE_LOREM = "https://loremflickr.com/";
     public static final String WALLPAPER_SOURCE_PICSUM = "https://picsum.photos/";
+    public static final String PLACEIMG = "https://placeimg.com/";
     public static final String KEY_CHANGE_WALLPAPER_NOW = "changeWallpaperNow";
     public static final String KEY_CHANGE_WALLPAPER_PERIODIC = "background_periodic";
     public static final String CHANGE_WALLPAPER_PERIODIC_15_MIN = "per_15_minutes";

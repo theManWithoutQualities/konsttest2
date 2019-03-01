@@ -10,7 +10,9 @@ import android.util.Log;
 
 import static com.example.konsttest2.settings.SettingsUtils.KEY_CHANGE_WALLPAPER_NOW;
 import static com.example.konsttest2.settings.SettingsUtils.KEY_WALLPAPER_SOURCE;
+import static com.example.konsttest2.settings.SettingsUtils.PLACEIMG;
 import static com.example.konsttest2.settings.SettingsUtils.WALLPAPER_SOURCE_LOREM;
+import static com.example.konsttest2.settings.SettingsUtils.WALLPAPER_SOURCE_PICSUM;
 
 public class BackgroundLoadService extends JobService {
 
@@ -41,8 +43,20 @@ public class BackgroundLoadService extends JobService {
                     final String url = PreferenceManager
                             .getDefaultSharedPreferences(getApplicationContext())
                             .getString(KEY_WALLPAPER_SOURCE, WALLPAPER_SOURCE_LOREM);
+                    String finalUrl = null;
+                    switch (url) {
+                        case WALLPAPER_SOURCE_LOREM:
+                            finalUrl = url + widthPixels + "/" + heightPixels;
+                            break;
+                        case WALLPAPER_SOURCE_PICSUM:
+                            finalUrl = url + widthPixels + "/" + heightPixels + "/?random";
+                            break;
+                        case PLACEIMG:
+                            finalUrl = url + widthPixels + "/" + heightPixels + "/any";
+                            break;
+                    }
                     final Bitmap bitmap = mBackgroundDownloader
-                            .loadBitmap(url + widthPixels + "/" + heightPixels);
+                            .loadBitmap(finalUrl);
                     final String imageName = BACKGROUND_IMAGE_NAME;
                     CacheBackgroundHandler.getInstance().saveImage(getApplicationContext(), bitmap, imageName);
 

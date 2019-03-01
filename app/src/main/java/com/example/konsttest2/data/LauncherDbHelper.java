@@ -66,8 +66,10 @@ public class LauncherDbHelper extends SQLiteOpenHelper {
         if (cursor != null && cursor.getCount()>0) {
             cursor.moveToFirst();
             int output = cursor.getInt(0);
+            database.close();
             return output;
         } else {
+            database.close();
             return null;
         }
     }
