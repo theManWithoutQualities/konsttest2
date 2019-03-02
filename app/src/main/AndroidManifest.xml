@@ -48,6 +48,10 @@
             android:enabled="true"
             android:permission="android.permission.BIND_JOB_SERVICE">
         </service>
+        <provider
+            android:authorities="startCount"
+            android:name=".test4provider.Test4InnerContentProvider"
+            android:exported="false"/>
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="9d01ca57583566d24afd9f170e92cfc69d0acd95" />

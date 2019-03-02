@@ -1,12 +1,17 @@
 package com.example.konsttest2;
 
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.IntentFilter;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
@@ -41,6 +46,7 @@ import io.fabric.sdk.android.Fabric;
 import com.example.konsttest2.metrica.MetricaUtils;
 import com.example.konsttest2.profile.ProfileActivity;
 import com.example.konsttest2.settings.SettingsActivity;
+import com.example.konsttest2.test4provider.StartCountContract;
 import com.example.konsttest2.welcome.WelcomeSlideActivity;
 import com.microsoft.appcenter.AppCenter;
 import com.microsoft.appcenter.analytics.Analytics;
@@ -164,6 +170,8 @@ public class MainActivity extends BasicActivity
         if(changeWallpaperNow) {
             restartBackgroundLoading();
         }
+
+        countMainActivityCreate(this);
     }
 
     @Override
@@ -294,5 +302,46 @@ public class MainActivity extends BasicActivity
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Uses private content provider (for test4).
+     * Counts main activity creations.
+     *
+     * @param activity Activity.
+     */
+    private static void countMainActivityCreate(Activity activity) {
+        new AsyncTask<Void, Void, Integer>() {
+            @Override
+            protected Integer doInBackground(Void... voids) {
+                final Cursor cursor = activity.getContentResolver().query(
+                        Uri.parse("content://startCount/" + StartCountContract.StartCountEntry.TABLE_NAME),
+                        new String[]{StartCountContract.StartCountEntry.COLUMN_NAME_COUNT},
+                        null,
+                        null,
+                        null
+                );
+                Integer count = 0;
+                if (cursor != null) {
+                    if(cursor.moveToNext()) {
+                        count = cursor.getInt(0);
+                    }
+                }
+                final ContentValues contentValues = new ContentValues();
+                contentValues.put(StartCountContract.StartCountEntry.COLUMN_NAME_COUNT, ++count);
+                activity.getContentResolver().update(
+                        Uri.parse("content://startCount/" + StartCountContract.StartCountEntry.TABLE_NAME),
+                        contentValues,
+                        null,
+                        null
+                );
+                return count;
+            }
+            @Override
+            protected void onPostExecute(Integer count) {
+                super.onPostExecute(count);
+                Log.i("TEST4", "count of main activity create: " + count);
+            }
+        }.execute();
     }
 }
