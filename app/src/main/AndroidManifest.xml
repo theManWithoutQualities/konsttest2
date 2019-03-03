@@ -52,6 +52,16 @@
             android:authorities="startCount"
             android:name=".test4provider.Test4InnerContentProvider"
             android:exported="false"/>
+        <provider
+            android:authorities="com.example.konsttest2.info"
+            android:name=".appinfoprovider.AppInfoProvider"
+            android:enabled="true"
+            android:exported="true"/>
+        <provider
+            android:authorities="com.example.konsttest2.profile"
+            android:name=".profileprovider.ProfileProvider"
+            android:enabled="true"
+            android:exported="true"/>
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="9d01ca57583566d24afd9f170e92cfc69d0acd95" />

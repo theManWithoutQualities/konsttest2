@@ -68,7 +68,10 @@ public abstract class LauncherAdapter extends RecyclerView.Adapter {
             appItemList
                     .get(getAdapterPosition())
                     .setCount(appItemList.get(getAdapterPosition()).getCount() + 1);
-            dbHelper.addClick(appItemList.get(getAdapterPosition()).getPackageName());
+            dbHelper.addClick(
+                    appItemList.get(getAdapterPosition()).getPackageName(),
+                    appItemList.get(getAdapterPosition()).getName()
+            );
             final Intent intent = new Intent(ACTION_APP_CLICKED);
             context.sendBroadcast(intent);
             Log.d("Konst", "app clicked!");

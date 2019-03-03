@@ -11,6 +11,13 @@ import com.example.konsttest2.R;
 import com.example.konsttest2.metrica.MetricaUtils;
 import com.yandex.metrica.YandexMetrica;
 
+import static com.example.konsttest2.profile.ProfileUtils.FB;
+import static com.example.konsttest2.profile.ProfileUtils.GIT;
+import static com.example.konsttest2.profile.ProfileUtils.MAIL;
+import static com.example.konsttest2.profile.ProfileUtils.MAP;
+import static com.example.konsttest2.profile.ProfileUtils.PHONE;
+import static com.example.konsttest2.profile.ProfileUtils.VK;
+
 public class ProfileActivity extends BasicActivity {
 
     @Override
@@ -25,7 +32,7 @@ public class ProfileActivity extends BasicActivity {
             YandexMetrica.reportEvent(MetricaUtils.CLICK_VK);
             final Intent intent = new Intent(
                     "android.intent.action.VIEW",
-                    Uri.parse("http://vk.com")
+                    Uri.parse(VK)
             );
             startActivity(intent);
         });
@@ -35,7 +42,7 @@ public class ProfileActivity extends BasicActivity {
             final Intent intent =
                     new Intent(
                             "android.intent.action.VIEW",
-                            Uri.parse("http://www.facebook.com")
+                            Uri.parse(FB)
                     );
             startActivity(intent);
         });
@@ -45,7 +52,7 @@ public class ProfileActivity extends BasicActivity {
             final Intent intent =
                     new Intent(
                             "android.intent.action.VIEW",
-                            Uri.parse("https://github.com/theManWithoutQualities")
+                            Uri.parse(GIT)
                     );
             startActivity(intent);
         });
@@ -55,7 +62,7 @@ public class ProfileActivity extends BasicActivity {
             final Intent intent =
                     new Intent(
                             "android.intent.action.VIEW",
-                            Uri.parse("https://www.google.com/maps/@53.8730496,27.5177472,12z")
+                            Uri.parse(MAP)
                     );
             startActivity(intent);
         });
@@ -64,14 +71,14 @@ public class ProfileActivity extends BasicActivity {
             YandexMetrica.reportEvent(MetricaUtils.CLICK_MAIL);
             Intent emailIntent = new Intent(
                     Intent.ACTION_SENDTO,
-                    Uri.fromParts("mailto","konst007@tut.by", null));
+                    Uri.fromParts("mailto", MAIL, null));
             startActivity(Intent.createChooser(emailIntent, "Send email..."));
         });
 
         findViewById(R.id.phone).setOnClickListener(v -> {
             YandexMetrica.reportEvent(MetricaUtils.CLICK_PHONE);
             Intent intent = new Intent(Intent.ACTION_DIAL);
-            intent.setData(Uri.parse("tel:+375291939666"));
+            intent.setData(Uri.parse("tel:" + PHONE));
             startActivity(intent);
         });
     }

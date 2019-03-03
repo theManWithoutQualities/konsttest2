@@ -6,7 +6,7 @@ public final class DesktopItemContract {
 
     private DesktopItemContract() {}
 
-    public static class LinkEntry implements BaseColumns {
+    public static class DesktopItemEntry implements BaseColumns {
         public static final String TABLE_NAME = "desktop_item";
         public static final String COLUMN_NAME_TITLE = "title";
         public static final String COLUMN_NAME_LINK = "link";
