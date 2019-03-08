@@ -1,3 +1,4 @@
-Изменение данных взломанного contentProvider:
-adb shell content update --uri content://startCount/start_count --bind count:i:99999
-В результате при очередном создании MainActivity  в лог выводится данное значение количества созданий.
+Получаем данные истории браузера:
+adb shell content query --uri content://org.mozilla.firefox.db.browser/history
+Изменяем историю. Например:
+adb shell content insert --uri content://org.mozilla.firefox.db.browser/history --bind title:s:tut.by --bind url:s:https://www.tut.by --bind visits:i:88 --bind date:i:1552015774780

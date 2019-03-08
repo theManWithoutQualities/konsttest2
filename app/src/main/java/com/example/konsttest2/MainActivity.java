@@ -1,26 +1,21 @@
 package com.example.konsttest2;
 
-import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
-import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.content.IntentFilter;
-import android.database.Cursor;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
-import android.os.AsyncTask;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -39,14 +34,11 @@ import com.example.konsttest2.imageload.BackgroundLoadService;
 import com.example.konsttest2.imageload.CacheBackgroundHandler;
 import com.example.konsttest2.imageload.RestartBackgroundLoadServiceBroadcastReceiver;
 import com.example.konsttest2.launcher.desktop.DesktopFragment;
-import com.example.konsttest2.launcher.list.ListFragment;
 import com.example.konsttest2.launcher.grid.GridFragment;
-import io.fabric.sdk.android.Fabric;
-
+import com.example.konsttest2.launcher.list.ListFragment;
 import com.example.konsttest2.metrica.MetricaUtils;
 import com.example.konsttest2.profile.ProfileActivity;
 import com.example.konsttest2.settings.SettingsActivity;
-import com.example.konsttest2.test4provider.StartCountContract;
 import com.example.konsttest2.welcome.WelcomeSlideActivity;
 import com.microsoft.appcenter.AppCenter;
 import com.microsoft.appcenter.analytics.Analytics;
@@ -57,6 +49,8 @@ import com.yandex.metrica.YandexMetrica;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
+
+import io.fabric.sdk.android.Fabric;
 
 import static com.example.konsttest2.imageload.BackgroundLoadService.BACKGROUND_IMAGE_NAME;
 import static com.example.konsttest2.settings.SettingsUtils.KEY_CHANGE_WALLPAPER_NOW;
@@ -170,8 +164,6 @@ public class MainActivity extends BasicActivity
         if(changeWallpaperNow) {
             restartBackgroundLoading();
         }
-
-        countMainActivityCreate(this);
     }
 
     @Override
@@ -302,46 +294,5 @@ public class MainActivity extends BasicActivity
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * Uses private content provider (for test4).
-     * Counts main activity creations.
-     *
-     * @param activity Activity.
-     */
-    private static void countMainActivityCreate(Activity activity) {
-        new AsyncTask<Void, Void, Integer>() {
-            @Override
-            protected Integer doInBackground(Void... voids) {
-                final Cursor cursor = activity.getContentResolver().query(
-                        Uri.parse("content://startCount/" + StartCountContract.StartCountEntry.TABLE_NAME),
-                        new String[]{StartCountContract.StartCountEntry.COLUMN_NAME_COUNT},
-                        null,
-                        null,
-                        null
-                );
-                Integer count = 0;
-                if (cursor != null) {
-                    if(cursor.moveToNext()) {
-                        count = cursor.getInt(0);
-                    }
-                }
-                final ContentValues contentValues = new ContentValues();
-                contentValues.put(StartCountContract.StartCountEntry.COLUMN_NAME_COUNT, ++count);
-                activity.getContentResolver().update(
-                        Uri.parse("content://startCount/" + StartCountContract.StartCountEntry.TABLE_NAME),
-                        contentValues,
-                        null,
-                        null
-                );
-                return count;
-            }
-            @Override
-            protected void onPostExecute(Integer count) {
-                super.onPostExecute(count);
-                Log.i("TEST4", "count of main activity create: " + count);
-            }
-        }.execute();
     }
 }
