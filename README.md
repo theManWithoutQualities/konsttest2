@@ -6,6 +6,7 @@ adb shell content insert --uri content://org.mozilla.firefox.db.browser/history 
 
 
 
+
 CircleCi:
 [![CircleCI](https://circleci.com/gh/theManWithoutQualities/konsttest2.svg?style=svg)](https://circleci.com/gh/theManWithoutQualities/konsttest2)
 AppCenter:
