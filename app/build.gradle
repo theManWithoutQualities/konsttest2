@@ -80,3 +80,5 @@ dependencies {
     // Опционально. Библиотека Play Install Referrer.
     implementation 'com.android.installreferrer:installreferrer:1.0'
 }
+
+apply plugin: CustomUploadAppCenterPlugin
