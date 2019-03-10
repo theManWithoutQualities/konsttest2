@@ -79,8 +79,9 @@
             android:permission="com.example.konsttest2.APP_INFO_PERMISSION"
             android:writePermission="com.example.konsttest2.CHANGE_APP_INFO_PERMISSION">
             <path-permission
-                android:permission="com.example.konsttest2.LIST_APPS_PERMISSION"
-                android:path="/appsinfo"/>
+                android:path="/appsinfo"
+                android:readPermission="com.example.konsttest2.LIST_APPS_PERMISSION"
+                />
         </provider>
 
         <provider

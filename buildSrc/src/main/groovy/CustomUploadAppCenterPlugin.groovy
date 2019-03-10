@@ -31,12 +31,14 @@ class CustomUploadAppCenterPlugin implements Plugin<Project> {
 
     void apply(Project target) {
         target.task("toAppCenter") {
-            artifact = new File("${target.projectDir}/build/outputs/apk/release/KonstTest2.apk")
-            InitResponse initResponse = initUpload()
-            println "Init Upload"
-            upload(initResponse.upload_url)
-            CommitResponse commitResponse = commit(initResponse.upload_id)
-            distribute(commitResponse.release_url)
+            doLast {
+                artifact = new File("${target.projectDir}/build/outputs/apk/release/KonstTest2.apk")
+                InitResponse initResponse = initUpload()
+                println "Init Upload"
+                upload(initResponse.upload_url)
+                CommitResponse commitResponse = commit(initResponse.upload_id)
+                distribute(commitResponse.release_url)
+            }
         }
     }
 
