@@ -8,7 +8,9 @@ public final class AppInfoContract {
 
     public static class AppInfoEntry implements BaseColumns {
         public static final String TABLE_NAME = "appinfo";
-        public static final String COLUMN_NAME_TITLE = "title";
+        public static final String COLUMN_NAME_PACKAGE_NAME = "package_name";
+        public static final String COLUMN_NAME_NAME = "name";
         public static final String COLUMN_NAME_COUNT = "count";
+        public static final String COLUMN_NAME_DATE = "date";
     }
 }

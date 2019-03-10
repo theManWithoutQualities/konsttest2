@@ -35,8 +35,10 @@ public class LauncherFragment extends Fragment {
         @Override
         public void onReceive(Context context, Intent intent) {
             Log.d("Konst", "receive intent add/del app");
+            if (intent.getAction().equals("android.intent.action.PACKAGE_REMOVED")) {
+                launcherAdapter.getDbHelper().deleteAppInfo(intent.getDataString());
+            }
             loadApps();
-            launcherAdapter.notifyDataSetChanged();
         }
     };
     protected final BroadcastReceiver clickBroadcastReceiver = new BroadcastReceiver() {
@@ -44,7 +46,6 @@ public class LauncherFragment extends Fragment {
         public void onReceive(Context context, Intent intent) {
             Log.d("Konst", "receive intent click app");
             loadApps();
-            launcherAdapter.notifyDataSetChanged();
         }
     };
 
@@ -117,6 +118,7 @@ public class LauncherFragment extends Fragment {
         fillPopularPositions(tempList);
         sort(tempList);
         appItemList.addAll(tempList);
+        launcherAdapter.notifyDataSetChanged();
     }
 
     private void fillPopularPositions(List<AppItem> list) {

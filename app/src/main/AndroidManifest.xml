@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.konsttest2">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -9,6 +10,27 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.REQUEST_DELETE_PACKAGES" />
 
+    <permission
+        android:name="com.example.konsttest2.APP_INFO_PERMISSION"
+        android:label="App info permission"
+        android:description="@string/info_permission_description"
+        android:protectionLevel="normal" />
+    <permission
+        android:name="com.example.konsttest2.LIST_APPS_PERMISSION"
+        android:label="List apps permission"
+        android:description="@string/list_permission_description"
+        android:protectionLevel="normal" />
+    <permission
+        android:name="com.example.konsttest2.CHANGE_APP_INFO_PERMISSION"
+        android:label="Change app info permission"
+        android:description="@string/change_app_info_permission_description"
+        android:protectionLevel="normal" />
+    <permission
+        android:name="com.example.konsttest2.GET_PROFILE_PERMISSION"
+        android:label="Get profile permission"
+        android:description="@string/get_profile_permission_description"
+        android:protectionLevel="normal" />
+
     <application
         android:name=".KonstTest2"
         android:allowBackup="true"
@@ -16,7 +38,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_me_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".profile.ProfileActivity"
             android:parentActivityName=".MainActivity">
@@ -48,6 +71,25 @@
             android:enabled="true"
             android:permission="android.permission.BIND_JOB_SERVICE">
         </service>
+        <provider
+            android:authorities="com.example.konsttest2.info"
+            android:name=".appinfoprovider.AppInfoProvider"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="com.example.konsttest2.APP_INFO_PERMISSION"
+            android:writePermission="com.example.konsttest2.CHANGE_APP_INFO_PERMISSION">
+            <path-permission
+                android:path="/appsinfo"
+                android:readPermission="com.example.konsttest2.LIST_APPS_PERMISSION"
+                />
+        </provider>
+
+        <provider
+            android:authorities="com.example.konsttest2.profile"
+            android:permission="com.example.konsttest2.GET_PROFILE_PERMISSION"
+            android:name=".profileprovider.ProfileProvider"
+            android:enabled="true"
+            android:exported="true"/>
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="9d01ca57583566d24afd9f170e92cfc69d0acd95" />

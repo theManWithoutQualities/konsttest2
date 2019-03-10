@@ -33,8 +33,9 @@ android {
         applicationId "com.example.konsttest2"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 300
-        versionName "3.0"
+        versionCode 400
+        versionName "4.0"
+        setProperty("archivesBaseName", "KonstTest2")
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -42,6 +43,11 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.config
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    output.outputFileName = output.outputFile.name.replace('-release', '')
+                }
+            }
         }
     }
     compileOptions {
@@ -74,3 +80,5 @@ dependencies {
     // Опционально. Библиотека Play Install Referrer.
     implementation 'com.android.installreferrer:installreferrer:1.0'
 }
+
+apply plugin: CustomUploadAppCenterPlugin
