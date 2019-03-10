@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Client4</string>
+    <string name="show_last_clicked">Show last clicked</string>
+    <string name="show_all">Show all</string>
+    <string name="number_of_app_starts">Number of app starts</string>
+    <string name="save">Save</string>
+    <string name="go_to_profile">Go to profile</string>
+    <string name="show_profile_info">Show profile info</string>
+</resources>
