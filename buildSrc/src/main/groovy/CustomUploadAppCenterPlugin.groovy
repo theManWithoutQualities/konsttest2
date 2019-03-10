@@ -25,7 +25,7 @@ class CustomUploadAppCenterPlugin implements Plugin<Project> {
     final String appOwner = "konst007-tut.by"
     final String appName = "konsttest2"
     File artifact
-    final String destination = "Me"
+    final String destination = "Konstantinov"
     final String releaseNotes = "This is DEV! Task4 success!"
     final HttpUrl baseUrl = HttpUrl.get(APPCENTER_BASE_URL)
 
