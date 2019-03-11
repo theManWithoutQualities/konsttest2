@@ -19,10 +19,12 @@ public class SettingsActivity extends BasicActivity {
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.content, new SettingsFragment())
-                .commit();
+        if (savedInstanceState == null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.content, new SettingsFragment())
+                    .commit();
+        }
     }
 
     @Override
