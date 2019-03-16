@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
 import com.example.konsttest2.BasicActivity;
-import com.example.konsttest2.MainActivity;
+import com.example.konsttest2.main.MainActivity;
 import com.example.konsttest2.R;
 import com.example.konsttest2.metrica.MetricaUtils;
 import com.yandex.metrica.YandexMetrica;

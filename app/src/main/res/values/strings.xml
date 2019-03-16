@@ -42,4 +42,6 @@
     <string name="list_permission_description">List apps permission. We do not want everyone see all apps</string>
     <string name="change_app_info_permission_description">Change app info permission. We do not want everyone change app info</string>
     <string name="get_profile_permission_description">Get profile permission. We do not want everyone see profile</string>
+    <string name="simple_push">Простой пуш</string>
+    <string name="pretty_push">Покрасивее</string>
 </resources>

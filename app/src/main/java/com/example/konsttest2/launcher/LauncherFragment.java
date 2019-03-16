@@ -17,6 +17,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import static com.example.konsttest2.KonstTest2.TAG;
 import static com.example.konsttest2.settings.SettingsUtils.KEY_SORT;
 import static com.example.konsttest2.settings.SettingsUtils.SORT_ALPHABETIC;
 import static com.example.konsttest2.settings.SettingsUtils.SORT_ALPHABETIC_REVERSE;
@@ -34,7 +35,7 @@ public class LauncherFragment extends Fragment {
     protected final BroadcastReceiver refreshBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            Log.d("Konst", "receive intent add/del app");
+            Log.d(TAG, "receive intent add/del app");
             if (intent.getAction().equals("android.intent.action.PACKAGE_REMOVED")) {
                 launcherAdapter.getDbHelper().deleteAppInfo(intent.getDataString());
             }
@@ -44,7 +45,7 @@ public class LauncherFragment extends Fragment {
     protected final BroadcastReceiver clickBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            Log.d("Konst", "receive intent click app");
+            Log.d(TAG, "receive intent click app");
             loadApps();
         }
     };
@@ -57,9 +58,9 @@ public class LauncherFragment extends Fragment {
         filterRefreshApps.addAction("android.intent.action.PACKAGE_REMOVED");
         filterRefreshApps.addDataScheme("package");
         context.registerReceiver(refreshBroadcastReceiver, filterRefreshApps);
-        Log.d("Konst", "register receiver for refresh apps");
+        Log.d(TAG, "register receiver for refresh apps");
         context.registerReceiver(clickBroadcastReceiver, new IntentFilter(ACTION_APP_CLICKED));
-        Log.d("Konst", "register receiver for click apps");
+        Log.d(TAG, "register receiver for click apps");
     }
 
     @Override
@@ -67,20 +68,20 @@ public class LauncherFragment extends Fragment {
         super.onDetach();
         getActivity().unregisterReceiver(refreshBroadcastReceiver);
         getActivity().unregisterReceiver(clickBroadcastReceiver);
-        Log.d("Konst", "unregister receiver for refresh apps");
-        Log.d("Konst", "unregister receiver for click apps");
+        Log.d(TAG, "unregister receiver for refresh apps");
+        Log.d(TAG, "unregister receiver for click apps");
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        Log.d("Konst", "fragment onResume");
+        Log.d(TAG, "fragment onResume");
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        Log.d("Konst", "fragment onPause");
+        Log.d(TAG, "fragment onPause");
     }
 
     protected void loadApps() {

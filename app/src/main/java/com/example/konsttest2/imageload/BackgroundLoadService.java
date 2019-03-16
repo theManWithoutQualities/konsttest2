@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+import static com.example.konsttest2.KonstTest2.TAG;
 import static com.example.konsttest2.settings.SettingsUtils.KEY_CHANGE_WALLPAPER_NOW;
 import static com.example.konsttest2.settings.SettingsUtils.KEY_WALLPAPER_SOURCE;
 import static com.example.konsttest2.settings.SettingsUtils.PLACEIMG;
@@ -32,7 +33,7 @@ public class BackgroundLoadService extends JobService {
     public boolean onStartJob(JobParameters params) {
         int jobId = params.getJobId();
         if (jobId == JOB_ID_LOAD_IMAGE) {
-            Log.d("Konst", "load image by service");
+            Log.d(TAG, "load image by service");
             final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
             preferences.edit().putBoolean(KEY_CHANGE_WALLPAPER_NOW, false).apply();
             new Thread(new Runnable() {
@@ -73,7 +74,7 @@ public class BackgroundLoadService extends JobService {
 
     @Override
     public boolean onStopJob(JobParameters params) {
-        Log.d("Konst", "stop job loading background");
+        Log.d(TAG, "stop job loading background");
         final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         preferences.edit().putBoolean(KEY_CHANGE_WALLPAPER_NOW, true).apply();
         return false;

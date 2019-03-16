@@ -10,6 +10,8 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.konsttest2.KonstTest2.TAG;
+
 public class LauncherDbHelper extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "Launcher.db";
@@ -223,7 +225,7 @@ public class LauncherDbHelper extends SQLiteOpenHelper {
     }
 
     public void deleteDesktopItem(long id) {
-        Log.d("Konst", "delete desktop item, id = " + id);
+        Log.d(TAG, "delete desktop item, id = " + id);
         SQLiteDatabase database = this.getWritableDatabase();
         database.delete(
                 DesktopItemContract.DesktopItemEntry.TABLE_NAME,

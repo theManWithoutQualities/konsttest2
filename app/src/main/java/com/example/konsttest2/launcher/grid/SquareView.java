@@ -3,7 +3,7 @@ package com.example.konsttest2.launcher.grid;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -28,8 +28,8 @@ public class SquareView extends LinearLayout implements LauncherView {
 
     @Override
     public void setIcon(Drawable icon) {
-        final View avatar = findViewById(R.id.app_icon);
-        avatar.setBackground(icon);
+        final ImageView avatar = findViewById(R.id.app_icon);
+        avatar.setImageDrawable(icon);
     }
 
     @Override

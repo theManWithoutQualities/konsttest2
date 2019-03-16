@@ -39,9 +39,5 @@
             android:layout_height="wrap_content"
             android:id="@+id/textView2"
             android:text="@string/description_second"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:src="@drawable/ic_step_tree"/>
     </LinearLayout>
 </ScrollView>

@@ -22,6 +22,7 @@ import com.yandex.metrica.YandexMetrica;
 
 import java.util.List;
 
+import static com.example.konsttest2.KonstTest2.TAG;
 import static com.example.konsttest2.launcher.LauncherFragment.ACTION_APP_CLICKED;
 import static com.example.konsttest2.launcher.LauncherFragment.TOP_FREQUENT_COUNT;
 
@@ -74,7 +75,7 @@ public abstract class LauncherAdapter extends RecyclerView.Adapter {
             );
             final Intent intent = new Intent(ACTION_APP_CLICKED);
             context.sendBroadcast(intent);
-            Log.d("Konst", "app clicked!");
+            Log.d(TAG, "app clicked!");
             startAt(getAdapterPosition());
             return;
         };

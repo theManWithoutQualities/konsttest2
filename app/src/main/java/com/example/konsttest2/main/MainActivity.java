@@ -1,4 +1,4 @@
-package com.example.konsttest2;
+package com.example.konsttest2.main;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -30,6 +30,8 @@ import android.view.ViewGroup;
 
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.ndk.CrashlyticsNdk;
+import com.example.konsttest2.BasicActivity;
+import com.example.konsttest2.R;
 import com.example.konsttest2.imageload.BackgroundLoadService;
 import com.example.konsttest2.imageload.CacheBackgroundHandler;
 import com.example.konsttest2.imageload.RestartBackgroundLoadServiceBroadcastReceiver;
@@ -52,6 +54,7 @@ import java.util.List;
 
 import io.fabric.sdk.android.Fabric;
 
+import static com.example.konsttest2.KonstTest2.TAG;
 import static com.example.konsttest2.imageload.BackgroundLoadService.BACKGROUND_IMAGE_NAME;
 import static com.example.konsttest2.settings.SettingsUtils.KEY_CHANGE_WALLPAPER_NOW;
 import static com.example.konsttest2.settings.SettingsUtils.SHOW_WELCOME_PAGE_KEY;
@@ -83,7 +86,6 @@ public class MainActivity extends BasicActivity
             startActivity(intent);
             return;
         }
-
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -96,6 +98,13 @@ public class MainActivity extends BasicActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        findViewById(R.id.simple_push).setOnClickListener(
+                new NotificationButtonListener(false, this)
+        );
+        findViewById(R.id.pretty_push).setOnClickListener(
+                new NotificationButtonListener(true, this)
+        );
 
         mPager = findViewById(R.id.main_content);
         final List<Fragment> fragments =
@@ -158,7 +167,7 @@ public class MainActivity extends BasicActivity
                 AlarmManager.INTERVAL_DAY,
                 pendingIntent
         );
-        Log.d("Konst", "Alarm manager is configured");
+        Log.d(TAG, "Alarm manager is configured");
         final boolean changeWallpaperNow = preferences
                 .getBoolean(KEY_CHANGE_WALLPAPER_NOW, true);
         if(changeWallpaperNow) {
@@ -282,7 +291,7 @@ public class MainActivity extends BasicActivity
     private void restartBackgroundLoading() {
         final Intent intent = new Intent(RESTART_IMAGE_SERVICE);
         sendBroadcast(intent);
-        Log.d("Konst", "send intent: restart background loading");
+        Log.d(TAG, "send intent: restart background loading");
     }
 
     @Override

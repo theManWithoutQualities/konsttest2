@@ -9,6 +9,8 @@ import com.example.konsttest2.R;
 import java.io.InputStream;
 import io.fabric.sdk.android.services.concurrency.AsyncTask;
 
+import static com.example.konsttest2.KonstTest2.TAG;
+
 public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 
     private static final int LINK_SIZE = 120;
@@ -31,7 +33,7 @@ public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
         return bmp;
     }
     protected void onPostExecute(Bitmap result) {
-        Log.d("Konst", "DownloadImageTask#onPostExecute, bitmap = " + result);
+        Log.d(TAG, "DownloadImageTask#onPostExecute, bitmap = " + result);
         if (result == null || result.getWidth() < LINK_SIZE
                 || result.sameAs(Bitmap.createBitmap(result.getWidth(), result.getHeight(), result.getConfig()))) {
             image.setImageDrawable(context.getDrawable(R.drawable.link_img));
