@@ -183,12 +183,7 @@ public class MainActivity extends BasicActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
+        hideDrawer();
     }
 
     @Override
@@ -210,9 +205,7 @@ public class MainActivity extends BasicActivity
             intent.setClass(this, SettingsActivity.class);
             startActivity(intent);
         }
-
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        hideDrawer();
         return true;
     }
 
@@ -220,6 +213,7 @@ public class MainActivity extends BasicActivity
         final Intent intent = new Intent();
         intent.setClass(this, ProfileActivity.class);
         startActivity(intent);
+        hideDrawer();
     }
 
     public void setDesktopFragment() {
@@ -302,6 +296,13 @@ public class MainActivity extends BasicActivity
             unregisterReceiver(restartBackgroundLoadServiceBroadcastReceiver);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public void hideDrawer() {
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
         }
     }
 }

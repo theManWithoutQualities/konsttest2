@@ -38,7 +38,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="@string/pretty_push"
-                android:id="@+id/pretty_push"/>
+                android:id="@+id/pretty_push" />
         </LinearLayout>
     </android.support.design.widget.NavigationView>
 

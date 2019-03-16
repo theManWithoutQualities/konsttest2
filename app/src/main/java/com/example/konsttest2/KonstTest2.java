@@ -1,16 +1,11 @@
 package com.example.konsttest2;
 
 import android.app.Application;
-import android.content.SharedPreferences;
 import android.os.Build;
-import android.preference.PreferenceManager;
-import android.util.Log;
 
 import com.yandex.metrica.YandexMetrica;
 import com.yandex.metrica.YandexMetricaConfig;
 import com.yandex.metrica.push.YandexMetricaPush;
-
-import static com.example.konsttest2.settings.SettingsUtils.KEY_CHANGE_WALLPAPER_NOW;
 
 public class KonstTest2 extends Application {
 

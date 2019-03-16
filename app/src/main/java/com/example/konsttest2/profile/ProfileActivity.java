@@ -110,14 +110,6 @@ public class ProfileActivity extends BasicActivity {
         LocalBroadcastManager.getInstance(this).unregisterReceiver(profileBroadcastReceiver);
     }
 
-    @Override
-    public void onBackPressed() {
-        YandexMetrica.reportEvent(MetricaUtils.BACKPRESS_PROFILE);
-        final Intent intent = new Intent();
-        intent.setClass(this, MainActivity.class);
-        startActivity(intent);
-    }
-
     public void bindPushText() {
         final SharedPreferences defaultSharedPreferences =
                 PreferenceManager.getDefaultSharedPreferences(this);

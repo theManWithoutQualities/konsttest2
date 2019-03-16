@@ -16,27 +16,28 @@ import com.example.konsttest2.R;
 
 public class NotificationButtonListener implements View.OnClickListener {
     private boolean prettyView;
-    private Context context;
+    private MainActivity context;
 
-    public NotificationButtonListener(boolean prettyView, Context context) {
+    public NotificationButtonListener(boolean prettyView, MainActivity context) {
         this.prettyView = prettyView;
         this.context = context;
     }
 
     @Override
     public void onClick(View v) {
+        context.hideDrawer();
         final NotificationManager notificationManager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        NotificationCompat.Builder builder;
+        NotificationCompat.Builder notificationBuilder;
         if (Build.VERSION.SDK_INT >= 26) {
-            builder = new NotificationCompat.Builder(
+            notificationBuilder = new NotificationCompat.Builder(
                     context,
                     NotificationChannelCreator.getChannelId(notificationManager)
             );
         } else {
-            builder = new NotificationCompat.Builder(context);
+            notificationBuilder = new NotificationCompat.Builder(context);
         }
-        builder
+        notificationBuilder
                 .setSmallIcon(R.drawable.push);
         if (prettyView) {
             final int identifier = context
@@ -44,7 +45,7 @@ public class NotificationButtonListener implements View.OnClickListener {
                     .getIdentifier("hello", "drawable", context.getPackageName());
             final Bitmap bitmap = ((BitmapDrawable) context.getResources().getDrawable(identifier))
                     .getBitmap();
-            builder
+            notificationBuilder
                     .setContentTitle("Pretty push")
                     .setContentText("This is a pretty push")
                     .setColor(Color.parseColor("#00ff00"))
@@ -55,19 +56,22 @@ public class NotificationButtonListener implements View.OnClickListener {
                                     .bigLargeIcon(null)
                     );
         } else {
-            builder
+            notificationBuilder
                     .setContentTitle("Simple push")
                     .setContentText("This is a simple push");
         }
+        notificationBuilder.setContentIntent(getPendingIntent());
+        notificationManager.notify(0, notificationBuilder.build());
+    }
+
+    private PendingIntent getPendingIntent() {
         final Intent intent = new Intent(context, MainActivity.class);
         final TaskStackBuilder taskStackBuilder = TaskStackBuilder.create(context);
         taskStackBuilder.addParentStack(MainActivity.class);
         taskStackBuilder.addNextIntent(intent);
-        final PendingIntent pendingIntent = taskStackBuilder.getPendingIntent(
+        return taskStackBuilder.getPendingIntent(
                 0,
                 PendingIntent.FLAG_UPDATE_CURRENT
         );
-        builder.setContentIntent(pendingIntent);
-        notificationManager.notify(0, builder.build());
     }
 }
