@@ -49,6 +49,12 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.konsttest2.main.MainActivity" />
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="push" android:host="profile" />
+            </intent-filter>
         </activity>
         <activity android:name=".statistic.StatisticActivity" />
         <activity android:name=".main.MainActivity">
