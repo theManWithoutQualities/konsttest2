@@ -12,10 +12,9 @@ import android.util.Log;
 import android.widget.TextView;
 
 import com.example.konsttest2.BasicActivity;
-import com.example.konsttest2.main.MainActivity;
 import com.example.konsttest2.R;
+import com.example.konsttest2.main.MainActivity;
 import com.example.konsttest2.metrica.MetricaUtils;
-import com.microsoft.appcenter.utils.storage.SharedPreferencesManager;
 import com.yandex.metrica.YandexMetrica;
 
 import static com.example.konsttest2.profile.ProfileUtils.FB;

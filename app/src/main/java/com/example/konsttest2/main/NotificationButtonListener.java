@@ -1,10 +1,8 @@
 package com.example.konsttest2.main;
 
-import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
-import android.app.WallpaperManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -31,8 +29,10 @@ public class NotificationButtonListener implements View.OnClickListener {
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         NotificationCompat.Builder builder;
         if (Build.VERSION.SDK_INT >= 26) {
-            final String channelId = createChannel(notificationManager);
-            builder = new NotificationCompat.Builder(context, channelId);
+            builder = new NotificationCompat.Builder(
+                    context,
+                    NotificationChannelCreator.getChannelId(notificationManager)
+            );
         } else {
             builder = new NotificationCompat.Builder(context);
         }
@@ -69,17 +69,5 @@ public class NotificationButtonListener implements View.OnClickListener {
         );
         builder.setContentIntent(pendingIntent);
         notificationManager.notify(0, builder.build());
-    }
-
-    private String createChannel(NotificationManager notificationManager) {
-        String channelId = "konstChannel";
-        String name = "konstChannel";
-        String description = "my channel";
-        final int importanceHigh = NotificationManager.IMPORTANCE_HIGH;
-        final NotificationChannel notificationChannel =
-                new NotificationChannel(channelId, name, importanceHigh);
-        notificationChannel.setDescription(description);
-        notificationManager.createNotificationChannel(notificationChannel);
-        return channelId;
     }
 }
