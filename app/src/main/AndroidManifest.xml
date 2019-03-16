@@ -57,7 +57,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".statistic.StatisticActivity" />
-        <activity android:name=".main.MainActivity">
+        <activity
+            android:name=".main.MainActivity"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.HOME"/>

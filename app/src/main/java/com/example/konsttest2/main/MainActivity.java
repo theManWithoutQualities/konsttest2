@@ -57,6 +57,7 @@ import io.fabric.sdk.android.Fabric;
 import static com.example.konsttest2.KonstTest2.TAG;
 import static com.example.konsttest2.imageload.BackgroundLoadService.BACKGROUND_IMAGE_NAME;
 import static com.example.konsttest2.settings.SettingsUtils.KEY_CHANGE_WALLPAPER_NOW;
+import static com.example.konsttest2.settings.SettingsUtils.KEY_NEED_RECREATE;
 import static com.example.konsttest2.settings.SettingsUtils.SHOW_WELCOME_PAGE_KEY;
 
 public class MainActivity extends BasicActivity
@@ -71,6 +72,7 @@ public class MainActivity extends BasicActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(TAG, "Main onCreate");
         super.onCreate(savedInstanceState);
         AppCenter.start(getApplication(), "450322b7-9374-4d01-bcaf-5abf9816b3cf",
                 Analytics.class, Crashes.class, Distribute.class);
@@ -82,7 +84,7 @@ public class MainActivity extends BasicActivity
                 preferences.getBoolean(SHOW_WELCOME_PAGE_KEY, true);
         if (showWelcomePage) {
             final Intent intent = new Intent(this, WelcomeSlideActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            finish();
             startActivity(intent);
             return;
         }
@@ -177,7 +179,16 @@ public class MainActivity extends BasicActivity
 
     @Override
     protected void onResume() {
+        Log.d(TAG, "Main onResume");
         super.onResume();
+        final SharedPreferences defaultSharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(this);
+        final boolean needRecreate = defaultSharedPreferences
+                .getBoolean(KEY_NEED_RECREATE, false);
+        if (needRecreate) {
+            defaultSharedPreferences.edit().putBoolean(KEY_NEED_RECREATE, false).apply();
+            recreate();
+        }
         setBackground();
     }
 
@@ -188,8 +199,8 @@ public class MainActivity extends BasicActivity
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+        hideDrawer();
         int id = item.getItemId();
-
         if (id == R.id.nav_desktop) {
             setDesktopFragment();
             YandexMetrica.reportEvent(MetricaUtils.CHOOSE_DESKTOP);
@@ -205,15 +216,14 @@ public class MainActivity extends BasicActivity
             intent.setClass(this, SettingsActivity.class);
             startActivity(intent);
         }
-        hideDrawer();
         return true;
     }
 
     public void clickAvatarHandler(View view) {
+        hideDrawer();
         final Intent intent = new Intent();
         intent.setClass(this, ProfileActivity.class);
         startActivity(intent);
-        hideDrawer();
     }
 
     public void setDesktopFragment() {

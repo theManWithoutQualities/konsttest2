@@ -25,4 +25,5 @@ public final class SettingsUtils {
     public static final String CHANGE_WALLPAPER_PERIODIC_1_HOUR = "per_1_hour";
     public static final String CHANGE_WALLPAPER_PERIODIC_8_HOURS = "per_8_hours";
     public static final String CHANGE_WALLPAPER_PERIODIC_24_HOURS = "per_24_hours";
+    public static final String KEY_NEED_RECREATE = "needRecreate";
 }

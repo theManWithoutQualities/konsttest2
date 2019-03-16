@@ -6,6 +6,9 @@ import android.support.v7.preference.PreferenceFragmentCompat;
 
 import com.example.konsttest2.R;
 
+import static com.example.konsttest2.settings.SettingsUtils.KEY_NEED_RECREATE;
+import static com.example.konsttest2.settings.SettingsUtils.KEY_THEME;
+
 public class SettingsFragment
         extends PreferenceFragmentCompat
         implements SharedPreferences.OnSharedPreferenceChangeListener {
@@ -16,7 +19,10 @@ public class SettingsFragment
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        getActivity().recreate();
+        if (key.equals(KEY_THEME)) {
+            getActivity().recreate();
+        }
+        sharedPreferences.edit().putBoolean(KEY_NEED_RECREATE, true).apply();
     }
 
     @Override
