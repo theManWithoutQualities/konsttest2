@@ -1,14 +1,12 @@
 package com.example.konsttest2.settings;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import com.example.konsttest2.BasicActivity;
-import com.example.konsttest2.MainActivity;
 import com.example.konsttest2.R;
-import com.example.konsttest2.metrica.MetricaUtils;
-import com.yandex.metrica.YandexMetrica;
 
 public class SettingsActivity extends BasicActivity {
 
@@ -16,20 +14,23 @@ public class SettingsActivity extends BasicActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        final Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.content, new SettingsFragment())
-                .commit();
+        if (savedInstanceState == null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.content, new SettingsFragment())
+                    .commit();
+        }
     }
 
     @Override
-    public void onBackPressed() {
-        YandexMetrica.reportEvent(MetricaUtils.BACKPRESS_SETTINGS);
-        final Intent intent = new Intent();
-        intent.setClass(this, MainActivity.class);
-        startActivity(intent);
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            NavUtils.navigateUpFromSameTask(this);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

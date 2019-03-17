@@ -1,4 +1,4 @@
-package com.example.konsttest2.imageload;
+package com.example.konsttest2.backgroundload;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

@@ -5,8 +5,11 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.SpannableString;
+import android.text.style.BackgroundColorSpan;
 import android.util.Log;
 import android.view.ActionMode;
 import android.view.Menu;
@@ -22,8 +25,11 @@ import com.yandex.metrica.YandexMetrica;
 
 import java.util.List;
 
+import static com.example.konsttest2.KonstTest2.TAG;
 import static com.example.konsttest2.launcher.LauncherFragment.ACTION_APP_CLICKED;
 import static com.example.konsttest2.launcher.LauncherFragment.TOP_FREQUENT_COUNT;
+import static com.example.konsttest2.settings.SettingsUtils.KEY_THEME;
+import static com.example.konsttest2.settings.SettingsUtils.THEME_LIGHT;
 
 public abstract class LauncherAdapter extends RecyclerView.Adapter {
 
@@ -52,14 +58,16 @@ public abstract class LauncherAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
         ((LauncherHolder)viewHolder).bindIcon(appItemList.get(i).getIcon());
-        ((LauncherHolder)viewHolder).bindName(appItemList.get(i).getName());
+        ((LauncherHolder)viewHolder)
+                .bindName(
+                        getContrastString(appItemList.get(i).getName())
+                );
         if (i < TOP_FREQUENT_COUNT) {
             ((LauncherHolder)viewHolder).bindBackgroundColor(Color.parseColor(ACCENT_COLOR));
         } else {
             ((LauncherHolder)viewHolder).bindBackgroundColor(Color.TRANSPARENT);
         }
     }
-
 
     public class LauncherHolder extends RecyclerView.ViewHolder {
 
@@ -74,7 +82,7 @@ public abstract class LauncherAdapter extends RecyclerView.Adapter {
             );
             final Intent intent = new Intent(ACTION_APP_CLICKED);
             context.sendBroadcast(intent);
-            Log.d("Konst", "app clicked!");
+            Log.d(TAG, "app clicked!");
             startAt(getAdapterPosition());
             return;
         };
@@ -82,7 +90,11 @@ public abstract class LauncherAdapter extends RecyclerView.Adapter {
             @Override
             public boolean onCreateActionMode(ActionMode mode, Menu menu) {
                 MenuInflater menuInflater = mode.getMenuInflater();
-                menuInflater.inflate(R.menu.app_context_menu, menu);
+                if (appItemList.get(getAdapterPosition()).getSystem()) {
+                    menuInflater.inflate(R.menu.system_app_context_menu, menu);
+                } else {
+                    menuInflater.inflate(R.menu.app_context_menu, menu);
+                }
                 return true;
             }
 
@@ -148,7 +160,7 @@ public abstract class LauncherAdapter extends RecyclerView.Adapter {
         public void bindIcon(Drawable icon) {
             ((LauncherView)itemView).setIcon(icon);
         }
-        public void bindName(String name) {
+        public void bindName(SpannableString name) {
             ((LauncherView)itemView).setTitle(name);
         }
         public void bindBackgroundColor(int color) {
@@ -168,5 +180,16 @@ public abstract class LauncherAdapter extends RecyclerView.Adapter {
         if (launchIntentForPackage != null) {
             context.startActivity(launchIntentForPackage);
         }
+    }
+
+    private SpannableString getContrastString(String string) {
+        final String currentTheme = PreferenceManager
+                .getDefaultSharedPreferences(context)
+                .getString(KEY_THEME, THEME_LIGHT);
+        int color = currentTheme.equals(THEME_LIGHT) ? Color.WHITE : Color.BLACK;
+        final SpannableString spannable = new SpannableString(string);
+        final BackgroundColorSpan backgroundColorSpan = new BackgroundColorSpan(color);
+        spannable.setSpan(backgroundColorSpan, 0, string.length(), 0);
+        return spannable;
     }
 }

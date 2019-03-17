@@ -3,6 +3,7 @@ package com.example.konsttest2.welcome;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -13,7 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.konsttest2.BasicActivity;
-import com.example.konsttest2.MainActivity;
+import com.example.konsttest2.main.MainActivity;
 import com.example.konsttest2.R;
 
 import java.util.Arrays;
@@ -74,6 +75,7 @@ public class WelcomeSlideActivity extends BasicActivity {
 
             }
         });
+        ((TabLayout)findViewById(R.id.tabs)).setupWithViewPager(mPager);
     }
 
     @Override
@@ -147,4 +149,6 @@ public class WelcomeSlideActivity extends BasicActivity {
                 .putString(KEY_DENSITY, density)
                 .apply();
     }
+
+
 }

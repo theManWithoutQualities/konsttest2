@@ -2,6 +2,7 @@ package com.example.konsttest2.launcher.list;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.text.SpannableString;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -21,7 +22,7 @@ public class ListView extends LinearLayout implements LauncherView {
     }
 
     @Override
-    public void setTitle(String title) {
+    public void setTitle(SpannableString title) {
         final TextView titleView = findViewById(R.id.contact_title);
         titleView.setText(title);
     }
@@ -34,6 +35,7 @@ public class ListView extends LinearLayout implements LauncherView {
 
     @Override
     public void setBackgroundCol(int color) {
-        findViewById(R.id.raw).setBackgroundColor(color);
+        final Drawable background = findViewById(R.id.raw).getBackground();
+        setColorToBackground(color, background);
     }
 }

@@ -1,7 +1,5 @@
 package com.example.konsttest2.launcher.list;
 
-import android.content.Context;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;

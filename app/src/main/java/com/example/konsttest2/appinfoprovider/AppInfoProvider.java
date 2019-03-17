@@ -12,6 +12,9 @@ import android.util.Log;
 
 import com.example.konsttest2.data.LauncherDbHelper;
 
+import static com.example.konsttest2.KonstTest2.TAG;
+import static com.example.konsttest2.data.AppInfoContract.AppInfoEntry.COLUMN_NAME_COUNT;
+
 public class AppInfoProvider extends ContentProvider {
 
     private LauncherDbHelper dbHelper;
@@ -96,10 +99,10 @@ public class AppInfoProvider extends ContentProvider {
     ) {
         switch (uriMatcher.match(uri)) {
             case URI_MATCH_APP_INFO_UPDATE:
-                Log.d("Konst", "update clicks");
-                if(values.containsKey(com.example.konsttest2.data.AppInfoContract.AppInfoEntry.COLUMN_NAME_COUNT)
+                Log.d(TAG, "update clicks");
+                if(values.containsKey(COLUMN_NAME_COUNT)
                         && selectionArgs.length > 0 && TextUtils.isDigitsOnly(selectionArgs[0])) {
-                    int clicks = values.getAsInteger(com.example.konsttest2.data.AppInfoContract.AppInfoEntry.COLUMN_NAME_COUNT);
+                    int clicks = values.getAsInteger(COLUMN_NAME_COUNT);
                     int id = Integer.parseInt(selectionArgs[0]);
                     return dbHelper.updateClicks(id, clicks);
                 } else {

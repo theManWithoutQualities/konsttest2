@@ -22,13 +22,13 @@
     <string name="show_welcome_after">Afficher la page d\'accueil lors de la prochaine exécution</string>
     <string name="no_data">Aucune donnée</string>
     <string name="mail">Email: konst007@tut.by</string>
-    <string name="vk">Vkontakte: vkontaktenesizhu</string>
-    <string name="fb">Facebook: vfeisbukenesizhutozhe</string>
+    <string name="vk">Vkontakte: https://m.vk.com/id15841685</string>
+    <string name="fb">Facebook: https://www.facebook.com/profile.php?id=100010369265622</string>
     <string name="git">GitHub: theManWihoutQualities</string>
     <string name="location">Coordonnées: 53 ° 55 ′ s. sh. 27 ° 33 ′ à. d.</string>
     <string name="description_second">... Par exemple, vous pouvez afficher les statistiques de lancement d’application, afficher un profil</string>
     <string name="welcome">Bienvenue!</string>
-    <string name="phone">Téléphone: +37550000</string>
+    <string name="phone">Téléphone: +375291939666</string>
     <string name="delete">Удалить</string>
     <string name="add">Добавить</string>
     <string name="frequency">Частота</string>
@@ -43,4 +43,6 @@
     <string name="list_permission_description">List apps permission. We do not want everyone see all apps</string>
     <string name="change_app_info_permission_description">Change app info permission. We do not want everyone change app info</string>
     <string name="get_profile_permission_description">Get profile permission. We do not want everyone see profile</string>
+    <string name="simple_push">Простой пуш</string>
+    <string name="pretty_push">Покрасивее</string>
 </resources>

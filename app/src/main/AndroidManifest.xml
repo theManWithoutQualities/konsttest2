@@ -40,16 +40,26 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <meta-data android:name="ymp_firebase_default_app_id" android:value="konsttest2"/>
+        <meta-data android:name="ymp_gcm_default_sender_id" android:value="number:774772130577"/>
         <activity
             android:name=".profile.ProfileActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".main.MainActivity">
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.konsttest2.MainActivity" />
+                android:value="com.example.konsttest2.main.MainActivity" />
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="push" android:host="profile" />
+            </intent-filter>
         </activity>
         <activity android:name=".statistic.StatisticActivity" />
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".main.MainActivity"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.HOME"/>
@@ -60,14 +70,14 @@
         <activity android:name=".welcome.WelcomeSlideActivity" />
         <activity
             android:name=".settings.SettingsActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".main.MainActivity">
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.konsttest2.MainActivity" />
+                android:value="com.example.konsttest2.main.MainActivity" />
         </activity>
         <service
-            android:name=".imageload.BackgroundLoadService"
+            android:name=".backgroundload.BackgroundLoadService"
             android:enabled="true"
             android:permission="android.permission.BIND_JOB_SERVICE">
         </service>
@@ -83,13 +93,17 @@
                 android:readPermission="com.example.konsttest2.LIST_APPS_PERMISSION"
                 />
         </provider>
-
         <provider
             android:authorities="com.example.konsttest2.profile"
             android:permission="com.example.konsttest2.GET_PROFILE_PERMISSION"
             android:name=".profileprovider.ProfileProvider"
             android:enabled="true"
             android:exported="true"/>
+        <receiver android:name=".silentpush.SilentPushReceiver">
+            <intent-filter>
+                <action android:name="${applicationId}.action.ymp.SILENT_PUSH_RECEIVE"/>
+            </intent-filter>
+        </receiver>
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="9d01ca57583566d24afd9f170e92cfc69d0acd95" />
