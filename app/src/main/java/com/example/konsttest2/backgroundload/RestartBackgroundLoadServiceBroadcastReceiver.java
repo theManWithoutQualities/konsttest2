@@ -50,7 +50,6 @@ public class RestartBackgroundLoadServiceBroadcastReceiver extends BroadcastRece
                         new JobInfo.Builder(BackgroundLoadService.JOB_ID_LOAD_IMAGE,
                                 new ComponentName(context, BackgroundLoadService.class))
                                 .setPeriodic(periodic)
-                                .setOverrideDeadline(0)
                                 .build()
                 );
             }
