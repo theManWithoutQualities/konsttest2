@@ -16,7 +16,8 @@
         android:key="sort"
         android:entries="@array/sort_entries"
         android:entryValues="@array/sort_entryValues"
-        android:title="@string/sort" />
+        android:title="@string/sort"
+        android:defaultValue="noSort"/>/>
     <CheckBoxPreference
         android:key="showWelcomePage"
         android:title="@string/show_welcome_after" />

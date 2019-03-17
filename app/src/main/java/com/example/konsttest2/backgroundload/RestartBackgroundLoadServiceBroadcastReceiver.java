@@ -1,4 +1,4 @@
-package com.example.konsttest2.imageload;
+package com.example.konsttest2.backgroundload;
 
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
@@ -9,7 +9,8 @@ import android.content.Intent;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-import static com.example.konsttest2.MainActivity.RESTART_IMAGE_SERVICE;
+import static com.example.konsttest2.KonstTest2.TAG;
+import static com.example.konsttest2.main.MainActivity.RESTART_IMAGE_SERVICE;
 import static com.example.konsttest2.settings.SettingsUtils.CHANGE_WALLPAPER_PERIODIC_15_MIN;
 import static com.example.konsttest2.settings.SettingsUtils.CHANGE_WALLPAPER_PERIODIC_1_HOUR;
 import static com.example.konsttest2.settings.SettingsUtils.CHANGE_WALLPAPER_PERIODIC_24_HOURS;
@@ -21,7 +22,7 @@ public class RestartBackgroundLoadServiceBroadcastReceiver extends BroadcastRece
     public void onReceive(final Context context, final Intent intent) {
         String action = intent.getAction();
         if (RESTART_IMAGE_SERVICE.equals(action)) {
-            Log.d("Konst", "Receive restart service action");
+            Log.d(TAG, "Receive restart service action");
             JobScheduler jobScheduler = (JobScheduler) context.getSystemService(Context.JOB_SCHEDULER_SERVICE);
             if (jobScheduler != null) {
                 jobScheduler.cancel(BackgroundLoadService.JOB_ID_LOAD_IMAGE);
@@ -49,7 +50,6 @@ public class RestartBackgroundLoadServiceBroadcastReceiver extends BroadcastRece
                         new JobInfo.Builder(BackgroundLoadService.JOB_ID_LOAD_IMAGE,
                                 new ComponentName(context, BackgroundLoadService.class))
                                 .setPeriodic(periodic)
-                                .setOverrideDeadline(0)
                                 .build()
                 );
             }

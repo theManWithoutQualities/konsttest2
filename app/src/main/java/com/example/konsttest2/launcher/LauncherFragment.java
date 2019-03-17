@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Color;
@@ -17,6 +18,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import static com.example.konsttest2.KonstTest2.TAG;
 import static com.example.konsttest2.settings.SettingsUtils.KEY_SORT;
 import static com.example.konsttest2.settings.SettingsUtils.SORT_ALPHABETIC;
 import static com.example.konsttest2.settings.SettingsUtils.SORT_ALPHABETIC_REVERSE;
@@ -34,7 +36,7 @@ public class LauncherFragment extends Fragment {
     protected final BroadcastReceiver refreshBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            Log.d("Konst", "receive intent add/del app");
+            Log.d(TAG, "receive intent add/del app");
             if (intent.getAction().equals("android.intent.action.PACKAGE_REMOVED")) {
                 launcherAdapter.getDbHelper().deleteAppInfo(intent.getDataString());
             }
@@ -44,10 +46,18 @@ public class LauncherFragment extends Fragment {
     protected final BroadcastReceiver clickBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            Log.d("Konst", "receive intent click app");
+            Log.d(TAG, "receive intent click app");
             loadApps();
         }
     };
+
+    public LauncherAdapter getLauncherAdapter() {
+        return launcherAdapter;
+    }
+
+    public List<AppItem> getAppItemList() {
+        return appItemList;
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -57,9 +67,9 @@ public class LauncherFragment extends Fragment {
         filterRefreshApps.addAction("android.intent.action.PACKAGE_REMOVED");
         filterRefreshApps.addDataScheme("package");
         context.registerReceiver(refreshBroadcastReceiver, filterRefreshApps);
-        Log.d("Konst", "register receiver for refresh apps");
+        Log.d(TAG, "register receiver for refresh apps");
         context.registerReceiver(clickBroadcastReceiver, new IntentFilter(ACTION_APP_CLICKED));
-        Log.d("Konst", "register receiver for click apps");
+        Log.d(TAG, "register receiver for click apps");
     }
 
     @Override
@@ -67,97 +77,24 @@ public class LauncherFragment extends Fragment {
         super.onDetach();
         getActivity().unregisterReceiver(refreshBroadcastReceiver);
         getActivity().unregisterReceiver(clickBroadcastReceiver);
-        Log.d("Konst", "unregister receiver for refresh apps");
-        Log.d("Konst", "unregister receiver for click apps");
+        Log.d(TAG, "unregister receiver for refresh apps");
+        Log.d(TAG, "unregister receiver for click apps");
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        Log.d("Konst", "fragment onResume");
+        Log.d(TAG, "fragment onResume");
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        Log.d("Konst", "fragment onPause");
+        Log.d(TAG, "fragment onPause");
     }
 
     protected void loadApps() {
-        appItemList.clear();
-        final List<AppItem> tempList = new ArrayList<>();
-        final PackageManager packageManager = getActivity().getPackageManager();
-        Intent intent = new Intent(Intent.ACTION_MAIN, null);
-        intent.addCategory(Intent.CATEGORY_LAUNCHER);
-        List<ResolveInfo> resolveInfoList = packageManager.queryIntentActivities(intent, 0);
-
-        for (ResolveInfo resolveInfo : resolveInfoList) {
-            AppItem appItem = new AppItem();
-            appItem.setIcon(resolveInfo.activityInfo.loadIcon(packageManager));
-            appItem.setName(resolveInfo.loadLabel(packageManager).toString());
-            final String packageName = resolveInfo.activityInfo.packageName;
-            appItem.setPackageName(packageName);
-            try {
-                appItem.setInstallDate(
-                        new Date(
-                                packageManager
-                                        .getPackageInfo(packageName, 0)
-                                        .firstInstallTime
-                        )
-                );
-            } catch (PackageManager.NameNotFoundException e) {
-                e.printStackTrace();
-            }
-
-            final Integer count = launcherAdapter.getDbHelper().getCount(packageName);
-            appItem.setCount(count == null ? 0 : count);
-
-            tempList.add(appItem);
-        }
-
-        fillPopularPositions(tempList);
-        sort(tempList);
-        appItemList.addAll(tempList);
-        launcherAdapter.notifyDataSetChanged();
+        new FillAppItemListTask(this).execute();
     }
 
-    private void fillPopularPositions(List<AppItem> list) {
-        Collections.sort(list, (a1, a2) -> a2.getCount().compareTo(a1.getCount()));
-        if (list.size() >= TOP_FREQUENT_COUNT) {
-            for (int num = 0; num < TOP_FREQUENT_COUNT; num++) {
-                appItemList.add(list.get(num));
-            }
-        } else {
-            appItemList.addAll(list);
-            for (int num = appItemList.size() - 1; num < TOP_FREQUENT_COUNT; num++) {
-                appItemList.add(
-                        new AppItem()
-                                .setIcon(new ColorDrawable(Color.TRANSPARENT))
-                                .setName(EMPTY)
-                );
-            }
-        }
-    }
-
-    private void sort(List<AppItem> list) {
-        final String sortName = PreferenceManager.getDefaultSharedPreferences(getContext())
-                .getString(KEY_SORT, SORT_ALPHABETIC);
-        switch (sortName) {
-            case SORT_ALPHABETIC:
-                Collections.sort(list, (a1, a2) -> a1.getName().compareTo(a2.getName()));
-                break;
-            case SORT_ALPHABETIC_REVERSE:
-                Collections.sort(list, (a1, a2) -> a2.getName().compareTo(a1.getName()));
-                break;
-            case SORT_DATE:
-                Collections.sort(list, (a1, a2) ->
-                        a1.getInstallDate().compareTo(a2.getInstallDate()));
-                break;
-            case SORT_FREQUENCY:
-                Collections.sort(list, (a1, a2) -> a1.getCount().compareTo(a2.getCount()));
-                break;
-            default:
-                break;
-        }
-    }
 }

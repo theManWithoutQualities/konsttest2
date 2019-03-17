@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="110dp"
     android:orientation="horizontal"
-    android:id="@+id/raw">
+    android:id="@+id/raw"
+    android:background="@drawable/background_border">
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"

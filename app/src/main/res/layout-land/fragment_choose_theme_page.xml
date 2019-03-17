@@ -31,10 +31,5 @@
                 android:id="@+id/dark_theme"
                 android:onClick="clickRadioButtonTheme"/>
         </RadioGroup>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_gravity="bottom"
-            android:src="@drawable/ic_step_five"/>
     </FrameLayout>
 </ScrollView>

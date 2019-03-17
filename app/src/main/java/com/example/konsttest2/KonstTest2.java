@@ -1,17 +1,15 @@
 package com.example.konsttest2;
 
 import android.app.Application;
-import android.content.SharedPreferences;
 import android.os.Build;
-import android.preference.PreferenceManager;
-import android.util.Log;
 
 import com.yandex.metrica.YandexMetrica;
 import com.yandex.metrica.YandexMetricaConfig;
-
-import static com.example.konsttest2.settings.SettingsUtils.KEY_CHANGE_WALLPAPER_NOW;
+import com.yandex.metrica.push.YandexMetricaPush;
 
 public class KonstTest2 extends Application {
+
+    public static final String TAG = "Konst";
 
     @Override
     public void onCreate() {
@@ -27,5 +25,6 @@ public class KonstTest2 extends Application {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
             YandexMetrica.enableActivityAutoTracking(this);
         }
+        YandexMetricaPush.init(getApplicationContext());
     }
 }

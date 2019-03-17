@@ -22,13 +22,13 @@
     <string name="show_welcome_after">عرض صفحة الترحيب في الجولة التالية</string>
     <string name="no_data">لا توجد بيانات</string>
     <string name="mail">البريد الإلكتروني: konst007@tut.by</string>
-    <string name="vk">Vkontakte: vkontaktenesizhu</string>
-    <string name="fb">Facebook: vfeisbukenesizhutozhe</string>
+    <string name="vk">Vkontakte: https://m.vk.com/id15841685</string>
+    <string name="fb">Facebook: https://www.facebook.com/profile.php?id=100010369265622</string>
     <string name="git">GitHub: theManWihoutQualities</string>
     <string name="location">الإحداثيات: 53 ° 55 ′ s. ث. 27 ° 33 ′ بوصة د.</string>
     <string name="description_second">... على سبيل المثال ، يمكنك عرض إحصائيات إطلاق التطبيق ، أو عرض ملف تعريف</string>
     <string name="welcome">أهلا وسهلا!</string>
-    <string name="phone">الهاتف: +37550000</string>
+    <string name="phone">الهاتف: +375291939666</string>
     <string name="delete">Удалить</string>
     <string name="add">Добавить</string>
     <string name="frequency">Частота</string>
@@ -43,4 +43,6 @@
     <string name="list_permission_description">List apps permission. We do not want everyone see all apps</string>
     <string name="change_app_info_permission_description">Change app info permission. We do not want everyone change app info</string>
     <string name="get_profile_permission_description">Get profile permission. We do not want everyone see profile</string>
+    <string name="simple_push">Простой пуш</string>
+    <string name="pretty_push">Покрасивее</string>
 </resources>

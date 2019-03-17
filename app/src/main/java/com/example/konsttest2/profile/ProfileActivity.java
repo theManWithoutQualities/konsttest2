@@ -1,12 +1,17 @@
 package com.example.konsttest2.profile;
 
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.widget.TextView;
 
 import com.example.konsttest2.BasicActivity;
-import com.example.konsttest2.MainActivity;
 import com.example.konsttest2.R;
 import com.example.konsttest2.metrica.MetricaUtils;
 import com.yandex.metrica.YandexMetrica;
@@ -17,8 +22,11 @@ import static com.example.konsttest2.profile.ProfileUtils.MAIL;
 import static com.example.konsttest2.profile.ProfileUtils.MAP;
 import static com.example.konsttest2.profile.ProfileUtils.PHONE;
 import static com.example.konsttest2.profile.ProfileUtils.VK;
+import static com.example.konsttest2.KonstTest2.TAG;
 
 public class ProfileActivity extends BasicActivity {
+
+    private ProfileBroadcastReceiver profileBroadcastReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,13 +89,32 @@ public class ProfileActivity extends BasicActivity {
             intent.setData(Uri.parse("tel:" + PHONE));
             startActivity(intent);
         });
+        profileBroadcastReceiver = new ProfileBroadcastReceiver(this);
     }
 
     @Override
-    public void onBackPressed() {
-        YandexMetrica.reportEvent(MetricaUtils.BACKPRESS_PROFILE);
-        final Intent intent = new Intent();
-        intent.setClass(this, MainActivity.class);
-        startActivity(intent);
+    protected void onResume() {
+        super.onResume();
+        bindPushText();
+        LocalBroadcastManager
+                .getInstance(this)
+                .registerReceiver(
+                        profileBroadcastReceiver,
+                        new IntentFilter("BIND_PUSH_TEXT")
+                );
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(profileBroadcastReceiver);
+    }
+
+    public void bindPushText() {
+        final SharedPreferences defaultSharedPreferences =
+                PreferenceManager.getDefaultSharedPreferences(this);
+        final String pushText = defaultSharedPreferences.getString("pushText", "");
+        ((TextView)findViewById(R.id.profile_push)).setText(pushText);
+        Log.d(TAG, "set text in profile: " + pushText);
     }
 }
