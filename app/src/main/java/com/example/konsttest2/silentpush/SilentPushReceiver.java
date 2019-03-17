@@ -9,6 +9,8 @@ import android.util.Log;
 
 import com.yandex.metrica.push.YandexMetricaPush;
 
+import static com.example.konsttest2.KonstTest2.TAG;
+
 public class SilentPushReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -18,7 +20,7 @@ public class SilentPushReceiver extends BroadcastReceiver {
                 .edit()
                 .putString("pushText", payload)
                 .apply();
-        Log.d("Konst", "push payload: " + payload);
+        Log.d(TAG, "push payload: " + payload);
         LocalBroadcastManager
                 .getInstance(context)
                 .sendBroadcast(new Intent("BIND_PUSH_TEXT"));

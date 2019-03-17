@@ -1,4 +1,4 @@
-package com.example.konsttest2.imageload;
+package com.example.konsttest2.backgroundload;
 
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;

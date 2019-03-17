@@ -8,7 +8,8 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_gravity="center_vertical"
-        android:id="@+id/cell">
+        android:id="@+id/cell"
+        android:background="@drawable/background_border">
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="60dp"

@@ -91,7 +91,7 @@ public class DesktopFragment extends Fragment {
             if (CONTACT.ordinal() == desktopItem.getType()) {
                 image.setImageDrawable(getContext().getDrawable(R.drawable.phone_img));
             } else {
-                new DownloadImageTask(image, getContext()).execute(desktopItem.getLink());
+                new DownloadFaviconTask(image, getContext()).execute(desktopItem.getLink());
             }
         }
     }

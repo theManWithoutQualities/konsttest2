@@ -1,9 +1,10 @@
-package com.example.konsttest2.imageload;
+package com.example.konsttest2.backgroundload;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.support.annotation.NonNull;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -25,7 +26,6 @@ public class CacheBackgroundHandler {
                 }
             }
         }
-
         return sInstance;
     }
 
@@ -50,18 +50,19 @@ public class CacheBackgroundHandler {
         }
     }
 
-    @NonNull
     private File createFile(final Context context, final String fileName) {
         File directory = context.getDir(DIRECTORY_NAME, Context.MODE_PRIVATE);
-
         return new File(directory, fileName);
     }
 
-    public Bitmap loadImage(final Context context, final String fileName) {
+    public Drawable loadImage(final Context context, final String fileName) {
         FileInputStream inputStream = null;
         try {
             inputStream = new FileInputStream(createFile(context, fileName));
-            return BitmapFactory.decodeStream(inputStream);
+            return new BitmapDrawable(
+                    context.getResources(),
+                    BitmapFactory.decodeStream(inputStream)
+            );
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

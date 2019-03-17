@@ -9,6 +9,16 @@ public class AppItem {
     private String name;
     private String packageName;
     private Integer count;
+    private Boolean system;
+
+    public Boolean getSystem() {
+        return system;
+    }
+
+    public AppItem setSystem(Boolean system) {
+        this.system = system;
+        return this;
+    }
 
     public Integer getCount() {
         return count;

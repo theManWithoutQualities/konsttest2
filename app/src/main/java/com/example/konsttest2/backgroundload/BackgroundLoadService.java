@@ -1,4 +1,4 @@
-package com.example.konsttest2.imageload;
+package com.example.konsttest2.backgroundload;
 
 import android.app.job.JobParameters;
 import android.app.job.JobService;
@@ -59,7 +59,9 @@ public class BackgroundLoadService extends JobService {
                     final Bitmap bitmap = mBackgroundDownloader
                             .loadBitmap(finalUrl);
                     final String imageName = BACKGROUND_IMAGE_NAME;
-                    CacheBackgroundHandler.getInstance().saveImage(getApplicationContext(), bitmap, imageName);
+                    CacheBackgroundHandler
+                            .getInstance()
+                            .saveImage(getApplicationContext(), bitmap, imageName);
 
                     final Intent broadcastIntent = new Intent(BROADCAST_ACTION_UPDATE_IMAGE);
                     broadcastIntent.putExtra(BROADCAST_EXTRA_IMAGE_NAME, imageName);
@@ -75,8 +77,6 @@ public class BackgroundLoadService extends JobService {
     @Override
     public boolean onStopJob(JobParameters params) {
         Log.d(TAG, "stop job loading background");
-        final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        preferences.edit().putBoolean(KEY_CHANGE_WALLPAPER_NOW, true).apply();
         return false;
     }
 }

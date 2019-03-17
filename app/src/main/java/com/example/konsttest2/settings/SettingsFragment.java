@@ -21,8 +21,8 @@ public class SettingsFragment
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         if (key.equals(KEY_THEME)) {
             getActivity().recreate();
+            sharedPreferences.edit().putBoolean(KEY_NEED_RECREATE, true).apply();
         }
-        sharedPreferences.edit().putBoolean(KEY_NEED_RECREATE, true).apply();
     }
 
     @Override

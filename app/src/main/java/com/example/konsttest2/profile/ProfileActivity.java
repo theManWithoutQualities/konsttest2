@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import com.example.konsttest2.BasicActivity;
 import com.example.konsttest2.R;
-import com.example.konsttest2.main.MainActivity;
 import com.example.konsttest2.metrica.MetricaUtils;
 import com.yandex.metrica.YandexMetrica;
 
@@ -23,6 +22,7 @@ import static com.example.konsttest2.profile.ProfileUtils.MAIL;
 import static com.example.konsttest2.profile.ProfileUtils.MAP;
 import static com.example.konsttest2.profile.ProfileUtils.PHONE;
 import static com.example.konsttest2.profile.ProfileUtils.VK;
+import static com.example.konsttest2.KonstTest2.TAG;
 
 public class ProfileActivity extends BasicActivity {
 
@@ -115,6 +115,6 @@ public class ProfileActivity extends BasicActivity {
                 PreferenceManager.getDefaultSharedPreferences(this);
         final String pushText = defaultSharedPreferences.getString("pushText", "");
         ((TextView)findViewById(R.id.profile_push)).setText(pushText);
-        Log.d("Konst", "set text in profile: " + pushText);
+        Log.d(TAG, "set text in profile: " + pushText);
     }
 }
