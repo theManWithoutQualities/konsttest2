@@ -19,7 +19,7 @@
     <string name="show_welcome_after">Показывать Welcome-page при следующем запуске</string>
     <string name="no_data">Нет данных</string>
     <string name="mail">Email: konst007@tut.by</string>
-    <string name="fb">Facebook: vfeisbukenesizhutozhe</string>
+    <string name="fb">Facebook: https://www.facebook.com/profile.php?id=100010369265622</string>
     <string name="git">GitHub: theManWihoutQualities</string>
     <string name="location">Координаты: 53°55′ с. ш. 27°33′ в. д.</string>
     <string name="description_second">...Например, можно просматривать статистику запуска приложений, просматривать профиль</string>
@@ -27,7 +27,7 @@
     <string name="phone">Телефон: +375291939666</string>
     <string name="description">Это лаунчер. Для запуска приложений и других интересных вещей.</string>
     <string name="theme">Тема</string>
-    <string name="vk">Vkontakte: vkontaktenesizhu</string>
+    <string name="vk">Vkontakte: https://m.vk.com/id15841685</string>
     <string name="desktop">Рабочий стол</string>
     <string name="delete">Удалить</string>
     <string name="add">Добавить</string>
